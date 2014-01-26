@@ -1,0 +1,3450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dash's Qzone</title><link href="http://4894816.github.io/" rel="alternate"></link><link href="http://4894816.github.io/feeds/all.atom.xml" rel="self"></link><id>http://4894816.github.io/</id><updated>2014-01-24T16:18:00+01:00</updated><entry><title>迁移博客成功</title><link href="http://4894816.github.io/qianyibokechenggong.html" rel="alternate"></link><updated>2014-01-24T16:18:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-24:qianyibokechenggong.html</id><summary type="html">&lt;p&gt;谈一下设计思路， 兼谈博客的写作。   &lt;/p&gt;
+&lt;h3&gt;设计思路&lt;/h3&gt;
+&lt;p&gt;大概花了有10天的时间，把所有博客都同步到了自己平台，其中包括Ycool 800篇，两个QQ里共计300多篇，以及开心网等其他平台上的几百篇文章。  &lt;br /&gt;
+所有的迁移过程全靠代码搞定，为此写了几个脚本去抓叶子，有用来抓Ycool的，QQ私密日志版的，公开版的，开心网抓取版，加起来大概不到1000行的代码搞定，其中还有大量废话式的注释。依次跑一次的话，大概半个小时就能把所有日志同步到自己的服务器上。     &lt;/p&gt;
+&lt;p&gt;对比于三个不同平台的实现难度，腾讯的服务器对内容的保护可谓是---令人发指。  &lt;br /&gt;
+首先，QZONE页面不能被”另存为”，如果你看到好友的文章不错，想另存到本地，对不起，腾讯会给你保存下来一个莫名其妙的网页。这个问题我是通过iMacros这个插件来做的。这个插件可以智能化的抓取到浏览器呈现的特定内容，而且可以批量进行。写好iMacros的脚本后，点一下循环按钮，它会帮你把内容保存到本地。  &lt;br /&gt;
+另存到本地的内容是一种非常晦涩的代码。对kaixin001的日志处理我也是用iMacros来做的，但是它取回来的数据就很工整，没有大大小小的陷阱。而在腾讯抓回来的页面中，代码是非常混乱的。比如，它把本来标准的双引号变成了两个双引号，由此BeautifulSoup这个强大的库就一筹莫展了。  &lt;br /&gt;
+当然Python毕竟是很强悍的语言之一，对字符串的处理很是强大，但这也让我花了很多、很多时间。还得借助于正则表达式来解析文本内容、替换字段。很多次我在写代码注释的时候都感觉很气愤，于是数次提到了"Fuck"这个词。  &lt;br /&gt;
+腾讯的图片服务器也是隐藏得很深的，在取回图片的时候也花了不少时间。   &lt;/p&gt;
+&lt;p&gt;对比于腾讯，Ycool和开心网对内容的保护则没那么严格，取回的代码都很标准,取回的周折非常小。   &lt;/p&gt;
+&lt;p&gt;新搭建的页面在&lt;a href="http://4894816.github.io," title="Dash's website"&gt;http://4894816.github.io&lt;/a&gt;。   &lt;br /&gt;
+github是世界上最火/最大的代码交流社区，github提供的静态页面非常好用，不过你需要了解git这个版本控制工具，git可以用来管理代码、文档、日历等等，有兴趣的同学可以发信给我。     &lt;/p&gt;
+&lt;p&gt;新的网站基于pelican, &lt;a href="http://blog.getpelican.com"&gt;http://blog.getpelican.com&lt;/a&gt;, 这是一个静态网站生成器。所谓的静态网站，是指的不依赖于任何后台数据库的网站。静态网站，在早年互联网是非常流行的。在我本科一年级的时候制作过一个静态网站，关于英语学习的，曾挂在LZU主页两年多。那时候还是手动做页面、构图等等。一个一个页面的做。而现今，诸多的网站框架，可以让人多快好省的快速搭建起来一个视觉和可用性都僅一流的网站。    &lt;/p&gt;
+&lt;p&gt;github上的4894816主要是和4894816这个Qzone的同步。和以往不同的是，以后我可以不用通过登录Qzone即可实现文章的更新。  &lt;br /&gt;
+这个思路是通过QQ邮箱更新QQ空间而实现的，为此我又写了两个脚本，一个用于根据博客文章名生成源文件；另一个则是把生成后的博客内容通过邮件发送到QZone.具体的实现细节也是一波三折。不再多说。&lt;/p&gt;
+&lt;h3&gt;有关博客的写作&lt;/h3&gt;
+&lt;p&gt;我一直觉得，真正的写作是一件严肃而好玩的事情。说它严肃，是因为在写作的时候其实也是个体在整理自身思路的时候，做了什么，想要共享给读者怎样的信息，如何把读者一步一步代入到文字的境界里，这得考究到文字的手法和作者的功底之类。当然这方面我向来是做得很差的----你看，我就经常不说人话，事实上，第一段中的诸多术语能吓跑80%的读者。  &lt;br /&gt;
+而说它好玩，是因为确实整理思路，把思路理顺并表达出来，这里头充满了思维上的挑战和乐趣。在N记上班的时候，有次一位经验丰富的工程师让我讲解一个问题的解决方案，那个问题本是我完美解决的，我知道做了什么，但就是讲不出来。于是该工程师思考了两分钟，用了5、6句话总结出来问题的前因后果。末了说了一句，能解决问题很好，但把问题的前因后果理清楚，更为重要。所以，我现今用于判断高手、老手、新手、菜鸟的标准就在于---他(她)是否能用人话把问题说清楚。很多工程师是不说人话，满口术语的。这些术语，一来是一种自我防备，一来是一种装比。我曾有个师父说起过，做工程的人，要能像白居易写诗老婆婆都能听懂一样，用最简单的话讲出手头做的最富有挑战性的东西。你看，这么多年我不就是在持续叨逼叨嘛。     &lt;/p&gt;
+&lt;p&gt;从博客时代开始我就没能找到写文字的感觉。我所打开的后台编辑器都不够干净。充满着乱七八糟的广告、弹窗等等。有的傻逼后台写了15分钟还会自动给你保存一下，还有的傻逼后台给你弹出个广告来，爸爸去哪儿正在热播哦～～你爸爸才去哪儿呢，然后你就打开，再回来一看---得，看戏多好玩啊，写个屁文章。    &lt;/p&gt;
+&lt;p&gt;但从前年开始我开始接触静态网站开始，发现这种方式很适合真正的写作。源文件的语言一般是Markdown（没听过的可以Google一下)， 然后用框架生成html文件，Octopress是我用来写技术类博客的一个框架，如果你们感兴趣，可以猛击这里:&lt;a href="http://feipyang.github.io"&gt;http://feipyang.github.io&lt;/a&gt;, 排版精美，文章组织也非常直观。    &lt;/p&gt;
+&lt;p&gt;我现在是这样写作的，首先在文本文件中写Markdown: &lt;br /&gt;
+&lt;img alt="/images/editblog.jpg" src="/images/editblog.jpg" /&gt;    &lt;/p&gt;
+&lt;p&gt;然后，一个命令生成本地网站. make html; make serve
+在本地预览网站，并进行修改.       &lt;br /&gt;
+而后，同步到github和Qzone.     &lt;/p&gt;
+&lt;p&gt;这种方式我觉得是很适合我的，主要是因为内容完全可控，本地和远程都留有备份。 &lt;br /&gt;
+也可以通过本地的一些字段检查工具，自动检查文字是否有拼写错误，对图片也可以做深加工。 &lt;br /&gt;
+在黑白的命令行下写什么都很心静。而心静，恰好是写出不错的文字的一个必要条件。这种心静，我在别人家的后台编辑器里，永远都很难做到。   &lt;/p&gt;</summary><category term=""></category></entry><entry><title>来一篇新的</title><link href="http://4894816.github.io/laiyipianxinde.html" rel="alternate"></link><updated>2014-01-23T15:51:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-23:laiyipianxinde.html</id><summary type="html">&lt;p&gt;这里来一篇新的博客，放两张图片进来吧。  &lt;br /&gt;
+&lt;img alt="/images/lucifier1.jpg" src="/images/lucifier1.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;这里是有关天使的一些图片，可以看看。  &lt;br /&gt;
+嗯，看上去还不错。  &lt;br /&gt;
+&lt;img alt="/images/lucifier2.jpg" src="/images/lucifier2.jpg" /&gt;&lt;/p&gt;</summary><category term=""></category></entry><entry><title>让记忆抵抗</title><link href="http://4894816.github.io/rang-ji-yi-di-kang.html" rel="alternate"></link><updated>2014-01-15T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-15:rang-ji-yi-di-kang.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  谁能告诉我/要有多坚强/
+ &lt;/span&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   才敢念念不忘 &amp;nbsp; &amp;nbsp;--《当时的月亮》
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &lt;img idx="0" src="/images/Qzone/2014-1-15_rangjiyidikang_1.jpg" alt="图片" style="width: 847px; height: 543px;" /&gt;
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 这几天我在做一件比较耗时间的事：写一系列脚本，自动抓取回我这些年来写过的文字。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;机缘凑巧，再加上本身比较爱折腾，这几年来比较流行的玩意儿我挨个都玩过。BBS、博客、微博、社交类网站、轻博客、相册……到最近的微信。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 由于从小在文字堆里玩大的缘故，对文字类为主的应用我会比较看重一点----这也是为什么在“万马齐喑“充斥着轻而易举鼠标一点就能创造出消息流的ＱＱ空间消息流里还能出现我这种用手打文字来污染各位视野的叨逼叨的缘故。事实上我对太容易转载的文字通常抱有戒心，各类心灵鸡汤或是成功学文章的大行其道更是早就被吓破了我脆弱的小心肝。我经常想着----手头就是键盘，何不随手敲上一段呢，哪怕是相对于大师们较为幼稚或是不达观的想法？大师透彻，那也只是他的；自身也许肤浅，然手臂从键盘撤回来作一环抱状，肉身在臂间的感觉确是真实的。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 正基于此，我这些年陆续写下的文字大概有：歪酷博客800+篇、大号Qzone150篇、中号Qzone240+篇、开心网小100篇、其他大概200篇左右。从2006年6月至今。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 有如此多的文字分散于各大内容提供商，实在是一件让人忐忑的事儿----你需要考虑： 万一，这个提供商倒闭了怎么办？
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 这不是杞人忧天：2005年5月，我苦练近3年的一个网游的服务商携带游戏存档跑路，我辛辛苦苦多年的角色，以及角色里积聚的人脉、战队一朝化为乌有。竟是老长一段时间都没能缓过神来。现在我不碰网游已有6年多了，也就看淡了当年的这一场事故，现在想来留下的无非只是被诱惑和对大好青春虚度的悔恨。然而，游戏消失那天我坐在网吧里，打开了熟悉的网游客户端，却再也连接不到服务器了。那种失落感和担心是不敢忘记的----彼时抽烟很凶悍，左手一根接一根的香烟在烧，右手不停焦灼的点着鼠标刷----当熟悉的一种生活方式突然离开你的时候，似乎整个人被抽空。去年我巧遇当年战队里的一位玩主，谈起当年运作商跑路事件，感触大抵相同。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 沙宝亮的《暗香》里一句经典歌词是“让爱在灿烂中死去”---当初该款网游虽然猝死，却导致了我心境上的大彻大悟。以后就逐渐远离了那些让人一眼喜欢上而勾人魂魄的东西，譬如网游。因为再多的奋战，只是改变了服务器端的几个数据而已嘛！工作以后我看到我的同事在魔兽里混战，想起到我当年通宵达旦大砍骷髅和法师刷怪的夜晚，而我终于在文字外加运动的世界里求得心安了，也只是小小感慨一下。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 佛教里有说到戒“痴”这一说，我觉得用在这个场景上很适合
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 正因为有过数据突然丢失的前科，我最近终于开始考虑对文字做迁移。大约我也只有在现在才能做这个事----前几年，我写程序的功力不够，全盘弄回来搞不定；再加上诸多的波折，心理不平静的时候做什么都没法深入。但2014年这一年我感觉和以往数年开局完全不一样，开年收获的第一件礼物就是自由。总之各种主动、被动的选择，世界一下就清净下来，也许该是做点事情的时候了。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 过去一天半写了百来行Python脚本，歪酷的800篇文章和诸多相册就全盘收归碗里了。接下来是取回Ｑzone和开心网里的等等，在现有框架的基础上，实现难度不会太难，大概再有几天时间内即可取回。并完全迁移到自己的博客平台中。而要迁入的博客平台，是用一种近乎怪异的机制运行着的，它让我可以在命令行下敲下文字后，再动几下键盘就能同步到几个平台。没有后台，不需要构建复杂的后台，而运行的成本并不大----如果我要有自己的服务器，挂在家里的耗电量大概是一个月3块钱；如果不开自己的服务器，免费。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;顺便取回稍微看了下抓回来的文字，过往的文字丰富得让我自己都忍不住感慨。文字里真实的记载了：譬如我06年在南京实习时被某经理无故刁难时的郁闷、再譬如07年找工作时屡次无ＯＦＦＥＲ时的不顺、去第一个单位面试的场景、和Ｎ记时在诸多牛逼人物前作演讲时的战战兢兢、离开北京前在永定河边焚烧字纸的忐忑……很多生活里的小细节也被记载在案，譬如，我当年的同屋有一次做饭时，忘了关火结果把我挂在室内的衣服熏成带着大豆香的有趣往事……
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 这些场景，如果没有文字早就被忘掉了。正是文字能真实的记载并回放当时的场景。对比于影像和照片，文字是一种很奇怪的载体，它所能描述的场景丰富程度，取决于作者的笔法和读者的想象里。而影像和照片，在如此灵活的表述手段前太局限了。随便打个比方，你没法记载下冬夜里在紫金山山路上走走逛逛听听音乐的感受，而文字，几行就够了。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 这也是我一直觉得的：“文字有着比图像、视频更为强大的表达力”。作为什么都玩的家伙，我拍照也不在少数，然而当我回头看我拍下的照片时，拍照那时候的感觉早就忘掉了。譬如，在内蒙古草原上的云起云落的照片，为什么我当时会拍呢？我忘掉了。然而，在泰山雪中的爬山，我没有留下任何照片，因为那时候穷得买不起相机，而当时写下的文字，却依然可以让我在6年后回想起当年的牛逼。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp;老实说，我很奇怪为什么现在的人们越来越少的写下东西，却越来越多的在屏幕上指指点点着别人的生活。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 在互联网兴起前，我和我的小伙伴们是在日记本里记载诸多事宜的。彼时精美的笔记本常被用来当成礼物送人。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 后来互联网兴起了，大家开始写网站，在网络上写字之类的。在我大一的时候，1999年的11月，我听到我一位师兄的讲座，当年他的个人网站点击率在国内top 10，他说：“唯有文字、唯有共享的文字，才可以传世”----当时网易出30万买他的网站，他拒绝了。99年的30万意味着什么，大家可以想象。现在大家估计都会说他傻逼，这也是社会“进步”的一大反应嘛！然而你只要想一想，如果有人砸30万买你的记忆你肯卖不？
+   &lt;br /&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;我常通过文字和音乐借以了解个人性格。03年我就和彼时的女盆友吹牛说我能通过你喜欢的歌曲知道你的想法，她不信，于是我开始拿她闺密开涮，结果当然是心服口服。音乐是人潜意识的直接体现---通过曲风、节奏、歌曲中韵味，太容易看出喜欢这一类型音乐的个人的性格。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 再比如，走到某个家里，我只要看看书架上的书，就能大体了解到主人的才识。当然，现在的一个趋势是家里不怎么放书了。更多的空间里摆满了电子产品----不好意思这又撞到了我的枪口上，要知道我对消费电子的价格、功能还算比较了解，这些个成品玩意儿更好辨别，土壕还是真正的玩家，大体扫一圈也能辨别出来。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 一个人能不能写出真实的文字，大体决定了他（她）生活的深度。这些年来我遇到过不少的人，太多都令人失望，生活上看似热闹实则空虚，从这种文字里，我只是看到活着、炫耀，而不是真实的生活，更看不到任何幸福的可能。文字在娱乐至死的当下，显得颇为萧条。然而我却不能因为反对娱乐至死就把自己的文字变的和它一般粗俗。某曾说过：“我们不能因为反对某样东西，而最终让我们自己变成它”。 所幸的是，我还是能碰到用心用文字记载下生活的智者，不过很少罢了。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;我经常点到那些空空如也的空间里，却看不到丝毫和空间主人相关的文字。“多可怕”--我心想。而更粉刺的一个事实是：得益于天朝的国情，很多的空间被加密了-----这何尝不是一种个人意义上的闭关锁国？&amp;nbsp;至于朋友圈，那可能是一个更为故步自封的jail， 只能看到“秀主”和他回给你的话，你无从从别人的言语里了解到各个方面的他(她）， 这未免、有点儿、太、虚伪。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 可是我向来是懒得去规范他人的行为的。我只说，14年我终于把长久以来想做的一件事儿做了----把记忆从商业化的提供商里硬生生夺回来。 可能，眼下如火如荼的腾讯、微信等等一些，会在一段时间后归于泯灭。我一直相信我的判断，09年，薄ＸＩＬＡＩ如日中天的时候，我和我Ｎ记的同事说这哥们快玩完了，后来的事儿大家都看到了；ＭＳＮ的没落在08年我就提到了，所以我在MSN SPACE里的日志抢先搬到了本地。ＱＺＯＮＥ能挺多久我不知道，但是在我博客迁移的过程中，我发现了它是一个近乎于封闭的平台。我能做的只能给自己的文字做 一个备份，避免05年出现的网游世界的悲剧。&amp;nbsp;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 05年损失掉的毕竟只是虚妄的网游帐号；而如果诸多内容服务提供商泯灭，真实记载下来的生活丢失的话，这些年大概就白活了。事实上，在转移的过程中，我丢失了大约4个月的30多篇日志，让我嗟叹不已。然而考虑到那几个月是我极为傻逼的几个月，丢掉也是件好事。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 正因为时局是会变化的，我才更早的到了把信息全盘把在手头。没有什么比自由、踏实的把握住自己所写下的文字更为心安的感觉。在充斥着娱乐至死和商业铜臭的味道，我需要一个自由的平台，真实而安全的记载下点点滴滴。未来，在老去的时候，我依然可以用记忆抵抗着衰老、懒惰、人云亦云和得过且过。用某央视体育主持的话来说，抱着孙子在暖炉边无聊到透顶的时候，我大可以点开github，给他细细解释当年写下的 python脚本嘛。
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>一毛钱，来八段苦逼</title><link href="http://4894816.github.io/mao-qian-lai-ba-duan-ku-bi.html" rel="alternate"></link><updated>2014-01-11T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-11:mao-qian-lai-ba-duan-ku-bi.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+   ========
+   &lt;br /&gt;
+   引子
+   &lt;br /&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;我06年在北京实习时候，一次周末结伴去北京植物园，人群里碰到个吹萨克斯卖艺的，一管萨克斯吹得实在不咋地，我们就饶有兴趣的站旁边看他的收入。听了好一会，果然没发现有人给钱，后来我们的同伙来了就一起走掉了。走了好一会，有同学从口袋里掏出个1毛钱硬币：“呀，原来还真有零钱的，刚才应该给他的呀！”众皆笑---“一毛钱，听八段”的典故就是衍生于此。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 之后我们就肆无忌惮的拿一毛钱开玩笑---“来，一毛钱，给我唱八段！“ ”一毛钱，写八行代码！“等等。说这话的时候，我们是带着强烈的优越感和炫富感的，要知道，你的歌唱得那么难听、代码写得那么难看，肯给你一毛钱这么大一笔钱，实在是太给你面子了哇！
+  &lt;br /&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+    一毛钱，来八段苦逼
+    &lt;br /&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span&gt;
+   &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+    &lt;span&gt;
+     &amp;nbsp;
+    &lt;/span&gt;
+   &lt;/span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 上午起来我瞄了下《我是歌手》第2季的几个视频。因为一早上朋友圈里头就有几个情感比较丰富的在推张宇的《我是真的爱你》，一下唤起我22岁前的记忆，当时我没现在帅，也没现在这么有力量，却很傻很天真的自以为很懂爱情，每天就苦逼兮兮的在自习室里头边听着这首歌曲边上自习(奋斗呢！)边幻想远方的女神。当时还用随身听，用着很古老的磁带，当磁带机里放出这一句“
+  &lt;/span&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   请你让我随你去
+  &lt;/span&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp;/
+  &lt;/span&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   让我随你去 /
+  &lt;/span&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   我愿陪在你的身边为你挡风遮雨
+  &lt;/span&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp;
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   ”时，我会抬头望望兰州南面一线硕大的山脉，幻想自己能站在山顶，然后山风吹过，一阵风就能把我带到女神身边为她挡风遮雨。有句词说“我欲乘风归去”，大概就是这种感觉。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 张宇还演绎得不错，可是张宇的一个特点是：他唱什么歌曲都让人觉得他是张宇。有人曾对比几个金马奖影帝的表现时说：“梁朝伟是演老大像老大演小弟像小弟;&amp;nbsp;黄秋生是妖，演的人物身上除了人物特性还焕发着一股妖气；刘德华？他演什么角色都让觉得：咦，这不是刘德华吗？”----张宇就是歌坛的刘德华，他唱什么，一开口，大家就会第一时间想到：啊，张宇来了！
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 整首歌我给出6分。我听过好几个版本的《我是真的爱你》，张信哲唱得很到位，李宗盛唱得很沧桑，梁静茹唱得很清纯率真。张宇一开口，镜头切到后台，有个MM就表情很夸张很作的说了一句“很弹琴的男生很帅的”，一下就把我恶心到了，恩，这是在表演。而张宇一开口，我
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   第一时间
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   想到的又是：“啊，张宇来了！”
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 于是我又继续点开了别的视频。说实话我没太多时间用来娱乐，所以我连《我是歌手》第2季到底有哪几个演员都不知道。不看不知道，一看吓一跳。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;尽是一帮过气歌手。对了，还有两个不算新的新人。第一季里捧回大奖的一对组合，一粉红一碧绿的演绎了我《拍一拍身上的土》里写的新歌。本来我以为这已经够土了，没想到来了个更土的，对了，他叫闰土（张杰）。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 歌曲也都很喜气的，《嫂子》是吧？是好吃莫过饺子好玩不过嫂子的那个嫂子吗？事实上小时候我看电视连续剧《赵尚志》就觉得这歌曲有点……骚情。兄弟，你这么歌颂嫂子，你哥哥知道吗？&amp;nbsp; &amp;nbsp;&amp;nbsp;
+   &lt;br /&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 我就
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   不
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   具体
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   评点到歌手了。没兴趣点评，评点张宇是因为看得起他，其他人我可以直接说我看不起，所以就不浪费笔墨了。
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+    关于国内音乐
+    &lt;br /&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+    &lt;span&gt;
+     &amp;nbsp;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 1. 为钱而歌，永远都只是在卖唱。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;即便是很经典的歌曲，在这类“竞技”类PK里表现出来的，都只会是卡拉OK的音效。除非，你有真的对编曲做改编、颠覆。我是歌手第一季里的《矜持》就是这样一个例外，这个版本的霸气让人耳目一新。而第二季里，至今我看不到任何有才华和想法的歌手能做到这一点。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 2. 秀苦逼已经成为了pk类卖唱的主旋律。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 在PK类卖唱里，要打动观众，唯一的一点就是卖苦逼。越苦情越好，唱到越让人落泪越好，然后在一帮媒体的渲染下，你就真的成为“悲情王子”了。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 我们的媒体和电视似乎都无可救药的喜欢上无力、悲情、煽情。这一点得拜艺术人生的朱军所赐，能把一个简单的谈话节目办成追悼会似的氛围，也是无人可以出其右了。而PK类选秀/演唱里，胜出的基本上都是自我渲染为悲情类人物。为什么？
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 好简单，因为他一喊痛，观众就同情他啊！
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;3. 唱歌是次要的，关系是主要的。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;就拿《我是歌手》的第一季来看，某某组合靠做俯卧撑和票友孙俪老公的倾情表演赢得了冠军，但那也是一个头衔罢了，没什么。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 闰土的出场，不说了。嫁个好老婆真的很重要。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 前几天看《那山那人那水》，刘烨早年主演的一部很纯的片儿，故事虽然有些老套，但是景美、人美、演技真挚。我一直觉得谢NA就是一不识货的主儿，硬生生把刘帅哥甩掉，然后捧回来一个谁看都不顺眼的小白脸。至于闰土，我从来没觉得他的歌曲好听过，我刚才说到了悲情，靠贩卖悲情的人，从来都会博得没有心力的观众的同情----闰土就是这样一个时刻提醒着观众他的脆弱的、娇弱无力时刻呻吟着的小男人。这几年他的专辑我多少都有听过，在我看来，他只是在靠一把还不错的嗓子，时刻在提醒着他家的娜姐：“爱情是件很难很难的事儿，我们好不容易在一起，要珍惜”。人家刘帅哥是心灵很强大的人，那种淡定，那种低调，那种说话的气度，闰土你一辈子都学不来啊。
+   &lt;br /&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+     音乐里的感情
+     &lt;br /&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &lt;span&gt;
+    &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+     &lt;span&gt;
+      &amp;nbsp;
+     &lt;/span&gt;
+    &lt;/span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; &amp;nbsp;借着对歌曲的剖析，吐一段出来：&amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;在我还是小男生的时候我可能会觉得感情是要千辛万苦才得到手的最好，可现在我不这么看，甚至，我现在更愿意用“嗤之以鼻”来鄙视这种说法----要知道感动是廉价的，感觉是无价的。把自己整得苦逼兮兮然后提醒着女（男）神要珍惜自己，这是一种自残式的滥情。爱情里付出太多的那一方，也不值得同情，谁让他自己发贱撞上去呢？我也不欣赏那种太过于曲折和辛苦的追求后到手的感情，一辈子这么长，追到手就要费劲心思的话，这辈子在人家辣手之下，想必也没什么好日子过。我有一个朋友，他千辛万苦的把女神娶回了家，我们一干人等都以为从此走上幸福的道路了，但结果不是这样，女神经常把他整得灰头土脸的出来，再后来，他连随意外出的权利都被剥夺了。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &amp;nbsp; &amp;nbsp; 所以我现在经常说，关于感情，我懒得端着牛奶小心翼翼讨人家喜欢。事实上，我宁愿把牛奶打翻了跑掉。关于那首《我是真的爱你》演绎的对爱情的理解在我现在看来很阳痿很没有力量，我现在觉得： 能打翻的牛奶，从来不值得去端；我会做到牛奶在手里的时候，做到真心对待，但倘若你不识货，我就一把打翻盘子开始跑，反正中国姑娘多的是，跑啊跑的我总会碰到个牛逼的姑娘，端着牛奶闯不过打不翻被收编，然后就一起组队杀怪。西方哲学里这样对待“失去”： 不要为打翻的牛奶而哭泣。所以他们的题材多才多样，歌唱和平、宇宙、科技、天气、理想、绿色、友谊……即便是苦逼歌曲，唱到后面也是淡然、希望。而我们，这些年了，我们终于进化到能在牛奶里打滚、哭泣、撒娇。
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;可是中国的观众喜欢，观众喜欢看一个人被爱情折磨得撕心裂肺，然后用着最柔绵伤情的嗓子、催人泪下的句子来形容出他（她）的无助-----这不奇怪，国人就是这样，别人的痛苦是自己开心的源泉，不是有句俏皮话吗，你有什么伤心事，唱出来，让我们开心开心？ 有太多观众，没什么心力的，自己懒惰也就见不得人家有力量，心甘情愿的让自己的心情在打翻的牛奶里哭泣打滚撒娇。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp;
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   国内外音乐的对比
+   &lt;br /&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;曾经国内也有过那么一段，有着充满力量的歌曲出现过，那是80/90年代的事儿了，譬如张楚、黑豹等人。后来，摇滚死了，国内歌坛就没有力量什么事了，尽是秀苦逼的曲儿。再后来，我们就鼓吹和谐了。 阴阳怪气的人越来越多，真实的生活里，连真话都听不到几句，哪还有有力量的音乐？尽是些呻吟之作罢了。
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp; &amp;nbsp; 跑步这几年来，我换了不少音乐。基本上我现在MP3里歌曲以国外歌曲为主。动感、火爆、愤怒、旋律碉堡、中间有很多鼓点打得惊天动地的那种。我现在已经很难回到听苦逼歌曲的境地，因为音乐这个东西，是有力量的。比如当你听到john mayer现场版《Something's missing》开场的鼓点打下来的时候，如果你恰好是以15公里/小时的速度在跑，你的跑步节奏会和架子鼓协调上。 又比如，当你听到Coldplay的主唱
+  &lt;/span&gt;
+  克里斯·马丁在巴黎演唱会嚣张的扬起手臂大喊“Paris~~yeah~~~~oh, It's a fucking good voice”,观众以欢呼回应时，你会觉得那些solo piano点缀的小清新小苦逼音乐，实在弱爆了。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;我是没法就着苦情音乐跑步的，那样腿下会软掉。而动感、粗口、火爆类的题材的音乐，好比战鼓，鼓点打下去，意志一上来，什么都好办。苦逼音乐听多了，会得阳痿的。
+  &lt;br /&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   后记
+   &lt;br /&gt;
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   ========
+  &lt;/span&gt;
+  &lt;span style="" font-size:24px="font-size:24px"&gt;
+   &lt;span&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 一如既往的，我是不会怎么关注电视的，因为我没时间耗在这上头。当然我不会一棍子打死，我是说，中间可能会出现一两首经过精心改编重新演绎的歌曲也不一定。但，暂时，从这帮人马和水平和这一次的作秀程度之甚，还有替补之猫腻来说，我只能说：“来，一毛钱，给我唱8段苦逼”----事实上，我现在很忙，你倒找我8块钱让我听一段苦逼我都不干呢。
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   &amp;nbsp;
+  &lt;/span&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>Hurts like Heaven</title><link href="http://4894816.github.io/hurts-like-heaven.html" rel="alternate"></link><updated>2014-01-09T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-09:hurts-like-heaven.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;先从游戏说起。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 我刚上大学那会是1999年，刚好是电脑游戏如火如荼的年代。那时候的手机还以黑白屏居多，基本上也只能满足电话和短信功能，因而现在地铁里随手可见的姑娘手拿手机火爆闯关的场面基本上是看不到的。彼时网吧里打游戏的以男生居多，经常可以看到的场面就是，左手键盘右手鼠标，耳机夹住耳朵，打个游戏，紧张得跟开飞机似的。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 彼时的游戏更新很快，但每年总固定有那么一两个游戏特别火爆。电脑硬件也基本上是一年一个样儿，去年能跑主流游戏的电脑，到了明年上新款游戏就累得
+ &lt;/span&gt;
+ 呼嗤呼嗤。而学生又是一届一届的进来的，于是乎就形成了独特的游戏文化。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;96级的，红色警戒为主，没有交流，略过不提。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 年长两年的97级师兄们，他们习惯去靠近定西路的平房里，那里有很多小黑吧，主打的游戏是《帝国时代1》。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 年长一年的98级师兄们，则习惯选择另一个靠近他们宿舍的黑吧，他们主打的游戏是《星际争霸》。&amp;nbsp;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp; &amp;nbsp; 我们99级步入沙场时，恰好是《帝国时代2》火爆之时，当时满世界的99级学生都在联帝国2。这个游戏真是害人不浅，4v4的模式一下就能让8个人大呼小叫肾上腺激素上升到极高水平，晚上做梦了，梦里也满是高头大马的圣殿骑士。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 2000级的师弟们玩的则是《反恐精英》了，事实上我们对CS也投入了很多精力，一度也曾称霸某几大网吧。 然而，毕竟99级里难成气候&amp;nbsp;，没有帝国2般火爆。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 于是就有了这样的对比：
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 97级的觉得98级的傻逼，居然喜欢玩虚无飘渺的星空类对战，要知道帝国可是人文类游戏，有历史有策略有故事；对于我们99级97级的师兄要客气一些，但他们也认为我们属于傻逼类型，你看，都什么国家嘛，四大文明古国都没几个！埃及兵多吊啊，罗马多强悍啊，怎么就都没了呢？画面也太逼真，都没点卡通感。97级的对2000级的更是鄙夷，认为这是一帮不动脑子凭反应和运气混饭吃的货。&amp;nbsp;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 98级的觉得97和99的都是傻逼，因为他们一点想象力都没有----天天活在人堆里还没活腻啊，还玩儿什么古典题材类游戏，还说自己有文化！98的同样鄙视2000的，认为他们打游戏大呼小叫太没礼貌，CS太二，不动脑子。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 99级的觉得97和98都是傻逼，一个居然不懂得与时俱进从帝国1进化到帝国2,要知道帝国2比帝国1智能多了，帝国1里的所有兵种都需要手动点，帝国2里的农民却是可以自己耕田挖矿的。99级当然也鄙视00级玩儿CS不动脑，虽然自己也玩，但是时间还是帝国2占主体。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 2000级觉得前面几届都在装，早就落伍于时代了！用着卡顿顿的机器，玩着超级复杂的游戏，游戏最主要就是简单吗？怎么人还能被电脑玩呢？CS多好，人和人直接交流。简单，粗暴，直接！所以，9开头的几届师兄，全是傻叉。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 我当年在游戏方面是一个很滥情的人，手速快的缘故，什么都玩儿，还什么都玩儿得不差，切换于很多帮人里头，才有真正听说到不同年级玩家对彼此的鄙夷。幸好当年没有像微信朋友圈这么便捷的玩意，否则一开圈，每个圈子里定当充满对别的圈子的鄙夷。其实圈子就是这样，一个圈，把你们甘愿丧失的本性都扔在外头，一伙人抱在一起，维护着彼此的共性。帝国1的简单和音乐之美以及对战之直接幽默一直是我很欣赏的；星际里各种奇形怪状的生物和机械，确实让人大开眼界，充满了想象力；帝国2我玩得最多，以至于等到几年后我多年不练时居然能把研究生同学杀得鸡飞狗跳，他所创作出的逼真形象和中世纪的场景，以及对战战术的使用，兵种相克原理……玩过了它你会深谙中世纪历史；CS则是简单直接火爆，对手突然出现在你视野里的恐慌感，自己被撩倒时的game over的感觉，团队配合……这也是一部很好的游戏。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 你可以说圈子里的人都很牛逼，因为他们确实了解了这款游戏；你也可以说圈子里的人确实很傻逼，因为他们了解了这款游戏，就不肯去了解别的游戏了。 其实一个事实就是，所谓圈子，就是在这个圈子里的人，都在互相装逼，有的装的连自己都不认得自个儿了。多年后我遇到过很多当年的资深玩家，绝大多数居然还在玩当年的游戏，并且纷纷表示对现在的游戏看不懂之类，至于手游，那简直弱爆了，小姑娘玩的，他说。然后我倒吸一口气：兄弟，你错过了多少美好哇。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 生活中其实也是一样的。生活，在我眼里头，只是更大一点的游戏罢了。真正的游戏里，拼的是时间和手速；生活里，拼的是智慧和生命。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp;&amp;nbsp;很多时候，如果有人看你不爽，或者有人没有看上你，或者有人觉得你是傻逼----这些都不要紧，生活里甘愿从自己出发点看待别人的人，太多了。比如说买了n套房的觉得不买房把钱都玩儿了旅游了的人是傻逼；穷游网的觉得辛辛苦苦还房贷的人不懂的享受生活；&amp;nbsp;用win的鄙视用Linux的；用iphone的觉得用android的都是屌丝……国人永远都善于寻求共同点，寻求在人群中的认同感和所谓“地位”。所以呢，我们连08年奥运会的口号都是“同一个梦想”嘛，梦都做成一样的，这确实够碉堡。&amp;nbsp;而一旦有了被认同感以后，人就心生懈怠，宁愿把自己困死在这个圈子里了。这也是为什么我在帮人维护电脑的时候，总是惊讶的看到他们用着版本已经是10年前的软件，而且还迫不及待的说：一定要给我装成某个版本的！他们的原因永远只有一个：习惯了。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 习惯，多可怕的一个字眼。某种意义上，我们可以说，习惯是懒惰的代名词。
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 我是一个不信邪的人，所以经常用一种新的习惯来挑战久以形成的习惯，譬如：操作系统，玩琴时的指法，阅读的领域，跑步时的路线和节奏，不同领域工作的人和事……&amp;nbsp;我想说，从一种习惯切换到另一种更新的状态时，起初确实你会很不习惯，你会不自觉的去回想到以前固有的习惯，固有的思考模式等等。马上你会觉得似乎什么都不对了，这种新的状态让人感觉很不适应，有如蜕皮后的蛇宝宝一般皮肤脆弱，整个人都不对了。然而当你逐渐领悟到新认识事物的秒处时，其实你所拥有的，是旧的习惯和新养成习惯中积极的一面， 而认识到新东西的秒处了，不知不觉你会纠正在上一个圈子里犯下的错。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 最近有听到Coldplay在2012年巴黎演唱会上的开场音乐《Hurts like Heaven》，我觉得这首歌像极了在不同的领域间切换时的心路历程，有兴趣的可以去youku找找现场版的MV，很碉堡的一首歌，粗口、火爆、音乐拉风、鼓手奔放。遗憾的是它里头的一句经典歌词，迄今为止没有一个人能翻译对，大概是由于初译者没能领悟歌中的真意吧：
+      &lt;br /&gt;
+      &lt;span&gt;
+       &amp;nbsp;
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  Cause you do
+ &lt;/span&gt;
+ &lt;div&gt;
+  &lt;span style="" text-decoration:underline="text-decoration:underline"&gt;
+   你放手了
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  You you use your heart as a weapon
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" text-decoration:underline="text-decoration:underline"&gt;
+   你顽石般的心重击了我
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  And it hurts like heaven
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;其实应该是： 如果你，用你的心作为武器（去对抗这世界），那么即便受伤了，感觉也像在天堂里一般的甜蜜。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;马上就要过年了，当然今年我又得两手空空的回家。和去年一样的路线一样的行囊，可能依然是放假当天才到家。看起来似乎什么都没变，但有一点是变化的：凭空长了一岁，外加这一年的经历。我自己总结着的，这一年大概看完200+本书，160+篇技术类博客，4000条微博1000条Twitter，20+篇Qznne，跑步2000+公里。一年也只好做这么些事，然而, Use your heart as a weapon，这点我确实做到了了。如同当年在各种游戏圈里来回蹿时一样，只不过我不再依赖于虚拟世界里的参数变化和对战快感寻求人生价值而已。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 快要新的一年，其实不抱太多希望。生活里如果没有了太多期望，而只是报定对眼前生活的100%的把握，让自己生命充分燃烧的话，所有所得的，就皆是惊喜。新的一年可能会有所得，有所失，有所被伤害等等，都不要紧。我可能还是会不安分的如同我当年从一个游戏圈转到另外一个游戏圈一样，把眼前的一切都换掉。你们眼里可能觉得我还是在游戏人间，觉得我还是不肯安定。但恰如我前面说过的，生活对于我而言，无非是更大的一点的游戏，但遗憾的是，这个更大的一点的游戏里，至少在我们所处的社会里，游戏的规则是如何颠倒。虽然我是在游戏，但毕竟我用来做武器的是心，而不是权势或是诡计一类的什么，用心了才会真的把生活过得稍微碉堡一点。而用心做武器的人，也许会像路西法一般被抛入最深的地方，然后在被一帮基督信徒在世间污蔑其罪恶，然而我知他断然不会成为永远的孤魂，他在最深的黑暗里，心中依然可以仰望光明。&amp;nbsp;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>鄙人虽穷，板子还是有几块的</title><link href="http://4894816.github.io/bi-ren-sui-qiong-ban-zi-huan-shi-you-ji-kuai-de.html" rel="alternate"></link><updated>2014-01-02T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-02:bi-ren-sui-qiong-ban-zi-huan-shi-you-ji-kuai-de.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;题记： 曾答应过不少人共享出我的家庭网络配置环境，所以这篇算是对各位的欠账。这篇文章我尽量写得通俗，尽量减少专业术语。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 行走江湖，除了身手，装备也很重要。这也是为什么《藏龙卧虎》里章子怡饰演的小妞手握一把青冥剑就可以把江湖搅得鸡飞狗跳。在日常生活中，如果能利用手头的电子设备，则足以让生活平添几分色彩，保你从骨头到外表焕然一新，翩然浪迹于江湖。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &amp;nbsp; &amp;nbsp; 接下来列出来的诸多设备，我手头都有，并在上头耗费了我宝贵青春的诸多瞬间。良心推荐，童叟无欺。
+  &lt;br /&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp;
+   &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+    1. Raspberry PI&amp;nbsp;
+   &lt;/span&gt;
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &lt;img idx="0" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_1.jpg" alt="图片" style="width:741px;height:410px" /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 没错，这就是鼎鼎有名的“树莓派“，2012年推出的最火爆的名片式电脑。名片式的得名，就在于它的大小只有一张信用卡大小。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &amp;nbsp; &amp;nbsp; 尽量简单的介绍一下：
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp;&amp;nbsp;它的处理器主频是700MHZ，这一数值和2000年的主流电脑处理能力相似。但是考虑到2000年的电脑拿出来真的可以砸死人，而今你小手盈盈一握就拥有了2000年足以砸死人的一款装备，是不是很有成就感？内存，有256M和512M版本的。现在一般都是512M的了。
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp;&amp;nbsp;耗电量&amp;nbsp;： 大概5瓦特，保持24小时开机，这货8天才耗一度电，也就是说，一个月大概要耗费你一块五毛钱。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &amp;nbsp; &amp;nbsp; 容量： 取决于你给它配置什么样的内存卡，现在8G的内存卡就是20多块钱。里头已经可以跑上一个操作系统，并放下诸多资料了。
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 输出格式： HDMI/S-端子。 可以接家里的大屏幕液晶电视，或者老式电视机。支持1080P高清解码，简单来说，就是你看片的时候，脸上一根汗毛都能看清楚。
+      &lt;br /&gt;
+      &lt;span&gt;
+       &amp;nbsp; &amp;nbsp; &amp;nbsp;联网：100Ｍ网卡，用它来做存储设备的，瓶颈就在这里，因为100Ｍ网卡拷贝的速度是一秒钟12.5M。一部高清电影，通过网络拷贝，大概需要10分钟。
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; &amp;nbsp;端口：USB 2.0 端口，两个。 可以接键盘、鼠标、移动硬盘、打印机等。我这里用了个外置带供电的USB HUB，接上我手头大量的USB设备。
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 社区支援：
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;a href="http://www.raspberrypi.org/" style="font-size:14px" target="_blank"&gt;
+  http://www.raspberrypi.org
+ &lt;/a&gt;
+ &amp;nbsp; &amp;nbsp;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 操作系统：LINUX， &amp;nbsp;比WINDOWS更为简单、智能的操作系统。支持版本有debian/ubuntu/archLinux/fedora等，同时还支持riscos。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 我现在用它来挂了一块500G的移动硬盘，在这款名片式电脑上，完美的运行了下载服务器、网页服务器、电影服务器、存储服务器、FTP服务器，偶尔在上头打游戏。&amp;nbsp;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp; &amp;nbsp; 价格： 淘宝价，230块钱包邮。
+   &lt;br /&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &amp;nbsp; &amp;nbsp;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  2.&amp;nbsp;Beagle Bone
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;
+  &lt;img idx="1" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_2.jpg" alt="图片" style="width:757px;height:465px" /&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp;眼看得树莓派卖得火爆，德克萨斯仪器公司（TI）自然不甘寂寞，推出了这款名片式电脑。这款机器的造功一流，传说的高端霸气上档次，都得是黑色对不对？上面就是BeagleBone的黑色版本，叫BBB（BeagleBone Black）。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 配置： CPU达到了1000MHZ，内存512M。 同样支持高清解码（1080P），一个USB口，100M网卡。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 对于黑客来说，可能更喜欢BBB，因为BBB引出了更多的接口，注意旁边的两排，那都是引出的接口，而对比之下，RaspberryPI的接口少得可怜。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 操作系统， LINUX, DEBIAN/UBUNTU/ARCHLINUX, 还支持android.&amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 社区支持： 同样很完善，而且更多黑客愿意玩这个，要知道ＴＩ的老家在美国，硅谷的黑客之多，有目共睹。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 价格： 中国版，350左右包邮。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 我手头的BBB在2013年10月入手，入手以后，爱不释手，现在在上头做了几个附加传感器的应用。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  &amp;nbsp; &amp;nbsp; 3. 水星3540Ｒ千兆路由器
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &lt;img idx="2" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_3.jpg" alt="图片" style="width:640px;height:341px" /&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 等等，不是说板子？怎么说路由器了？
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 对的，就是路由器，可知道路由器也是可以定制的，一款定制化后的路由器能让你更搞笑而高效的工作？？？
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 4530Ｒ的内存是128ｍ， cpu大概相当于600mhz的样子，这样的配置对比于上面两个开发板来说，的确不算什么，也没有诸多的接口。表面上来看，它就是个Loser，然而，真的吗？
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 别忘了它附带了有一个ＵＳＢ口，就是因为这个ＵＳＢ的存在，让我们可以大动干戈，把它改造成一个全能式路由器！
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;www.openwrt.org，这个网站里存了可定制化的版本，OpenWRT也是一个很拉风的Linux定制版，基本上我们能想到的能在路由器上跑的应用它都囊括了。譬如，ＦＴＰ服务器/网页服务器/文件服务器/打印服务器，等等。你还可以把种子传到它上面，它会自动下载完。我一般是在上班前把种子放上去，晚上回来，OK,电影就好了，直接看。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 反正，你们家是要上网的；反正，你们家的路由器是24小时开机的----那么，为什么不让文件服务器的功能实现在一个24小时开机的设备上呢？ＯｐｅｎＷＲＴ就是为了实现这种愿望而定制出来的。&amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;更碉堡一点，如果你想越过官方的封锁，更拉风的上网，自由自在，ＯＰＥＮＷＲＴ也提供了诸多选项，更多的配置，需要你自己去探索。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 价格：包邮，大概在200左右。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  4. Netgear JNR 3210
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &lt;img idx="3" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_4.jpg" alt="图片" style="width:579px;height:484px" /&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 本来不想提这货的，但是考虑不想折腾的朋友可能也比较多。那么JNR3210可能是你们的不二之选。同样是1000M路由器，带一个USB口，可以通过Netgear官方的软件实现文件共享，打印共享，自动下载等功能。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 这货放在我家里，随便用一用，但其实还是蛮适合不折腾的人用的。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 有时候我觉得累了，就用到它的很多功能。不能一天24小时保持斗志，JNR3210完美的帮我管理好了家里的网络。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp; 价格：大概200左右。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  5.&amp;nbsp;
+ &lt;/span&gt;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  MERCURY 水星网络 MW151RM3G&amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;
+  &lt;img idx="4" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_5.jpg" alt="图片" style="width:300px;height:300px" /&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &lt;img idx="5" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_6.jpg" alt="图片" style="width:451px;height:348px" /&gt;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 小巧玲珑，很骚包。不过，我喜欢。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 同样可以被刷成ＯＰＥＮＷＲＴ，能挂移动硬盘等，但是内存太小，只有32Ｍ，处理能力也有限。不建议一般用户使用。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 但是，我在上面实现了很多不错的应用，比如下载/音乐播放等。你家的路由器会唱歌吗？我家的会。就是这货。
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6. Joggler
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;img idx="6" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_7.jpg" alt="图片" style="width:440px;height:578px" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这货是个数码相框，但是拥有了一颗非常牛逼的ＣＰＵ，内存，和诸多外设。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; CPU, ATOM 1.5GHZ, 伪双核，内存512Ｍ，显卡内建，但是依然可以解720Ｐ，内建存储1Ｇ， 触摸屏，光线传感器。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这货我在2010年入手的，当时450块钱，我觉得是我这辈子入手最划算的玩意。我把它带到了公司，一天24小时开机，成为了我在公司的网络服务器，完美的履行着文件共享/网页服务器/ＦＴＰ服务器/ｓｓｈ服务器等等等等功能。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;甚至，去年我们做的一个很大的项目，给美国Sprint公司做的一个项目，服务器就是挂在它上面！
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;它拥有一个ＵＳＢ口，这个ＵＳＢ口可以被扩充出来，外接硬盘。于是，我加了一块500Ｇ的硬盘在上头。运行系统，并作为存储库。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;价格： 现在淘宝价格是300包邮，尾货。
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  7. Arduino
+ &lt;/span&gt;
+ &lt;br /&gt;
+ Last , but not the least.&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; Arduino是我接触到的最拉风的项目。然而它也太大了，我只能列举一下我手头的几个板子。
+ &lt;br /&gt;
+ ＵＮＯ：
+ &lt;br /&gt;
+ &lt;img idx="7" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_8.jpg" alt="图片" style="width:300px;height:212px" /&gt;
+ &lt;br /&gt;
+ ＮＡＮＯ：
+ &lt;br /&gt;
+ &lt;img idx="8" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_9.jpg" alt="图片" style="width:300px;height:225px" /&gt;
+ &lt;br /&gt;
+ mega256:
+ &lt;br /&gt;
+ &lt;img idx="9" src="/images/Qzone/2014-1-2_birensuiqiong_banzihuanshiyoujikuaide_10.jpg" alt="图片" style="width:843px;height:444px" /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;这几款我都有，主要用于不同的场合， 如果在对体积要求苛刻的场合，考虑NANO，如果需要更多的管脚，当然是MEGA256。一般情况下的，当然是UNO
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; Arduino的作用，就是在它的管脚和各种乱七八糟的传感器之间，建立物理连接，用板子来处理传感器所捕获到的各种信号。----例如，光强度信号， 红外线信号， 声音信号……
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 你可以在万能的淘宝上买到更多的传感器模块，例如MP3模块，SD卡模块， 人体感应模块等等。-----世界里有着各种多种多样的信号，而这些传感器，就是我们的眼和耳，还有皮肤，帮助我们，感知这个多姿多彩的世界。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 造价：
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;UNO， 40多块钱， NANO， 30块钱， MEGA256， 60块钱左右。传感器，看你要买什么样的。我前后在上面买了1000多块钱的元器件。呵呵，1000块无非也是女神的两瓶香水而已。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; Arduino的处理能力有限，非常非常有限，它不能运行系统，简单的说，它就是个控制器。你可以把它理解为很低端的电脑----简单，但是很快，很灵敏。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 现实世界里，恰好是Arduino的用武之地最大的地方。譬如，独轮车的自平衡程序，就是用Arduino做出来的。理论上说，它可以模拟出整个世界。我经常在想，它如此聪明而能干，以至于它可以模拟出机器人战士，用于消灭那些邪恶力量，呵呵。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 后记：
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 其实，我手头所拥有的开发设备，远不止我列举出来的这几款。这几款，只是我觉得很好用的，比较有典型的，适合家用的，或者有兴趣的人钻研的系统。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 更多的系统，我只是在路过的时候有所接触；有的，由于时间关系，没能深入的研习，所以也不敢抖出来。有的开发板，我几年买的时候，看似新潮，今天来看，太落伍了。&amp;nbsp;科技进步如此之快，我不知道明天的设备长成什么模样？
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 人生不该是无趣的。生活在物质社会的人群也不该是仅仅被培养成消费者。为着一个又一个所谓的参数自愿掏空腰包，而后更努力的卖命以换取更好的装备。我的意思是： 在物欲横流的社会里，你有必要明白，你手头看似很高端，很高科技的iphone/ galaxy等等高端手机，它里头到底是什么？ 做嵌入式的有一个术语，该死的BOM， Bill Of Material，物料报价，你有必要知道BOM到底是多少，这样你能活得明白，知道厂商赚了你多少----你会了解到除了潮流以外的诸多东西，仅仅是手头的一个设备，那太肤浅了，你可以了解到供应链，生产链，研发周期，市场策略，用户需求等等等等，在手头的小设备上肉眼看不到的很多东西。人一辈子，不就为活一个明白吧？做一个明白而聪明的消费者，不随波逐流，不迷从，有自己的想法，这多好。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 当然我不鼓励你成为我。&amp;nbsp;我在探索这些设备的同时，已经把大把的时光放进去了。人生可以有很多种颜色，我只是选择可能最适合自己的一种而已。在探究这些东西的时候，我常惊叹于：造化可以如此之美。尤其是看到个体的需求都可以通过代码配置出来，这一刻似乎你就是电子世界里的神。 造物主的感觉，不是你想有就能有。年底我会稍稍郁闷，原因大家都猜得到，但对比于小小的郁闷，征服的感觉太拉风。凯撒说，I see, I conquor， 看到了这些设备，自然我就要走上去把玩一把，因为，它们就是我手头拉风的道具哇。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 我不知道将来的设备会演变成什么样，如果有想象，我觉得，它们能带给人的，只能是惊喜。我在北京租房子的同屋曾经说过“我生活的最高境界，就是我死了我的代码还在跑”----入手几款板子，外加你勤劳的探索，可能真的能把这扇门帮你打开。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 骚年们，躁起来吧。
+ &lt;span style="" font-size:14px="font-size:14px"&gt;
+  &amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>A thousand kisses deep</title><link href="http://4894816.github.io/a-thousand-kisses-deep.html" rel="alternate"></link><updated>2013-12-29T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-12-29:a-thousand-kisses-deep.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;
+ &lt;embed allowfullscreen="" true="true"&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; ----注：&amp;nbsp;5：50开始，即可从头欣赏到《A thousand kisses deep》，然而前面的《I am your man》一样好听。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp; 每天我有大约12个小时以上的时间沉浸在音乐的背景里，听过的声音早就不止万千了，但只有寥寥几个声音能让我马上安心下来----注意，这里用到了安心而不是安静。让人安静的声音太多了，随便挑点旋律好或是有韵味的即可；然而让人心安的声音则是少之又少，那种踏实的感觉，可能只能用看穿世事心境坦然不以物喜不以己悲来形容。有朋友说起他听古典时心安无比，我很羡慕他的品味，也能想象到在纯旋律里思维无拘无束时的快乐；但问题是我一直是个品味很低的家伙，若音乐里没有文字、或是没有很“霸王”的主旋律，譬如鼓点或是如泄如注的钢琴抑或是其他主音的话，就总觉得少了点什么，于是便很难勾起共鸣。在各种歌声里，能让我一入耳就静下来的，Leonard Cohen就是一个。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 两年前寒冷而潮湿的冬天里，带着Ipad在南京图书馆查资料，豆瓣电台里传来《Boogie Street》，这首歌只一句就把人心俘获了，深沉、磁性、苍老的声音从耳机里，一句一句唱到心头。外头是雨加雪，图书馆里的暖气开得倍儿足，在大大的落地窗口看着大片的雪花从灰沉的半空落在对面总统府的院子里，地上却不留半点白色，那种心安是难以用言语来形容的。好声音可遇而不可求，我就是在这样一个无聊而沉闷的下午，在彼时那场后来被证明徒劳一场的沉闷而小心翼翼的被暧昧里，被这个声音触摸到了。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; Cohen可能是我现在还在听的为数不多的年纪超大的歌手了，1934年出生的老头，明年就满80。早年以小说和诗歌成名，不甘寂寞在30多岁才终于把自己玩成歌者，早年风流无比却一生未婚，其中更是因为悟道跑到修道院里去几年当了苦行僧，他
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   一直保持着龟速而用心的出专辑速度，究其一生
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   也只出到12、3张专辑的样子。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 我一直觉得，好的歌曲，&amp;nbsp;其歌词是可以当成诗歌来朗诵的。旋律再好的曲子，倘其歌词淡然如白水，唱上几遍便要腻烦。现代的谱曲手段、合音方式诸多，更是不缺对旋律的美化和点缀，好的歌词便是千金难求。Cohen由于其出身于文字，其每首歌曲的歌词，去掉伴奏，便是极好的诗歌(Poem)。2012年的2月我写过听《So long,
+   &lt;/span&gt;
+  &lt;/span&gt;
+  Marianne
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   》的感觉，那首歌的旋律之美和文字之妙，一直让人回味。Marianne是Cohen生命里的一段，老头子在她离开后所选择的，不是怨恨而是选择把她写成歌词年复一年的歌颂----对于爱过的人来说，又有哪点能比这种待遇更为荣耀(Honor)?
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;《
+   &lt;/span&gt;
+  &lt;/span&gt;
+  A thousand kisses deep
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   》是我一直想写的另一首关于Cohen的乐评。事实上在我如此长如此多的音乐欣赏生涯里，纯文字朗诵的作品其实不多，能回想起来的也只齐豫、黄磊、张楚等寥寥几人而已，不同风格的作品难以单纯用一个优劣来形容，然而留下印象最深，最""touching""（震撼？感动？不好翻译）的作品，当属《A thousand kisses deep》。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; &amp;nbsp;这首作品，我能说它是诗，还是歌？整首作品没有正式的发行版，只是Cohen在2009年伦敦演唱会上临时表演的一段，视频里看来，Cohen只是回头低声叮嘱了一下键盘手，便开始深情的朗诵了。键盘是一种神奇的乐器，可以被调试成各种模式，而这首作品的伴奏，是最为简单的“String""(弦乐)，脸皮厚点吹个牛，这种伴奏的弦乐，变化不大，我也可以完美弹出来。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 然而整首作品就是如此让人touching， 老头子用了3分多种，絮絮叨叨的背诵着也许是自己临时创作的语句。一开口便以苍老、有磁性却能让心融化的声音，缓慢、俏皮而真诚的抒发出一千个亲吻的爱意。整个舞台只剩下一盏孤灯，孤零零打在这个垂垂老矣满头银丝皱纹满面的老头身上，当这样一个历经沧桑的老人，一字一句的用深情的口吻字字句句吐露出对年轻时恋人历经岁月洗礼后的爱意，没有自怨自乂，没有顾影自怜，只有铅华落尽后的纯纯的爱意和无比的心安、温暖。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 怎样的情话，在历经岁月后，怎么说来都不会让人觉得肉麻。Cohen就是这样一个带着爱意走到了垂垂暮年的歌者。而他的歌词，不工词藻却注重于口感，一句一句，从皱纹笼罩下的老人的口中蹦出来，只能用“又美又深刻“来形容。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp;不想解读这首歌的歌词了，只是简单的把网上的翻译摘录了过来，有几处错了，自己更正了一下，粘贴在后面。&amp;nbsp;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/embed&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 英国诗人叶芝在《当你老了》里的几句诗是我特别喜欢的：
+ &lt;br /&gt;
+ &lt;div&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp; &amp;nbsp; “多少人爱你青春欢畅的时辰，
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;爱慕你的美丽，假意或真心，
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;只有一个人爱你那朝圣者的灵魂，
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   &amp;nbsp; &amp;nbsp;&amp;nbsp;爱你衰老了的脸上痛苦的皱纹“
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;愿在垂垂老矣脸上充满着痛苦皱纹、头上净是银色白发时，依然可以用坚定、俏皮、真诚的口吻，给同样垂垂老矣的爱人朗诵这首《A Thousand kisses love》
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;div&gt;
+     You came to me this morning
+    &lt;/div&gt;
+    &lt;div&gt;
+     清晨你来到我身边&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     And you handled me like meat.
+    &lt;/div&gt;
+    &lt;div&gt;
+     像触摸一块肉一般触摸我&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     You′d have to be a man to know
+    &lt;/div&gt;
+    &lt;div&gt;
+     你得是个男人才会明白&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     How good that feels, how sweet.
+    &lt;/div&gt;
+    &lt;div&gt;
+     那感觉多么甜蜜，多么美妙&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     My mirror twin, my next of kin,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我的镜中人啊，我的至亲，
+    &lt;/div&gt;
+    &lt;div&gt;
+     I′d know you in my sleep.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我在睡梦中也认得你的模样。
+    &lt;/div&gt;
+    &lt;div&gt;
+     And who but you would take me in&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     除了你没人会将我收留&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep?
+    &lt;/div&gt;
+    &lt;div&gt;
+     你的爱如同一千个吻那么深&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     I loved you when you opened&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我爱你，当你像朵百合
+    &lt;/div&gt;
+    &lt;div&gt;
+     Like a lily to the heat.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     向着炎热盛开的样子
+    &lt;/div&gt;
+    &lt;div&gt;
+     You see, I′m just another snowman&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     但我却像个雪人
+    &lt;/div&gt;
+    &lt;div&gt;
+     Standing in the rain and sleet,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     伫立在雨雪之中
+    &lt;/div&gt;
+    &lt;div&gt;
+     Who loved you with his frozen love&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     用他冰冻的爱
+    &lt;/div&gt;
+    &lt;div&gt;
+     His second-hand physique,
+    &lt;/div&gt;
+    &lt;div&gt;
+     和他身不由己的身体去爱你
+    &lt;/div&gt;
+    &lt;div&gt;
+     With all he is, and all he was
+    &lt;/div&gt;
+    &lt;div&gt;
+     用他现在和曾经的全部&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     他的爱如同一千个吻那么深
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     I know you had to lie to me
+    &lt;/div&gt;
+    &lt;div&gt;
+     我知道你不得不撒谎
+    &lt;/div&gt;
+    &lt;div&gt;
+     I know you had to cheat&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我知道你不得不撒下谎言
+    &lt;/div&gt;
+    &lt;div&gt;
+     To pose all hot and high&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     透过哄骗的面纱
+    &lt;/div&gt;
+    &lt;div&gt;
+     Behind The veils of sheer deceit&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     你努力装得无比性感和骄傲&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     Our perfect porn aristocrat&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我们完美的肉欲之爱
+    &lt;/div&gt;
+    &lt;div&gt;
+     So elegant and cheap&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     如此优雅而低俗
+    &lt;/div&gt;
+    &lt;div&gt;
+     I’m old but I’m still into that
+    &lt;/div&gt;
+    &lt;div&gt;
+     我老了，但我依然深深怀念
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     当年一千个吻那么深的爱情&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     I'm good at love, I'm good at hate,
+    &lt;/div&gt;
+    &lt;div&gt;
+     我,爱之深也恨之切，&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     It's in between I freeze.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     爱恨交织于是我不知所措&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     Been working out, but it's too late,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我试着走出，但为时晚矣
+    &lt;/div&gt;
+    &lt;div&gt;
+     It's been too late for years.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     一切都太晚了。
+    &lt;/div&gt;
+    &lt;div&gt;
+     But you look good, you really do,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     不过你看上去不错，真的不错&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     They love you on the street,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     走在街上依然有人为你神魂颠倒
+    &lt;/div&gt;
+    &lt;div&gt;
+     If you were here, I'd kneel for you&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     如果你在我面前，我会为你跪倒，
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     以一千个吻般深刻的爱。
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     The Autumn moved across your skin,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     秋天掠过你的肌肤&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     Got something in my eye,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     也给我的眼睛里带进了某些物事。
+    &lt;/div&gt;
+    &lt;div&gt;
+     A light that doesn't need to live,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     那是一道无需存在
+    &lt;/div&gt;
+    &lt;div&gt;
+     And doesn't need to die.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     也无需消失的光&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     A riddle in the book of love,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     一个爱之书里的谜
+    &lt;/div&gt;
+    &lt;div&gt;
+     Obscure and obsolete&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     晦涩而陈腐
+    &lt;/div&gt;
+    &lt;div&gt;
+     Till witnessed here in time and blood&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     唯有用时间与鲜血方可证实
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.
+    &lt;/div&gt;
+    &lt;div&gt;
+     如同一千个吻般深刻的爱意
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     And I’m still working with the wine&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我还在借酒浇愁
+    &lt;/div&gt;
+    &lt;div&gt;
+     Still dancing cheek to cheek&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     依然放荡不羁
+    &lt;/div&gt;
+    &lt;div&gt;
+     The band is playing Auld Lang Syne&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     乐队还在唱着霏靡之音
+    &lt;/div&gt;
+    &lt;div&gt;
+     But the heart will not retreat&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     而我的心依然不懂得退却
+    &lt;/div&gt;
+    &lt;div&gt;
+     I ran with Diz, I sang with Ray,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我和迪吉及但丁一起混&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     I never had their sweep&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我从未有威风之时
+    &lt;/div&gt;
+    &lt;div&gt;
+     But once or twice they let me play
+    &lt;/div&gt;
+    &lt;div&gt;
+     但偶尔他们也会让我露两手
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.
+    &lt;/div&gt;
+    &lt;div&gt;
+     唱上这首《A thousand kissed deep》&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     I loved you when you opened&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     我爱你，当你像朵百合&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     Like a lily to the heat.&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     向着炎热盛开之时
+    &lt;/div&gt;
+    &lt;div&gt;
+     You see, I′m just another snowman&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     看看我吧，我仍然像个雪人
+    &lt;/div&gt;
+    &lt;div&gt;
+     Standing in the rain and sleet,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     伫立在雨雪之中&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     Who loved you with his frozen love&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     用他冰冻的心脏深深爱着你
+    &lt;/div&gt;
+    &lt;div&gt;
+     His second-hand physique,
+    &lt;/div&gt;
+    &lt;div&gt;
+     用他冰冻的不由自主的身体爱着你&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     With all he is, and all he was
+    &lt;/div&gt;
+    &lt;div&gt;
+     用他的过往、他的现在&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.
+    &lt;/div&gt;
+    &lt;div&gt;
+     如同一千个吻般深深爱着你
+    &lt;/div&gt;
+    &lt;div&gt;
+     &lt;br /&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+     But you don’t need to hear me now,&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     但现在你已无需再听&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     And every word I speak,
+    &lt;/div&gt;
+    &lt;div&gt;
+     我说的每句话&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     It counts against me anyhow&amp;nbsp;
+    &lt;/div&gt;
+    &lt;div&gt;
+     也许都会让你厌恶
+    &lt;/div&gt;
+    &lt;div&gt;
+     A thousand kisses deep.
+     &lt;br /&gt;
+     &lt;span&gt;
+      然而我的爱意，依然
+     &lt;/span&gt;
+     &lt;span style="" font-size:14px="font-size:14px"&gt;
+      如同一千个吻般那么深。
+     &lt;/span&gt;
+     &lt;span style="" font-size:14px="font-size:14px"&gt;
+      &amp;nbsp;
+     &lt;/span&gt;
+    &lt;/div&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;span&gt;
+  &amp;nbsp;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp;
+  &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>桃花源里美人多</title><link href="http://4894816.github.io/tao-hua-yuan-li-mei-ren-duo.html" rel="alternate"></link><updated>2013-12-24T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-12-24:tao-hua-yuan-li-mei-ren-duo.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;下午开完一个冗长而无聊的例会后顺手刷了会儿微博，看到了两个著名屌丝孔二狗和刘春在耍宝时抖出来的一视频。不看不要紧，一得意就忘了形,不小心就在办公室打了个奔放型的哈哈。
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 以前一直以为腾格尔的作品蛮乡土气息，现在看来，需要重新认识腾老湿了----2013年的尾巴上，腾老湿的卖力演出，如一缕清风，吹散了弥漫多日的雾霾。腾老师终于摆脱了长久以来从蒙古大草原带来的浓浓的土气，走上了左拥右抱活色春香的性福生活。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 废话少说，让我们迫不及待的来品一品这首曲子吧：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;整首曲子在高端霸气上档次的敲锣打鼓声中喜气洋洋的登场，腾老师长得真像那什么，哈哈：
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp;
+   &lt;img idx="0" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_1.jpg" style="width:602px;height:341px" /&gt;
+   &lt;br /&gt;
+   &lt;span&gt;
+    好多MM哦，还载歌载舞的，腾老师你确定来的是桃花源而不是天上人间咩？
+    &lt;br /&gt;
+    &lt;img idx="1" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_2.jpg" style="width:600px;height:326px" /&gt;
+    &lt;br /&gt;
+    贝斯声响起，可是，MM你手里拿的分明是一把琵琶，而且你这面目狰狞的……咦腾老湿你原来会吹箫？
+    &lt;br /&gt;
+    &lt;img idx="2" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_3.jpg" style="width:598px;height:335px" /&gt;
+    &lt;br /&gt;
+    腾老湿这个动作让人浮想联翩：
+    &lt;br /&gt;
+    &lt;img idx="3" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_4.jpg" style="width:602px;height:343px" /&gt;
+    &lt;br /&gt;
+    陶渊明在晋朝的生活如此活色生香，还闹情绪玩什么
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span&gt;
+   “不为五斗米而折腰”的意识流
+  &lt;/span&gt;
+  &lt;span&gt;
+   ，真是贱
+  &lt;/span&gt;
+  &lt;span&gt;
+   ……
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;span&gt;
+   &lt;span&gt;
+    &lt;img idx="4" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_5.jpg" style="width:602px;height:340px" /&gt;
+    &lt;br /&gt;
+    陶渊明在晋朝能和几十个MM在打麻将耶！！！猜猜大人摸到了什么牌呢？能自摸不？？？
+    &lt;br /&gt;
+    &lt;img idx="5" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_6.jpg" style="width:595px;height:342px" /&gt;
+    &lt;br /&gt;
+    糊了糊了，啊哈哈陶大人我真开心！！！
+    &lt;br /&gt;
+    &lt;img idx="6" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_7.jpg" style="width:596px;height:340px" /&gt;
+    &lt;br /&gt;
+    大人，您在梦里头、这个姿势？？？
+    &lt;br /&gt;
+    &lt;img idx="7" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_8.jpg" style="width:600px;height:340px" /&gt;
+    &lt;br /&gt;
+    诸多衣衫不整的MM朝镜头扑了过来……
+    &lt;br /&gt;
+    &lt;img idx="8" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_9.jpg" style="width:596px;height:334px" /&gt;
+    &lt;br /&gt;
+    在桃花源，您可以：
+    &lt;br /&gt;
+    和MM捉迷藏或者老鹰抓小鸡：
+    &lt;br /&gt;
+    &lt;img idx="9" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_10.jpg" style="width:597px;height:336px" /&gt;
+    &lt;br /&gt;
+    还可以和MM玩跷跷板：
+    &lt;br /&gt;
+    &lt;img idx="10" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_11.jpg" style="width:597px;height:342px" /&gt;
+    &lt;br /&gt;
+    和MM玩扮新娘过家家：
+    &lt;br /&gt;
+    &lt;img idx="11" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_12.jpg" style="width:597px;height:334px" /&gt;
+    &lt;br /&gt;
+    轿子里当然是坐着快乐的腾老湿啦：
+    &lt;br /&gt;
+    &lt;img idx="12" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_13.jpg" style="width:600px;height:338px" /&gt;
+    &lt;br /&gt;
+    这位特别出演，非常非常的长袖善舞：
+    &lt;br /&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;img idx="13" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_14.jpg" style="width:596px;height:333px" /&gt;
+  &lt;span&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    整个舞台真的是非常非常的碉堡哦，上面是美女，下面还是美女，腾老湿在中间载歌载舞，好不尽兴：
+    &lt;br /&gt;
+    &lt;img idx="14" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_15.jpg" style="width:597px;height:341px" /&gt;
+    &lt;br /&gt;
+    腾老湿在翘翘板游戏中终于没能力压群芳，功亏一篑，真是令人扼腕！
+    &lt;br /&gt;
+    &lt;img idx="15" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_16.jpg" style="width:596px;height:332px" /&gt;
+    &lt;br /&gt;
+    片尾，感谢、感谢、感谢：
+    &lt;br /&gt;
+    &lt;img idx="16" alt="图片" src="/images/Qzone/2013-12-24_taohuayuanlimeirenduo_17.jpg" style="width:597px;height:336px" /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 满分为10分的话，这首歌儿我给出250分的高分。看完这个视频以后我对音乐和表演艺术有了更深刻的认识---原来琵琶也是可以横着拿的，原来萧可以像魔法师的扫帚一样被骑在胯下。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 整首歌曲也可以视为畜牧业金属的巅峰之作，其高端喜气的配乐、卖力+卖肉的诸多群众演员的非专业演出和长袖善舞，更是身势音乐的神来之作。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 歌词也写得很好，堪称琅琅上口的典范。我觉得方文山应该向腾老湿学习写词的技巧。在整首歌曲跌宕起伏的音乐中，腾老湿言简意赅的几句词就把桃花源塑造成了一个温暖肉色的洞窟，方文山他做的到吗？而且很多歌词也很励志，你看看这句“一个打鱼的，这么有福气”---最要命的是这句歌词是从诸多MM口中念叨出来的，那些成天抱怨着社会黑暗人心不古前途黯淡的心理黑暗的屌丝们，听到如此励志的歌词，我们是不是应该在扪心自问后羞愧万分进而奋发涂墙重新燃起对生活的冉冉希望呢？
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp;&amp;nbsp;至于腾老湿，真应该成为我等无为青年一代的学习对象，作为一个年华落尽的老年男性歌手，作为整首MV唯一的男性演员，腾老湿该是承担了多大的肉体和精神上的折磨，才拍出如此尽善尽美的作品啊！人说“三个女人一台戏”，据我目测，这里头MM少数也有个3、40个，腾老湿一气演完十余场戏，真是老当益壮外加敬业的典范。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 最后放出视频地址，各位小伙伴们，在做完必要的对眼睛的防护措施后，尽情的沉醉在腾老湿奔放的歌喉里吧！！！
+    &lt;br /&gt;
+    &lt;embed allowfullscreen="" true="true"&gt;
+    &lt;/embed&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>至乐莫若读书(9)--阅读手段、设备及其它(1)</title><link href="http://4894816.github.io/zhi-le-mo-ruo-du-shu-9-yue-du-shou-duan-she-bei-ji-qi-ta-1.html" rel="alternate"></link><updated>2013-12-01T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-12-01:zhi-le-mo-ruo-du-shu-9-yue-du-shou-duan-she-bei-ji-qi-ta-1.html</id><summary type="html">
+&lt;div&gt;
+ &lt;span style="" font-style:italic="font-style:italic"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;如今是难得见到几个真正读书的人。很多人的回答干脆而直接--“哪有时间”，很多人会拿出手机说“我在手机上读”，然后就优雅的划开屏幕指着几个图标开始介绍：“你看这是XX读书，这是XX书城等等”。真正的读书、淘书之人，现实生活里我见得很少。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;想到这里我回想起一个细节：今年国庆回家时我背了一大摞书回家，临走前我爸要来看，我交到他手上时顺口叮嘱了一句：“这等好书，看紧点，别让人给偷了”。我爸大笑：“这年头谁还看书？你放心，摆他们面前他们都不肯翻的”。我马上就想起小时候经常发现手头的书无故失踪的往事，突然不见之时年幼的自己真是失魂落魄，找遍家里每一个角落而后郁郁寡欢。而过上一两年却在某亲戚或朋友家的某个角落看到该本书，便偷偷揣怀里带回来。这种感觉大概就是“完璧归赵”的欣喜之感吧！然而还是有很多的书从此便两不相见，以至于我如今偶尔还能想起她们封面的颜色、图案，当初是如何到手的往事……还是少许唏嘘。我未曾想到时代进步得如此之快，现今岂止是看书的少，连偷书的绝迹了。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 我有时候会在脑子里琢磨下关于阅读手段、阅读设备的命题，有的命题已经琢磨了很多年。刚好最近有不少人问起关于阅读设备的选择问题，在推荐设备的同时在这里一并摆出来。是为题记。
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+   阅读过时了吗？
+  &lt;/span&gt;
+  &amp;nbsp;
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp; &amp;nbsp; 在网络触手可及的现在，一伸手便是信息。个体和信息的关系，已经从个体寻求信息，转变到了信息俘虏个体。打个比方来说，在互联网兴起的初期，上世纪九十年代我们上网时，都是我们在主动的寻求信息，在28.8K的modem连接下艰难的访问着某些看似很新潮的媒体。彼时的好网站是口口相传或是用笔记抄来共享的。现在呢？页面多得令人发指，增长的数目更是令人咋舌。网站在变着法儿的吸引你----你常常点开一个链接，然后一个链接接着另一个链接，你挨个点下去，津津有味。然而，时间在流逝，当你再一次抬起头来时，时钟往往过去了好几个点---这种场面很常见。
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 在信息开始俘虏个体的时代里，阅读是否已经过时？
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;我想，看文章的大多数人应该有过我提到过的瞬间，被某个链接吸引，而后一个链接接着一个链接的点&amp;nbsp;。然而请仔细想想：在这种点击、眼球被吸引、身心被愉悦的过程中，你得到了什么？你当时的体会现在还能回想得起来多少？那些诱人的花花绿绿的小图标，当时勾人心魄的，如今竟是完全没有印象了。但内容提供商和运营商感到开心----你的点击就是他们的金钱。你看，你做了多么无私的一件事儿呀！？
+   &lt;br /&gt;
+   &lt;span&gt;
+    &amp;nbsp; &amp;nbsp; 而阅读不会给你带来这种感觉。真正能让人沉迷于其中的阅读，并不是一个链接接着一个链接。文字是有组织的，这一点远远胜过互联网上诸多看似诱人实则无关的无条理无组织的链接。再臭的书，也是同一个作者写出来的，说它臭，至少你能体会到一个臭文笔作家的挫笨的思路吧？而隐藏在那些花花绿绿的诱人链接后面的“小编”，他们是很多个无关的群体，你永远无从从诸多欲盖弥章的诱人链接中得到真正的思想。
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 所以，关于这个问题，我的答案是：阅读永远不会过时，就算你读到再烂的作品，它依然能给你连贯的“批判”思维。与其在诱人、离散的互联网陷阱式链接里消磨岁月，不如请你回归阅读。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+     深度阅读、还是浅度阅读？
+    &lt;/span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp;&amp;nbsp; 回答“我在手机上看书啊”的朋友，我很理解。事实上为我自己都做过很长时间关于手机/移动设备阅读的尝试。在NOKIA上班的时候公司的班车是很拉风，准点而漫长，在拉风而漫长的班车上，我尝试过在PSP/手机上阅读各类书籍。然而我发现，总是有那么一两个王八蛋程序发来某条短信，或是某个诱人的链接，引诱着我去刷刷QQ看看女神或者某个王八蛋在不在线，或是看看新闻……总之有着各种乱七八糟的思维，时不时跳出来，让你的阅读无从继续、或是断断续续。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;我当年的手机上有着看过的书籍列表，现在看来非常垃圾。尽是些只能读一遍的文字。譬如小小说、譬如传奇类文字。这些文字，仅供消遣，读完以后，想不起来。因而，我定义为“
+     &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+      浅度阅读
+     &lt;/span&gt;
+     ”。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &amp;nbsp; &amp;nbsp; 关于深度阅读，我有着自己的定义。我小时候读过的很多书，没被偷走的那些个，长到30岁依然在翻。我有一套《奇妙的世界》，这是套儿童故事丛书，惶惶六大卷，里头有着我非常喜爱的中篇、长篇小说。这些小说里勾勒出许许多多新奇而瑰丽的场景。譬如：复仇的爱斯基摩少年、不可一世终被救牍的富家少年、纳粹威胁下为了保护犹太儿童的法国幼儿园……&amp;nbsp;我想说，这些我能信手拈起来的故事里，蕴藏有很多让我受益一生的道理。譬如，在
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ 爱斯基摩少年的故事里，少年的师傅在交给他射箭绝技时告诫他“别让别人怕你，让别人害怕的人和疯狗没什么两样，信服信赖而不是畏惧，这才应该是英雄的真谛”---这句话让年轻的爱斯基摩少年摆脱了心结最终获得身心的解放，于我而言，这话在长达20多年的时间里，不时让我回味并反省。这种能引发人思考、反省的阅读，我称之为”
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  深度阅读
+ &lt;/span&gt;
+ “。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 我们需要的到底是什么样的阅读呢？我不想剑走偏锋，因为好书难寻，好心境难寻，好书遇到好心境，皆是缘分而言。所以，我建议最好是尽量多的深度阅读。但是，浅度阅读不可少---因为，人深沉了，就没得救了，只能剩出家一条路。尘世万千精彩，我是舍不得的。我日常的阅读中，70%的深度+30%的浅度，这是我的标准，至于你适合怎样，答案看你自己。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+   &amp;nbsp; &amp;nbsp; 我应该采用怎样的阅读手段？
+  &lt;/span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 这个问题应该是仁者见仁智者见智了。有人偏爱纸质阅读，有人偏爱电子类阅读。这里我只说我的见解。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 1. &amp;nbsp;图书馆不能解决一切。&amp;nbsp;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 首先，并不是每个人都能找到并享受图书馆。事实上图书馆相对于庞大的人口基数来说，依然是杯水车薪。有的地方根本就没有图书馆，譬如三线城市的图书馆都破得不成人杨。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 再者，图书馆里的书，未必是最新的书。我朝对文化的重视是有目共睹的，那就是，从来没当回事！50年代把知识分子当臭老九搞，批斗什么早就是家常便饭。现今的知识分子需要把业绩和金钱挂钩，搞得学术场与金钱齐飞，专心做学问的有几人？？？在这种情况下，你还指望图书馆的书能实时更新？这不大可能。选择了图书馆，可能你会和最新的书籍失之交臂。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 最后，图书馆里的书，相当一部分是废书。不解释，去翻图书馆里的天朝特色的政治类书籍。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;2. 书店不能解决一切。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;首先，书店经营的愈发困难决定了它的市场角色。小众而有思想的书越来越少，因而你走进书店，发现越来越多的所谓畅销书陈列案前，而好书却在角落里落灰！我经常在兰州某图书市场里淘来过快发霉的好书。然而没有人发现，畅销书在最显眼处，它们才能维持书店的存亡。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 再者，很多好书不能出版，书店里卖的只能是合法的书籍。这点，不解释，同样是天朝特色。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 最后，最重要的一条，书籍是有重量的。在诸多人流离于这世间的当头，买的起书，却带不走书，这是最要命的也是最残酷的----一个爱书之人很痛苦的事就是亲手把买来的书送给收破烂的。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;所以我说，我逛得起书店，但是我不敢逛书店。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 写到这里先小结一个，因为我困了我要睡觉，明天我再接着写下一篇，关于电子类书籍的选购。睡觉去啦。
+  &lt;br /&gt;
+  &amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>跑步的意义(十）</title><link href="http://4894816.github.io/pao-bu-de-yi-yi-shi.html" rel="alternate"></link><updated>2013-11-29T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-29:pao-bu-de-yi-yi-shi.html</id><summary type="html">
+&lt;div&gt;
+ 11月29日。零度以下的晨跑一场。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  6：00
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 准备运动中。
+ &lt;br /&gt;
+ 玄武湖&amp;amp;紫金山，月亮高挂在半空。
+ &lt;br /&gt;
+ &lt;img idx="0" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__1.jpg" alt="图片" style="width:740px;height:984px" /&gt;
+ &lt;br /&gt;
+ 灯火通明的南京站：
+ &lt;br /&gt;
+ &lt;img idx="1" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__2.jpg" alt="图片" style="width: 847px; height: 637px;" /&gt;
+ &lt;br /&gt;
+ 路灯下的跑道：
+ &lt;br /&gt;
+ &lt;img idx="2" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__3.jpg" alt="图片" style="width: 847px; height: 628px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：17
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 跑动中, 第一丝曙光。
+ &lt;br /&gt;
+ &lt;img idx="3" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__4.jpg" alt="图片" style="width: 847px; height: 631px;" /&gt;
+ &lt;br /&gt;
+ 第一丝曙光打在南京城里。
+ &lt;br /&gt;
+ &lt;img idx="4" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__5.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：33
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 水中央
+ &lt;br /&gt;
+ &lt;img idx="5" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__6.jpg" alt="图片" style="width: 847px; height: 636px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：38
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 银杏满地的跑道：
+ &lt;br /&gt;
+ &lt;img idx="6" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__7.jpg" alt="图片" style="width:744px;height:986px" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;img idx="7" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__8.jpg" alt="图片" style="width:742px;height:990px" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：46
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 乌蓬船
+ &lt;br /&gt;
+ &lt;img idx="8" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__9.jpg" alt="图片" style="width: 847px; height: 632px;" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：52
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 太阳就快爬上紫金山：
+ &lt;br /&gt;
+ &lt;img idx="9" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__10.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ 鸡鸣寺
+ &lt;br /&gt;
+ &lt;img idx="10" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__11.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ 天色大亮：
+ &lt;br /&gt;
+ &lt;img idx="11" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__12.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  6：58
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 城墙边/银杏/晨练的人群
+ &lt;br /&gt;
+ &lt;img idx="12" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__13.jpg" alt="图片" style="width: 847px; height: 638px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  7：03
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 结冰的小块湖面
+ &lt;br /&gt;
+ &lt;img idx="13" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__14.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-size:24px="font-size:24px"&gt;
+  7：06
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 玄武门
+ &lt;br /&gt;
+ &lt;img idx="14" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__15.jpg" alt="图片" style="width: 847px; height: 633px;" /&gt;
+ &lt;br /&gt;
+ 阳光照进水杉林里：
+ &lt;br /&gt;
+ &lt;img idx="15" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__16.jpg" alt="图片" style="width: 847px; height: 636px;" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  7：14
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 完毕后的放松运动
+ &lt;br /&gt;
+ 这张可以对比6点的照片看，同一地点，玄武湖&amp;amp;紫金山
+ &lt;br /&gt;
+ &lt;img idx="16" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__17.jpg" alt="图片" style="width: 847px; height: 633px;" /&gt;
+ &lt;br /&gt;
+ 城墙：
+ &lt;br /&gt;
+ &lt;img idx="17" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__18.jpg" alt="图片" style="width: 847px; height: 632px;" /&gt;
+ &lt;br /&gt;
+ 出发时路灯下的跑道，如今是这幅模样：
+ &lt;br /&gt;
+ &lt;img idx="18" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__19.jpg" alt="图片" style="width: 847px; height: 634px;" /&gt;
+ &lt;br /&gt;
+ 跑道：
+ &lt;br /&gt;
+ &lt;img idx="19" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__20.jpg" alt="图片" style="width: 847px; height: 639px;" /&gt;
+ &lt;br /&gt;
+ 回程要路过的城门：
+ &lt;br /&gt;
+ &lt;img idx="20" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__21.jpg" alt="图片" style="width:740px;height:984px" /&gt;
+ &lt;br /&gt;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  尾声：
+ &lt;/span&gt;
+ &lt;br /&gt;
+ 感谢玉腿，没有它奋力跑动，看不到如此拉轰的景色。跑者，腿在地狱，心在天堂。
+ &lt;br /&gt;
+ &lt;img idx="21" src="/images/Qzone/2013-11-29_paobudeyiyi_shi__22.jpg" alt="图片" style="width: 847px; height: 635px;" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>卧虎藏龙</title><link href="http://4894816.github.io/wo-hu-cang-long.html" rel="alternate"></link><updated>2013-11-22T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-22:wo-hu-cang-long.html</id><summary type="html">卧虎藏龙
+
+
+
+
+
+  
+  
+ 
+ 
+ 
+  &amp;nbsp; &amp;nbsp;最初看这部片的时候是不明所以的，彼时的思维还停留在武侠片就该讲究场面、讲究招式、讲究一种刀剑若梦的杀戮般的快感。现在想来，多少是受了早年TVB的影响。因而《&amp;nbsp;卧虎藏龙》初上映时，我很鄙视美国人的品味，认为把奥斯卡大奖颁发给李安这个洋不洋汉不汉的家伙简直是瞎了狗眼。
+ 
+ 
+ 
+ 
+  &amp;nbsp; &amp;nbsp; 然而国货并没有自强，之后的武侠片一部不如一部，从老谋子的那部以露出丰满胸部成名的《满城×××××》开始，武侠片无论是从讲故事的能力、还是情节的跌宕起伏，都千篇一律----帅侠客+美少女+肉色可餐+花拳绣腿==票房。老实说，对现今中国导演想要表达的内心世界，我是心存疑惑的----我不知道他们想表现什么？但如果要我掏60～100左右，和一个妙龄少女，在漆黑的电影院里消磨过两小时来看一个索然无味的故事，我觉得是不值的。我会说----一起喝咖啡去吧，我给你讲笑话或是轶事或是吹牛，怎样都可以。花100块钱买一帮烂逼导演辞不达意说出来的故事，不如我亲自说给你听？
+ 
+ 
+ 
+  
+  &amp;nbsp; &amp;nbsp; 今年我去了黄山脚下，也确实见到了《卧虎藏龙》的拍摄场景。宏村自不必说，别有景致，别人写烂了我就不提了。而拍摄打斗场面的木坑竹海最是让人心生眷恋，我的老板，走南闯北多年的一个浪子极力鼓动下，才得以到达的一个景点。去之后只能用意犹未尽来形容。我一直觉得，若带个MM，竹林里穿上点花哨的衣服，随便摆拍便是个标准妖精的样儿。甚至我还和同事说，哥多想把未来的婚纱照搁这里拍了！有的地方我没去过，但我知道这辈子估计不会再去;有的地方我去过一次，但潜意识里，我觉得它和我有缘；所以，木坑竹海，我还会再去的，不久、或是很久以后。
+  
+  &amp;nbsp;&amp;nbsp;&amp;nbsp; 回来后我开始把《卧虎藏龙》翻出来重温，一遍，又一遍。被年月沉淀后的自己，开始明白李安想表达的真实意图。
+  
+  
+   
+   &amp;nbsp; &amp;nbsp; 我想说的是，年少轻狂的时候，也许是由于头发长见识短、又也许由于被洗脑多年不懂欣赏美、又或者太习惯于惯性思维……总之我狗眼看人低错失了很多本来能touch到骨子里的美好的东西。大学时太迷恋于周星驰的无厘头，以至于对《卧虎藏龙》一类的文艺兮兮的作品嗤之以鼻。然而10年之后，30岁的自己再回首看《卧虎藏龙》时，竟感动于之中的禅、情、侠，通篇看来只能用爱不释手心有戚戚来形容观后感。
+   
+   
+   &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 来个经典台词
+   
+  
+ 
+ 
+  
+  
+ 
+ 
+  
+   &amp;nbsp; &amp;nbsp; “我愿意游荡在你身边，做七天的野鬼，跟随你。就算落进最黑暗的地方，我的爱，也不会让我成为永远的孤魂。”&amp;nbsp;
+  
+ 
+ 
+  
+   &amp;nbsp;
+  
+  
+ 
+ 
+  
+   &amp;nbsp; &amp;nbsp; 应该说全片中我最欣赏的台词就是这句了----年轻的时候我觉得这段话肉麻。年轻时我以为要追求卓越，就应该去机会最多的地方、最开放的方。但现在我并不这么认为，我觉得，一个人，如果心里有了对生命的（热）爱，对自己真正（深）爱东西的（深）爱，那么，他就算落进最黑暗的地方，他的爱，也不会让他成为永远的孤魂。甚至，他的爱，能带他踏入光明之地。我甚至觉得，现在你把场面复制出来让我深情告白这一段，我亦不觉得有肉麻或是矫情之感，妈蛋，最后一口气他舍弃了飞升的机会，说出内心真实的感觉，这他妈不是真爱又是个啥？
+   
+   
+   &amp;nbsp; &amp;nbsp; 可能你看不懂我在说什么，事实上我也很难用词句准确表达出我此时想说的真实意愿。这不奇怪----谁让这部电影玩儿的是他吗的禅意呢？
+   
+   &amp;nbsp;&amp;nbsp;&amp;nbsp; 江湖里卧虎藏龙，人心又何尝不是如此。一部电影里，禅意万千，李安竟然能在2个半小时内完美展现出来之。有才的人就是这样，内心里藏龙卧虎，名至、实归。
+   
+  
+ 
+
+</summary><category term="Qzone"></category></entry><entry><title>硬件与软件</title><link href="http://4894816.github.io/ying-jian-yu-ruan-jian.html" rel="alternate"></link><updated>2013-11-15T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-15:ying-jian-yu-ruan-jian.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;
+ &lt;img idx="0" src="/images/Qzone/2013-11-15_yingjianyuruanjian_1.jpg" alt="图片" style="width:581px;height:422px" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 早上起来动了下烙铁，焊了个小板子。5个排针，结果被我焊成了这副糗德行，学艺不精啊！还好，万用表一测，居然没有虚焊，一会接到BeagleBone上头，就是个三轴的传感器了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我现在的公司里有个同事，有几回看到我在下班后鼓捣Arduino的一套玩意，就很不屑的说：“用面包板连电子元件的这类东西，真的很没意思，我大学时就玩得溜极了……”然后又巴拉巴拉说了老半天，总之就是你手握Linux/Unix一套利器，为何不去做云计算或是大数据一类有前途的东西？我听得不耐烦就直接顶一句“你丫玩得好就玩你的蛋儿高精尖来钱快的玩意去，不如练好本领去抢银行啊！？哥就乐意在面包板上玩传感器。”----有句俏皮话叫“不要和傻逼理论，因为傻逼会首先把你拉到和他同一道德或是技术层面，然后用他丰富的傻逼经验打败你。”
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我向来不以为在学校里做完了那些个乱七八糟的实验、实验报告上老师给你打上90甚至100的高分能说明什么----电路实验、EDA实验等等，这些大学我都玩儿过，而且分数还不低。但细细想来，实验书是预先编好的，实验的步骤是可以一步一步记录下来的，做好这种实验获得高分的关键，无非是：提前预习--&amp;gt;提早去实验室抢好位置--&amp;gt;多请教老师--&amp;gt;实验报告格式一定要写好。那么这就牵扯出一个问题，因为所有的步骤都是别人预先设定好了，你只是个履行者而已，你真的能发挥出想象力、创造力？你真的就提炼出了独立发现问题、解决问题、事后总结经验等等的能力？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 有时回首过往几十年的求学，觉得自己被教育戗害得不浅，不过幸好是上了大学我就没怎么好好学，好歹拣回来半个好脑袋（只是半个，因为另外半个还在抢救中）。传统的填鸭式教育的恶果是，它用着一套规规矩矩，把你的脑筋束缚住了，按照它预订的规则来你可以获得非常好的分数，然后这个分数骗了你，让你觉得自己无所不能。上了社会，你还拿着这一套规矩去考究别人，为难别人。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 比如我那个同事，他可能觉得当初面包板上的那些实验简单之极，自己得分甚高----这又怎样？你用心去考究过元件吗？你自己组织过各个模块的功能吗？Arduino是一个开源的平台。我在上头做了很多拉风的玩意儿，比如MP3，它可以用拿一个红外遥控器来遥控其行为，每次拷贝入新歌自动扫文件形成播放列表，或者你可以更嚣张的用手势来控制切歌，用一个倒车雷达上用的测距的超声波传感器来切歌----超声波换歌这一招太酷了，你把手放到离播放器20厘米的范围内，乖，下一首；放到离播放器20厘米以外50厘米内，亲爱的，上一首。放到50厘米外，给哥暂停下，哥上个厕所撒泡尿先。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 诸如等等，这就是想象力。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我经常觉得，硬件和软件，其实没必要分那么清的。甚至我们再推理一下，这世间的很多东西，分门别类，说白了只是给大多数人一个偷懒的理由---哦，我已经委身于这一行业了，所以我要在这一行业好吃好喝，没事我要装出来一个砖家样儿，免得别人来抢我的饭碗。我在上学时有过一个学法学的盆友，当时我看她的教材，翻过来翻过去觉得还蛮有点意思的，司法考试复习时我顺手翻她的参考书，那些个案例狗血百出，实在是研究人与人之间关系的绝佳教材。于是我说：“要不我也考一个去，这玩意好玩”。她的答案是，你不是这个专业的甭做梦了。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 这话多年后我一直都不屑。试想你当初一小姑娘，高考上学学法律也无非是几年的事情，几年的求学过程中你要睡觉要吃饭要玩儿要过四六级考试要考研还要上一堆乱七八糟的政治课，你真正花在专业上的时间又足以让你平添几分学术功底？当然司法考试这事儿我后来也一直没去考，但是这类考试呢，我太明白其窍门了。当然你可以说我看不起人，哦是吗？这得看你是怎样的人，确实我是看不起拿着专业当饭吃的人。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 回到原来的话题，硬件和软件。确实在我的求知(区分于求学)过程中我没把这两者做太多的区分。事实上我见过很多狠角色，都是手把焊铁能焊出个未来，手敲程序能敲得惊天动地，上得台去滔滔不绝，工作之余五花八门跑得比兔子快做饭能做到大厨级别……而作为吃IT这口饭的人，我没觉得什么都搞是个坏主意，很多好的程序，说白了就是想法。所谓的编程语言、手法啥的都是表象。这世间多的是解决方案，少的是想法。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 唯一能束缚我们的，只是我们自己有限的想象力。不知从哪本书看来的句子，作为结尾。我一定会多焊焊的，狗啃屎般的焊点再也不要出现在我的焊盘上！
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>拍一拍身上的土</title><link href="http://4894816.github.io/pai-pai-shen-shang-de-tu.html" rel="alternate"></link><updated>2013-11-13T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-13:pai-pai-shen-shang-de-tu.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 微博上我关注了“虾米音乐”，这个ID会时不时推荐出一些新的歌儿，刷微博时顺手点一把，也好歹能救我这种常年听pandora(国外的一个用户体验很好的在线radio)的家伙顺应下国内潮流。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 昨天下午“虾米音乐 ”抛出来一条，“                                    已两年未推出原创专辑的
+ &lt;a href="http://weibo.com/n/%E7%BE%BD%E6%B3%89" target="_blank"&gt;
+  @羽泉
+ &lt;/a&gt;
+ ，在2013年末为大家带来了温暖的全新单曲《回家乡》”---然后我就顺手点开了，反正就几分钟吧。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp; 不得不说，作为曾经的羽泉歌迷，我一直相信能吼出《最美》、《爱浪漫的人》、《感觉不到你》、《彩虹》、《蜡人》、《叶子》《还剩下些什么》、《坎大蛤黎明》、《旅程》……等经典歌曲的组合，还是抱有很高的期待的，尤其是他们选择的歌名是如此通俗易懂的三个字，谁说不能反璞归真时吼出最美的旋律呢？起了这么乡土气息的一个名字，我以为他们其实是要在万马齐喑的内地歌坛，举两年之力，不举不已一举擎天，玩一票大的！
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 随着音乐进度条的慢慢右移我的心在慢慢变冷，我觉得，他们可能是奔着时尚琅琅上口的目的去的，他们的内心可能觉得自己是在创作一个和谐时代下的大同之作，或者说，他们觉得，他们口里唱出来的，是这个主旋律下的时尚。但是，事实上这首歌可以用三个字来形容：土爆了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我在头脑里构思了一下两位歌手在创作时的对话：
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 海泉：羽凡，我说咱们两年没出专辑了，上次出的专辑还卖得跟屎一样，要不，咱出一张？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 羽： 好啊！你说我是歌手这节目孙俪他老公的最后出场，整得咱一把就这么火了，这回整点什么样的歌儿可以获得广大群众的支持呢？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 海： 我想想啊，这不快过年了嘛，过年了，每个人都得回家，要不咱整点这个题材？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 羽： 这个好，我就整一个回家题材，就整火车上归心似箭的游子！！！
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 海： 对，能给它加的都给它加上，孤单、奋斗、爱情……再找几个看上去很屌的外国编曲，就把这一发给做了吧！
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 于是他们两人从泥土上站了起来，拍了拍身上的土，写了一些乱七八糟的歌词，配上稀里哗啦的编曲，再把几个日本编曲找来，哦了，这首歌就诞生了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 听完这首歌之后我只能说：土就是土，哪怕你把Maroons 5或是metallica或是枪花过来给你编曲、打鼓等等，土就是土。你以为用一个I7处理器、海量（64G往上）内存、青轴键盘输入电脑里的精美印刷体《三字经》就不是入门启蒙读物吗？这首歌的歌词，其土气是浓浓的由里往外渗的。拿出版业来说，一部庸俗的书，纵使你给它追加上最华丽的封面，再举办一个隆重的发布会，人家一打开你的书，发现里头讲的是庸俗的成功学，这部书的品味一下就沦落为地摊货的品味了。从羽泉从99年出道到现在一直还奋斗在歌坛第一线的事实，我建议他们两人，好好写点真正能触动灵魂的歌词和旋律，不要去玩票什么主持人，不要去迎合主旋律玩鸡×巴和/谐，所有他们现在正在玩票的这些，也许能带来巨大的财富和影响，然而于他们的创作灵感，丝毫无意义！
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 有时候我听着他们早期的歌曲，比如，《彩虹》，当年大学时，哥唱出来这首歌就可以引来堆女生喝彩的，这么有朝气带给人希望的歌曲，你们为何现在再也创作不出来了呢？当年杜德伟还要翻唱你们的歌曲，现在杜德伟屌你们不屌？当年你们歌词里的那种意境，清幽高远，譬如《蜡人》《坎大蛤黎明》……为何到现在，你们就只会唱出来些个歌功颂德的歌曲用于为威权舔屁沟呢？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 回家，谁每年不曾回？真的有你们所唱的般简单吗？能网上购票前的每一年，每年我要么就是硬生生战票或坐票回去！后来工作了，有了点钱，能买得起加价票，好歹能横着回湖南。现在每次回家，都是大年30到家，为什么？没票啊！你一首歌，就把回家描述得那么好，那么，那些在硬座车厢里苦熬的生命，他们在想什么吗？那些无端被晚点的旅客，他们由于晚点不得不选择临时住宿，他们听到你们站着说话不腰疼的歌儿，在硬座车厢里苦熬时光的一刹那，心情就能好一点吗？
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 让我打分的话，整首歌曲的得分我给出1分，这一分是对羽泉在数年后依然还能坚持唱歌的一点点起码的鼓励。这是一首适合在山寨手机上以最大音量在跳广场舞的人群里播放的歌曲。而听完音乐后再回想起羽泉这几年的所作所为，我的感觉是：唱歌上，羽泉在向凤凰组合靠拢; 主持方面，他们在向朱军靠拢。无所谓嘛，他们可以大言不惭的说，歌手里主持得最好，主持人里唱歌最好，谁让我们现在的社会里流行不要脸呢？
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>敲一天代码读两手湿</title><link href="http://4894816.github.io/qiao-tian-dai-ma-du-liang-shou-shi.html" rel="alternate"></link><updated>2013-11-10T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-10:qiao-tian-dai-ma-du-liang-shou-shi.html</id><summary type="html">
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 读到海子的《四姐妹》，意境很唯美的一首诗
+ &lt;br /&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  永远是这样
+ &lt;/span&gt;
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 风后面是风
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 天空上面是天空
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 道路前面还是道路
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 而我沉默的前轮
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 悄悄在道路上
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 印下着深深的车辙
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 又有谁知道
+&lt;/span&gt;
+&lt;br style="" color:rgb="color:rgb" /&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  那给后轮的情诗
+ &lt;/span&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ 这让我回忆起19世纪美国诗人郎费罗的一首《A psalm of life》，结束前的几小段摘录如下，细读起来有异曲同工之妙：
+ &lt;br /&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp;
+ &lt;/span&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp;Lives of great men all remind us&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; We can make our lives sublime,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; And, departing, leave behind us&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Footprints on the sands of time ;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; Footprints, that perhaps another,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Sailing o'er life's solemn main,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; A forlorn and shipwrecked brother,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Seeing, shall take heart again.
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; Let us, then, be up and doing,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; With a heart for any fate ;&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; Still achieving, still pursuing,&amp;nbsp;
+ &lt;/span&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Learn to labor and to wait.
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  ----“雁过留声，人过留名&amp;nbsp;”，文字的意义何尝不如这句俗话所说。在文字越来越被轻视和无视甚至于阉割的粗鄙之世，我倒宁愿相信经过细心推敲所写下的文字、精心构思后敲出的代码等等勾勒出的一片宁静唯美之境。或许到了这个涩会不再打鸡血也没那么瞎忙乎的一天里，路过的人会发现前轮印下的情诗、前人在沙滩上留下的脚印，缓慢而从容的徜徉在时间的流里，如同头顶的银河中闪耀的群星，在漆黑的夜空里作欢快的窃窃私语。
+ &lt;/span&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>敬惜字纸（外一则）</title><link href="http://4894816.github.io/jing-xi-zi-zhi-wai-ze.html" rel="alternate"></link><updated>2013-11-02T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-11-02:jing-xi-zi-zhi-wai-ze.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;
+ &lt;span style="" font-weight:bold="font-weight:bold"&gt;
+  敬惜字纸(与文字的故事)：
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 回想起来，大学买了四年的《电脑报》《21st Century》《Crazy English》《Music Heaven》，常买《软件报》《电子报》《电脑商情报》《China Daily》……每次买来都是兴致盎然的读完，做下笔记。回想起来，那些报纸和杂志，给在边城里求学的我，打开的窗岂知是一扇？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 日积月累了四年，毕业时就有了两大麻布袋，看着这两袋过期报纸/杂志我开始抽闷烟，抽完后说了句：“带不走你们了，各奔前程吧”。叫来了收破烂的，卖了一大笔钱。光盘四大盒，保存至今。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  光盘的故事：
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 互联网刚兴起时下载速度很慢，因而带光盘的杂志卖得很火。650MB的光盘里往往能找到不少硬货。01年混迹兰州时，常去雁滩图书市场淘杂志。某种杂志，5.9的售价带光盘，内有各种软件/视频/音频。首期光盘里附送的江美琪《亲爱的，你怎么不在身边》和Maxwell《Lifetime》，大爱至今，光盘尚在湖南老家。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 许多人不懂得光盘的妙处。在我看来，一张组织有序的光盘，至少是一个光盘制作者或是一个光盘制作团队心血的结晶。600多兆的媒质里，该塞入什么东西，如何组织内容，大有学问在。我珍藏过许多光盘，里头的内容组织方法很巧妙，一张光盘能搞定系统从启动到跑得飞速的所有软件。后来DVD普及了、网络普及了，如此精心制作的作品确是近乎绝迹。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我当年也曾自己刻盘，刻下自己费劲心思得来的音乐、视频、软件等等。可惜懂的人毕竟是少数，然而我也不觉得失落，懂得妙处的毋须多言，不懂的你把金山银山摆他面前他也照样守着他那一亩三分地。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 有时候我不无悲摧的想：现在还有谁会精心去组织一张光盘的内容呢？系统越来越稳定，网络越来越快，人越来越懒惰。那些聪明而勤劳的家伙在现实生活中越来越少了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 以Maxwell的《Lifetime》中的歌词作为结尾：
+ &lt;br /&gt;
+ &lt;span style="" color:rgb="color:rgb"&gt;
+  &amp;nbsp;&amp;nbsp;&amp;nbsp; I can let it all pass me by
+  &lt;br /&gt;
+  &amp;nbsp;&amp;nbsp;&amp;nbsp; or I can get down and try
+  &lt;br /&gt;
+  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; work it all out this lifetime lifetime
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 人可以随波逐流浑浑噩噩一世；或者折腾折腾再折腾，创造出属于自己的人生----人生，没有意外的话，大半是取决于自己的。这番道理10年前从光盘中听到此曲时就想得一清二楚。这些年来是有些差强人意，然而这毕竟是自己work it out的一段lifetime，毋须遗憾。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>书评一则，兼谈微博年代的写作</title><link href="http://4894816.github.io/shu-ping-ze-jian-tan-wei-bo-nian-dai-de-xie-zuo.html" rel="alternate"></link><updated>2013-10-30T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-10-30:shu-ping-ze-jian-tan-wei-bo-nian-dai-de-xie-zuo.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;先说个引子: 野夫是我很赞赏的作家，初次看到他的作品是罗永浩推荐的《革命时代的爱情》（
+  &lt;a href="http://www.aisixiang.com/data/39314.html" target="_blank"&gt;
+   http://www.aisixiang.com/data/39314.html
+  &lt;/a&gt;
+  ）， 当年这篇文章老罗推荐时加的评语说让他哭了个稀里哗啦。彼时博客正火，火爆到基本上每个普通青年吃饱喝足了都要在大大小小的博客平台上留下长长大篇的流水帐表达完对自己美好生活的歌颂后还要呼朋唤友的互踩。后来流量越来越便宜，智能手机也自降身段低贱到少吃两顿肉就能收归囊中的程度，博客就日渐被各种富媒体交流平台所代替了。罗永浩的牛博便是当年大大小小博客平台上最为别致的一个，别致的原因是他把服务器架在了美帝国主义的机房，所以长期被有关部门封杀在墙外，而野夫彼时的博文，每次贴出来，总能轻松在博客排行榜上冲到头条的位置， 彼时写的人用心，看的人也认真，光是评论板块，读者们洋洋洒洒一长段的文字就能引人深思老半天。可不像咱们现在，觉得懒点个“赞”就觉得皆大欢喜了----这和领导们读完文件划个圈当属同一性质，画着画着圈，领导们的智商就下降到不能走歪路也不能走邪路了，至于点多了“赞”是否会有同等功效，大家就拭目以待好了。 &amp;nbsp; &amp;nbsp;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;是这样的，前几天我图便宜，在京东上圈了一大堆书回来，里头有两本卖得很火的野夫的作品，《1980年代的爱情》和《身边的江湖》。拿到手后我掂了掂份量，觉得还挺沉，心里有点窃喜：这两晚上应该有好料可以看了哇！ &amp;nbsp;&amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;我昨晚程序写多了睡不着，就把书翻出来看，不看不知道，一看气坏了。《身边的江湖》里80%的文章我都事先在网上看过了，看了看野夫新写的几篇，觉得有些索然无味，有种为着写而写的意思。比如他写的去香格里拉的文章，在我看来就是一篇有名的流水帐。关于台湾之旅变成了自家走访朋友外加自己的一些见闻所感。这样的文字难免让人失望。当然以前看过的文字还是不错的，也就是说，80%我看过的文字，收录在该书中，还是值得细品的。 &amp;nbsp; &amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;打开《1980年代的爱情》后我倒吸一口气：这排版也太适合用文字占用篇幅了吧！？ 基本上，这是我看过的排版很费纸的设计。硕大一张纸，也就中间很窄的部分印上字，页眉和页脚留到很空，一页书扫上几秒，就没了。对于我这种看书速度超快的人，基本上看这本书就是在不停的翻页。 &amp;nbsp;&amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;《1980年代的爱情》，这个名字很像马尔克斯的名作《霍乱时期的爱情》。马的作品我是在春节休假时在家读完的，读时的感觉，时而感慨、时而期盼、时而愤怒、最后掩卷之时，因为男主和女主历经劫难终于在一起了嘛，有种巨大的幸福感从内心升华而来。马尔克斯自认为自己最经典的作品，果然名不虚传。 &amp;nbsp; &amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;而读《1980年代的爱情》我没有丝毫惊喜。这故事太老套，老套到没有任何惊喜。下乡的已有城里对象的男孩遇到青涩时代心目中的女神，两人羞涩懵懂的暧昧了大半年，而后男孩回校深造回城后不了了之；多年后男孩遭遇变故出狱后再见徐娘半老的女神，两个经历过婚姻后的可怜人来了个一夜情后女神消失；再过了多年女神离世，男孩在葬礼上得知一夜情后女神消失的真实原因是不愿意拖累自己。对了，就这么一个故事。 &amp;nbsp; &amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;1980年代，本就没什么爱情， 再嚣张点说，直到现在，中国社会里的爱情也不多----如果爱情多得遍地都是的话，《非诚勿扰》等诸多相亲节目也就不会大行其道。不管你是否愿意承认，现实而势利是大多数人生活的常态，在一种近乎于顽固的门第观念下用势利的眼光审视交往的对方，难免就陷入了一种无需建立在“爱”基础上的“情”，然后个体就觉得虚弱而无力，没有了勇气，哪门子的所谓爱情？1980年的两个主人公，在最该勇敢的时候仍然抛不开门第观念，而在可以风轻云淡时偏偏选择了激情，这种个体的选择，很多人可能觉得唏嘘，在我看来是在犯傻。你以为多年后干一炮就能弥补当初没能在一起的遗憾了吗？爱情里有买春想象不到的温暖，很抱歉，书里的描写，没什么温暖。对比于马尔克斯的书读完后的那种幸福感，它什么也没有，反而令我觉得困了。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;《1980》这本书描写的与其说是爱情，不如说描述出两个脆弱的个体在尘世间的浮沉。我私下觉得，这部书用一篇博文来记载就够了，硬撑到一部小说的长度，又要学着《霍乱时期的爱情》般命名，作者的功底也许还有所欠缺，而这个故事的厚重程度，不足以支撑起如《霍》一般的荡气回肠。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;写出这样的书评我固然有些失望，但也在意料之中。我发现一个现象： 博客兴起的这几年里，大多数人已经变得不会写长篇文字了，或者说，写出来长篇文字，大多是憋出来，憋到后面实在憋不下去，就草草安个结尾。我有注意去看我关注的作家和普通人的博客，大多数人已经放弃了更新， 偶尔有更新，绝大多数的文字也不再如几年前般隽永、有嚼头。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;为什么？
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;我想，我们现在的生活，已经被智能手机和智能手机上寄生的诸多新奇应用冲击得七零八落了。几年前，手机还只是手机，用来打电话、收发短信而已，个别的高级用户，用来导航或看电影玩游戏。几年前大家还是肯踏实的坐在电脑前敲入一段文字的 ，那时候玩游戏有PSP之类，看电影还是要动个BT或者电驴来求种找资源的，各类论坛也比之今日更为火爆和更具真正意义上的交流性。而现在，所有的这些：游戏、导航、社交、视频等等，都可以在一块4.3寸或是更大的屏幕上用手指点击来完成。我们面前的是一个更为快速的年代，各种消息闪得太快，而在过快的消息流里，大多数人所能做的也只是更为简单的“复制”和“粘贴”，就是常用的“转发”功能。所以我们可以看到，大多数的空间的博文前面标注着一个红色的“转”字，而微博达人们每天更是转得不亦乐乎。以前我们去到某个地方，会想着用文字来形容其独特之美，现在我们去了哪里，第一件事就是拿出相机或者手机来噼里啪啦乱拍一通，稍做加工后发到网上去。文字的作用，在信息高速流动的富媒体中，越来越被轻视。 &amp;nbsp;&amp;nbsp;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;野夫这几年的文章，稍微能看得下去的也只有少数几篇。大多数时候，他挂名土家野夫，在微博上转发着各类敏感或是不敏感的消息。我承认作为有影响力、经历牛逼、看问题角度比较独到的人，在微博这类应用上，确实能起到开启民智的作用。但是，于他自身，又得到了什么呢？不客气的说，影响力是大了很多，但是文字却差了很多。微博等重在传输的应用，对字体的严格限制，会无形中抹杀掉人内心中想要表达的欲望。说白了，微博里，你只是在秀，你可能会缺乏深入的思考、以及对文字/段落/总体格局的细致考究。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;我的朋友F对博客和微博有着如下的对比，他说：写文章，好比憋了一大泡尿，憋了很长时间后一泡尿出来，尿得很爽，看的人也觉得很爽；而微博就像是小狗撒尿一样，到哪儿都标注下这里是自己的领地。我觉得这个对比很是恰当，博文里所能展示的，除了作者的文笔，还有见识；而微博中，很多时候是在为了秀存在感，或者说为了标明“啊，这里是我的领地”这种类似于小狗圈地的领地概念。博文时代的读者，能独立思考的时候不在少数；而读多了口水段子，倘再来看长篇大论，估计会有些看不下去。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;野夫文字水平的下降，我觉得是这个网络阅读时代的必然。他现在的生活太过于热闹，也就难以写出真正震撼心灵的文字。《1980》的书后有写到故事成型是在2003年，10年后等野夫到了德国了才有空整理出来。这个故事说白了很老套，野夫设想的高潮，关于一夜性爱的篇幅,要真对比于诸多用身体写作的作家们，又显得太小儿科。一篇博文要被硬生生撑成一篇长篇小说，就势必被揉合进太多与主题不相干的杂烩，最终也就毁了这个看似宏大的命题。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;如果想写出来好文字，我觉得把微博关掉是个不错的选择，停掉太多的、不必要的、频繁的吐槽，几天不发言后自然能憋出一大泡想法来付诸于文字；如果想让生活过得充实一点，那你最好扔掉智能手机并远离电视，让人爱不释手的消费类电子、变着法儿吸引人眼球的娱乐节目，这些在给你带来感官享受的同时，其实奴役了你的内心。比如，谈到对象的标准，很多人第一反应恐怕会是非诚的舞台, 而谈到唱歌，好声音的那帮孙子把好端端的歌唱毁成了飙泪的煽情类节目。 所见的定势多了，你陷入了一种人云亦云的表演型变态思维，再回过头来看生活里平淡却是真实的的人和事，恐怕就带上了某种立场。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;文字需要沉淀, 生活需要静思，可惜的是，匆忙而纷乱的生活、高速的设备和网络，并没有给我们留下太多。
+ &lt;/div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>至乐莫若读书（8）</title><link href="http://4894816.github.io/zhi-le-mo-ruo-du-shu-8.html" rel="alternate"></link><updated>2013-10-28T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-10-28:zhi-le-mo-ruo-du-shu-8.html</id><summary type="html">
+&lt;div&gt;
+ &lt;img idx="0" src="/images/Qzone/2013-10-28_zhilemoruodushu_8__1.jpg" alt="图片" style="width:800px;height:527px" /&gt;
+ &lt;br /&gt;
+ ----由签售会想起来的几本不错的书。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;我生平只去过两次签售会，然而两次都留下了极深刻的印象。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 一次是去年最热的三伏天里头，野夫和徐晓在南京先锋书店的签售会。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;会前有演说，作家和嘉宾的互动，话题是关于民间修史的。来捧场的几人居然有浦志强（这可是鼎鼎有名的大律师），徐战前（旧体诗写得极好）等人，一干人等均谈吐不俗、腔调自然全无做作之态，谈笑间几十年的恩怨情仇跃然若生。嘉宾里有一苏州大学的教授，当年因为写反诗被贬到新疆石河子，历经劫难方老来还乡，被其他人提起自己事迹也只是起身拱手淡然一笑。这个片段给我留下很深的印象，所谓人生境界和姿态，只在这一瞬。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &amp;nbsp; &amp;nbsp; 话题敏感，也少不得有国宝出没。然而彼时当局尚未堕落到如今这般
+ &lt;/span&gt;
+ 风声鹤唳，讲便讲了，不触及到太激烈的话题即是皆大欢喜。然而话题又确实很有意思，台上的两个作者互相提问，才发现都是坐过牢的。而其余嘉宾里，大多都是律师或法律工作者。话题之生动有趣，惹得书店里的扫地阿姨都停下来围观。店里摆的那几百本书顷刻售空，我手快抢到两套四本，还被后来人强烈要求转让。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &amp;nbsp; &amp;nbsp; 徐晓是这次签售会上留下印象很深的一位，50多岁的老太太，念及年轻时喜爱过的诗歌时，忍不住就高声朗诵了一段食指的《相信未来》头段：
+  &lt;br /&gt;
+  &lt;div&gt;
+   &lt;span style="" color:rgb="color:rgb"&gt;
+    当蜘蛛网无情地查封了我的炉台，
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+   &lt;span style="" color:rgb="color:rgb"&gt;
+    当灰烬的余烟叹息着贫困的悲哀，
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+   &lt;span style="" color:rgb="color:rgb"&gt;
+    我依然固执地铺平失望的灰烬，
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+   &lt;span style="" color:rgb="color:rgb"&gt;
+    用美丽的雪花写下：相信未来。
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;这种场景是很有气氛的，21世纪10年代里，大家都高度依赖于网络和手持设备的当头，能有一位气质高雅的女士认认真真的朗诵着年轻时喜爱过的诗。到我们50多岁时，会不会有勇气和那时的年轻人秀周杰伦或是john mayer?
+  &lt;br /&gt;
+  &lt;span&gt;
+   &amp;nbsp; &amp;nbsp; &amp;nbsp;徐晓在签售时有一个细节，我买的有一本《半生为人》的封面和第一页之间粘合得太紧，她打开时不小心扯破了一点，然后她就很抱歉的说对不起把你的书弄破了。工工整整的签上了自己的名字后
+   &lt;span&gt;
+    &amp;nbsp;，又把同行的出版社的同事叫过来看了完瑕疵，让他们回去检查书的修订情况。一个对细节很关注的人，文字的品味和深究自然不会差。小处见功夫，用在这里真是合适。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 野夫是大红人，大多数读者是奔着他的名气去的。但是有一个细节我注意到了，每次签书前，他总要和你握个手，签完后把书放回你手头后还要拱下手，他说是代表江湖上的礼仪。如果有读者请求合照，他会从签售台站起来，和你一起合影完再继续。
+     &lt;br /&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 另一次是在今年的春天里，李承鹏的《全世界人民都知道》签售会。彼时我们的现任已经上台了，所以呢发挥的尺度几乎是没有。签售会前不许讲话，不许请嘉宾，总之就是只许你签名，别的就都不要乱说了。在南京签售前，成都的签售会一度都只能戴上口罩以示抗议，一位国宝级作家去现场，国宝直接把90多岁老人的凳子抽走。
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 李承鹏的签售会上，自始至终店里都放着《海阔天空》单曲循环。下午两点开始的签售会，我1：45到场，前面已经有了连绵2公里长的队伍，后面陆续有人赶到。整场签售会一直持续到5点多才最后签完。签售的现场被许多椅子隔开来一个独立的空间，每个进去的人要实现把包临时寄存一下。整个场面很安静而井然有序&amp;nbsp;，店里没什么声音，仅是《海阔天空》的音乐好听到掉渣。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &amp;nbsp; &amp;nbsp; 李承鹏的真人和他照片还是有几分差距的，大眼倒是名副其实。他签售的细节和野夫相似，有合影要求即客客气气起身，没什么架子。尽管签得不亦乐乎，每个名还是很认真的下笔，再和读者握手一个，说“兄弟，这么冷，辛苦了感谢捧场”之类的话，反正他就是这么对我说的。
+      &lt;br /&gt;
+      &lt;span&gt;
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 回忆起这些只是想说明：文字好的人，做人也臻一流，谈吐也自然脱俗。对于喜欢的作者的文字，我一般会关注其细节，作家刀尔登曾说过他是对文字极其考究的人，容不得在文字里爆粗俗。我的感觉是：看书多了，自然就会喜欢上那些有嚼头的文字，这就好比你如果习惯了手磨咖啡，你就很难随便去买速溶咖啡来凑合，道理是一样的。
+       &lt;br /&gt;
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 最后推荐上面提到的几位作家的几本不错的书：
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 《半生为人》，徐晓著。&amp;nbsp;这里头讲了她早年的很多事，回忆得很清晰很细致，却丝毫没有絮絮叨叨的感觉。我当天是签售会完了以后就不顾得蚊虫叮咬在南大的那个非常经典的古建筑前读完的。读完之后，半是唏嘘，半是超脱。
+       &lt;br /&gt;
+       &lt;span&gt;
+        &amp;nbsp; &amp;nbsp; 《乡关何处》， 野夫著。经典无需解释，我已经不止一次提起过这书了。
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 《1980年代的爱情》《身边的江湖》，野夫的最新两部作品。我买了，书在路上，肯定不会差，书评就两个字：没有！
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 《全世界人民都知道》，李承鹏著。嬉笑怒骂间，强撸灰飞烟灭。如果你长期活在新闻联播里，推荐你看看这本书，你会看到自己未曾发现的世界。
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 《不必读书目》，刀尔登著。这里头是读书大家对诸多所谓经典的独到的看法。看一个人品味多高，看他读过的书就知道了。
+        &lt;br /&gt;
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 读书是件趣事，enjoy it。好了，我不罗嗦了，换装出门，上班去！&amp;nbsp;
+       &lt;/span&gt;
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>跑步的意义(九)</title><link href="http://4894816.github.io/pao-bu-de-yi-yi-jiu.html" rel="alternate"></link><updated>2013-10-19T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-10-19:pao-bu-de-yi-yi-jiu.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 当不用赤裸上身、不用带水、万米时间轻松控制在50分钟以内，光这三点就足以表明：秋天已悄然而至。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 这个夏天过得火爆、挑战重重。“得益”于南京的大拆大建，跑步入口从新模范马路挪到玄武门、三个月后又挪回来；跑步路线由一开始的环湖、到穿越情侣园跑段马路再继续环湖、然后城建就变本加厉把情侣园一大段路也封起来只得穿会展中心、最后我终于受不了马路上的废气一怒之下开始放弃环湖改穿越玄武湖中心的诸多岛屿。路线、距离一变而变，由10公里到13公里、最远时跑过15公里，最近稳定在13公里左右。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 最残忍的事出现在最热的那几天（懒汉们中午都懒得出门叫各种外卖的桑拿天里），彼时正好属于我跑步距离最长的一个月。当时北京姑娘兼歌手吴虹飞说要油炸北京住建委，后来她就被抓进局子里半个月，放出来后被赶出了帝都。我觉得我蛮能理解她的，我想说，当你看到每天熟悉的几公里优质跑道被建委莫名其妙的封起来，搞一些莫名其妙的所谓形象工程的建设时，类似的扔个炮仗炸掉这帮王八蛋的想法你也会有。再联想到三伏天，你却要从本就艰难的10公里增加到13、15公里，更是恨不得把炮仗换成原子蛋。环玄武湖的跑道我跑了两年多，早就形成了自己的节奏，每天跑步都会遇到同是跑步的熟悉的朋友，打个招呼或是点头致意一下，也是跑步中一道独特的风景，傻逼部门一封就是大半个湖，小伙伴老伙伴们早就作鸟兽散了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 距离上的挑战只是一部分，事实上夏天的高温高湿天气条件下需要考虑的防护措施很多。一开始是6点起床的，但是很快就发现到跑步的时候，太阳已经升得很高，明晃晃的阳光一晒过来，人就先蔫了一般，心气败下去了，脚底就先软了三分，再开跑就等于是煎熬了。于是我不得不把起床时间从6点调整到了5点，个别时候甚至提升到4点半。迅速准备完而后直奔湖边，赶在阳光未曾猖狂时即迅速前行。跑动时尽量拣树荫处、建筑物的阴影里乘凉。一开始跑步时我还是穿着上衣，后来发现越来越多的男跑者开始赤搏，终于有一天我在连续遇到迎面跑过来的5个赤搏跑者后不顾矜持，冒着被诸多大娘大饱眼福的风险开始跑路。故事的结果是若干天后我和W开始蜕变为流氓，敢在白天的紫金山景区里跑步时仍然旁若无人的赤搏，发现有偷窥的女生就愤然用眼神回敬之。由于高温高湿下对耗水和体能的苛刻，每次出门前都会抄上600CC的水，一圈没完水就见底。似乎身体只是个通道，水从瓶中化作汗滴的路径而已。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 艰苦的夏季过去以后，我发现身体有了很多变化。以往的夏天里，空调是必不可少的。今年的夏天，空调是从来没有用到的。对比于跑步到最热时那种身子里犹如一团烈火在焚身的感觉，所谓的“桑拿天”就是小意思。我经常在中午顶着大太阳在地表温度50多度的情况下穿接过巷找吃的，而内心觉得这种热只是“外热”，对比于跑步时的“内热”，简直弱爆了。而每次有些许感冒的症状时，跑它一圈发完汗就屁事没有，然后就从容的穿上该穿的衣服。当气温下降到20度时，再跑步时简直身轻如燕，以前不敢奢望的距离，轻松就能跑完。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 这个夏天里，我和W开始尝试越野跑。我俩一起征服过环紫金山、环老山、环将军山……在跑在这些风景如画的山间水畔时，我经常惊叹于突然出现在眼前的让人应接不暇的景色。也许是在山路的拐弯处，突然会出现一片湖泊，阳光在微风作用下，把千万片水波映射得如同金鳞一般。又或者是突然出现的一棵大树，傲然静立在某个角落，一树的沧桑，似是看透人间聚散一般。而沿途路过的某个看似荒凉的古寺，走进去，竟有僧人安然侍立，素雅得体、法相庄严，让人恍然有出尘之感。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我生平去过很多地方，名山大川，这些年来走南闯北所见也是不少。然而细想起来，大多数的旅程是这样的：一伙人熙熙攘攘的到了该处，摆Pose、拍照，听导游介绍些或真或假的传说或是轶事，然后用眼睛扫下几眼，拍下些自己以为好看的照片。然后我们就一帮人回宾馆吃饭、休息、打牌。这似乎就是旅游，我也没有觉得有何不对。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 然而多年以后，我再想起那个地方，除了照片里所记载的场景，其他似乎都记不起来。再去看别人拍的照片，原来要比我精美一百倍。那，这些所谓旅游，所带给的人的，似乎也只是虚度某段光阴后的一个迹象而已。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 而在跑步中所见到的诸多景象，它们如此强烈的冲击着人的心绪，和以前我曾以为的“闪亮的瞬间”形成了强烈的对比。不是说旅游不好，至少它能把你带到一个全新的地方，发现世界上有如此多的、和你过着不一样生活的人。然而，旅游终究也只是让你见识到别人的生活、别处的景观，迟早你还是要回归自己的生活。而跑步所见的这些静观、诸多感悟，却完完全全是你自己在生活里的体悟，或者说，离你的生活不远，最多就是跑几个小时能到达的地方。有人说在西藏找到自我、有人则说是普罗旺斯、等等，但那终究是别人的生活，你再牛逼也无法在自己上班、生活的环境里复制出一个远方，更不可能把远方的偶尔几天放纵活成生活的全部。然而跑步里的感悟和景色，就是你的生活，没有比在自己的生活里找到并体悟到自我更为幸福的事儿。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 有关思绪的转变方面这个夏季也达到了质变。以前的骑行、跑步，似乎做这些的目的就是为了忘却很多外界的干扰。譬如社会如此纷扰、人心的不古、碧池们的下贱、女神的傲慢……这些问题是需要时间来想明白的。那我觉得，大约在这个夏天的某个时刻我开始把这些纷扰都想明白了。本质上你的生活就是自己的一生，若是在跑步时一个不小心心跳过速或是意外，那人生估计是另一种剧本。So， 不要太关注太多身外的人和事，想明白、做好和自身相关的事情足矣，正如同在烈日下的长途奔袭一般，别人的空调、西瓜、冰淇淋和你半点关系都没有，你所有的，只是一双不错的跑鞋+一个不错的身体+手头的一瓶600CC的水。所以我开始把思绪从漫无边际拉回到自己的生活，由此构思出了某个用于测试的牛逼软件、某个完全DIY的MP3播放方案、某个用于测量空气质量+湿度+温度的WEB APP……这些东西，既然有了想法，写出来自然也不难。去年这个时候，我跑得不如现在快不如现在拉风，手头也等同于空无一物；而今年，至少手头有我认为比较杀手级的几款应用和作品了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 《跑步的意义》这个系列写到现在，断断续续两年多，写了9篇。我想，我对于跑步的意义的理解，也是随着跑步时间的延续，慢慢在加深。我玩游戏的时候，觉得PK厉害、江湖道义做尽了，便是人生的全部意义；后来我觉得游戏没意思，开始骑行，骑行时我觉得求变、保持新鲜的想法和视野、注重时间和效率能获得一个好人生；后来骑了一万多公里开始跑步，竟是别有另一种风景。事实上，关于跑步有什么意义，我觉得以我当下的笔力，可能很难描述出来。更多时候，它是一种“可意会而不可言传”的感觉。有句跑步的谚语叫“跑者，脚在地狱，心在天堂”----我该如何描述肉身在地狱、心在天堂的感觉呢？以我朴素的文风，只能说：夏天跑步，真的很苦很苦；但是，跑完了，就算是在跑得身体很不舒服的时候，精神始终是愉悦的。跑步让我摆脱了关于乱拆乱建的困扰、让我对眼前诸多扑在房子上哭着喊着买二套三套的家伙的傻叉们的行为有清醒的预警、让我能专心于值得专注的事情譬如钢琴+编程+电子制作，这并不是在逃避，相反，我觉得这可能是让人在二逼社会里不落俗套并活出真正自我的一种短期看似失败而长线看必然会成功的艰难坚持。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 如果你不曾尝试过跑步，那我推荐你在体重、装备合适的场合下，适当尝试下跑步；如果你已经在跑步，请坚持；如果你有了比跑步更拉风更拽的运动，请记得坚持并顺便在通告天下的同时通告一下我。跑步虽然有诸多意义，然而如果不去坚持，这些意义就变得毫无意义。所以在这个系列的第九篇里头，我想说的是，坚持。不管以前提到的意义多拉风，那些毕竟是对我这个个体而言，坚持玩某样东西，就能获得自己的意义，哪怕你当时不能了解，但是坚持能让你从量变达到质变的蜕变。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 总结下，这个夏季我学会的有：提升体能、耐力、早起、勇敢、不顾矜持、在平淡的跑动中找寻亮点、控制思绪到关注自身……但是，最重要一点，我觉得学会的是坚持，坚持，这大概就是这个史上最热的夏天里我学会的关于跑步的最大意义吧。我想，到我垂垂老矣到走不动路的时候，我一定会记得2013年的夏天里，我跑过的诸多艰难的路程和所见过的诸多瑰丽风景，正是坚持，让我这个有着跑步点缀的夏天，完美无比。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>跑步的意义(八)</title><link href="http://4894816.github.io/pao-bu-de-yi-yi-ba.html" rel="alternate"></link><updated>2013-08-19T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-08-19:pao-bu-de-yi-yi-ba.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div style="" text-align:center="text-align:center"&gt;
+  &amp;nbsp;跑者之夏
+  &lt;br /&gt;
+  ----写在52年(1961年)
+  &lt;span&gt;
+   以来最热的夏天
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &lt;img idx="0" src="/images/Qzone/2013-8-19_paobudeyiyi_ba__1.jpg" alt="图片" style="width:576px;height:386px" /&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+  &lt;/span&gt;
+  &lt;div style="" text-align:left="text-align:left"&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 上一篇关于跑步的日志还是1月12日，彼时正穿着抓绒外衣抗寒压缩裤每早上在冰天雪地中苦盼太阳升起。一晃7个月过去，&amp;nbsp;重重盔甲终已卸下，连续35度以上的高温一来就是一个多月，由29年最冷的冬天一跃就跃进了52年以来最热的夏天，每次跑步都恨不得扒掉一层皮而后快。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &amp;nbsp; &amp;nbsp; 酷暑难耐，跑者在炼狱仰望天堂。
+     &lt;br /&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 半年前我跑步的状态是这样的： 清早起床，哆嗦着把自己一把塞进压缩裤和抓绒里，稍事修整即正装出门。到得湖边已是早上7点，太阳刚好越过紫金山麓，&amp;nbsp;双手麻木跑上两公里才稍有缓解，沿途尽是枯木、湖冰、败荷，一派萧条之景。口中呼出的白气会在早晨酷冷的空气里迅速弥散，冬日的阳光有气无力的打在地上，苍白无力。唯有纤长的快速移动的影子提示着自己运动中的存在。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &amp;nbsp; &amp;nbsp; 如今跑步的状态是这样：5点起床，天色已是大亮。一袭短打上身，塞上一把水果抄上一瓶纯净水便得火速出门。急匆匆赶到湖边大约是6点，阳光已让人觉得热度来袭。接着便是漫长的奔跑，汗滴先是密密麻麻在毛孔上形成一片水滴的阵列，而后汇集成小溪，沿着跑步的方向，在皮肤上留下流线的痕迹。跑过8千米以后，上衣脱掉，扛六块腹肌迅速奔过晨练的大爷大妈方队。跑至12公里后的终点后，水瓶剩100毫升，体力耗尽，再踱步慢慢往回走。
+      &lt;br /&gt;
+      &lt;span&gt;
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 半年中依然是保持着一周4次(1/3/5/7)的晨跑频率，风雨无阻。
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp;&amp;nbsp;我先是从腊梅花中闻香而行，之后便看得柳叶冒出鹅黄、草儿和灌木开始吐出第一缕新绿，再后来，桃花、梨花、迎春……争芳斗艳。蛰伏了一个冬天的老头们也开始在清晨里开始放飞他们的宝贝风筝。某个初夏的早晨，下过一夜雨后，我惊讶的发现城墙下的水池里，千万只青蛙在呱呱傻叫求合体，然后便是荷花花蕾开始越过水面、盛开，”接天莲叶无穷碧“之后开始有莲蓬可以在玄武湖边上买到，早晨的阳光里，大群的蜻蜓在湖水边嬉戏打闹交配产仔。&amp;nbsp;微风吹过湖面，阳光打上去，波澜万缕。
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; 这半年里，我印象最深的一个画面，记录在微博的文字中----那是一个暴雨将至的早晨，风云突变无非是在一瞬间。”
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+   &lt;span style="" text-align:center="text-align:center"&gt;
+    早上跑到九华山城墙下时风云突变，黑云压城天色瞬间化成青灰色，东边的白光在起风的大片湖面上映出绚丽的光彩。一边快速奔跑一边欣赏湖光山色，感觉就像是现实版3D游戏的《怪物猎人》中虐杀霸王龙时的场景。
+   &lt;/span&gt;
+   &lt;span style="" text-align:center="text-align:center"&gt;
+    &amp;nbsp;
+   &lt;/span&gt;
+   &lt;span&gt;
+    “ 眼前纵有万般虚空，然而极力奔跑那一刻视觉快速变换的快感和内心的忐忑，这些感受不会骗人。
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style="" text-align:left="text-align:left"&gt;
+   &lt;span&gt;
+    &lt;span&gt;
+     &lt;span&gt;
+      &lt;span&gt;
+       &lt;span&gt;
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 事实上，跑步所能体会的，远非这些。上面一段所描述的，仅仅是视觉方面的体验。我文笔太差，很难形容出太多更为奇幻的场景，譬如靠近盛开的白玉兰花树时、桂花树时那一袭沁人肺腑的清香，而眼前却是花瓣遍地，这是一种难以用文字形容的美。跑鞋掠过花瓣铺就的花路上时，这一刻若然你曾经历，会想到的也许是美、憾、超脱……在那样的意境里，一千个人会有一千种想法，而我的挫笔，不足以抒写出芸芸大众胸内的诸多感慨。
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; &amp;nbsp;再譬如听觉的享受：尽管我习惯戴着耳机跑步，然而我还是能听得冬日里寒风掠过空荡荡树枝的呼啸、春日里各种叫虫此起彼伏的求爱之重奏、夏日里蝉儿的长鸣……有次在城墙下听某首Maroon 5的摇滚味很浓的歌曲时，蝉儿突然如杀猪般傻叫，这种大自然免费赐予的和声和Maroon 5骚包的音乐一起揉合在耳中，美妙无比。
+        &lt;br /&gt;
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; 这半年经历了很多，无论是事业上还是感情上。很多事情的诡异程度，若是放在几年前，年少轻狂而涉世未深的我定然会承受不来。而如今很多看似复杂的答案，在长长的孤独的跑步中，都能把自己从思维的牛角尖里扯拔出来，而后还自己、对方两个安宁。有些日常困扰自己的问题，小至程序、大至人生，多半在跑步的路途里、在音乐的伴奏下、与自我的对话中，得到了答案。2013的夏天，终于写出了让自己暂时还比较满意的软件、做出了让自己
+       &lt;/span&gt;
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+   &lt;span&gt;
+    暂时还比较
+   &lt;/span&gt;
+   &lt;span&gt;
+    满意的嵌入式应用、十指也终于可以得以随心所欲的演奏出想要的音符……这里头的很多，大约就得益于跑步时身体和灵魂的诸多感悟、和自我对话里获得的诸多灵感和启示。譬如说，我为同事们写的一款DNS服务器端软件里对编辑内容的限制，就得益于某个早晨的想法，那时候我跑到一半突然就兴起了控制欲：MD老子要对你们的输入做限制，这样你们就不能输入错误字符了！然后就有了一个永远不会给我带来麻烦的软件。。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 跑步时有时我会想到很多过去的人和事。5月后得知N去世的噩耗后我常常会在跑步时想起很多人的脸和声音影像来，譬如N、W、还有舅舅和外公等。有时我跑到玄武湖东边了，迎面看到九华山和鸡鸣寺的塔在夕阳里泛光时便能在内心为他们祈祷一番。有云的日子里，看着天上飘来飘去的白云，猜想也许他们只是在云端，&amp;nbsp;笑呵呵的看着我们这些芸芸众生在乱世浮沉而已。七月半将近，也许我这些感悟，只是应时之景吧。然而倘若真有另一个世界，愿你们在那边幸福，远离贫穷、欺诈和负心等等等等。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 算起来跑步已是第5年了。如果说在抽烟的日子里，跑步等于白费的话，从不沾烟开始到现在已是第三年的真正意义上的跑步。跑步跑到第三年，体力早已不是什么问题。如今的跑步，更多的体悟不是生理上、而是心理上的。我想：从上一篇日志到这一篇，跑步又让我前进了很多，心灵上的。它能让我更加勇敢、果断、坚决、豁达、更注重留意生活里隐藏的美。它让肉身的速度更快了、更耐热，心率更慢、耐力愈强。有六块腹肌的家伙，你们懂的。让灵魂的力量更加纯粹、柔情而坚强了，修心的家伙，你们会懂。
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 其实把，我觉得最最重要的是一点，它令人更骚情了，对比于上一篇的篇幅，这不是显而易见的事儿嘛？所以说，跑者们，Keep moving吧！困了，关机，碎觉，晚安，长夜静好。&amp;nbsp;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style="" text-align:left="text-align:left"&gt;
+   &lt;span&gt;
+    &lt;span&gt;
+     &lt;span&gt;
+      &lt;span&gt;
+       &lt;span&gt;
+        &lt;span&gt;
+         &lt;br /&gt;
+         &amp;nbsp; &amp;nbsp;&amp;nbsp;&amp;nbsp;
+        &lt;/span&gt;
+       &lt;/span&gt;
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/div&gt;
+ &lt;/div&gt;
+ &lt;span&gt;
+  &amp;nbsp;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>Trouble</title><link href="http://4894816.github.io/trouble.html" rel="alternate"></link><updated>2013-08-03T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-08-03:trouble.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp;
+ &lt;img idx="0" alt="图片" src="/images/Qzone/2013-8-3_Trouble_1.jpg" style="width:500px;height:500px" /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; 过去十多年每天的生活状态，大约用两句话就可以概括： Find trouble, Solve it（找Trouble，解决之）。 Trouble这个词我不知道怎么翻译才能言辞达意，倘翻译成“麻烦”或“茬”则带着贬义，若翻译成“问题”或“困难”之类又不足以形容其烦人程度。Trouble我习惯理解为一种耐人寻味而又让人折磨不已然而最终升华的玩意儿。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 养成这种生活轨迹，最初是得益于独生子女的缘故，家里只有一个孩子的倒霉蛋的特点就在于绝大部分时候不得不独处，最后索性心一横也就心甘情愿了。在无聊到近乎于静寂的世界里，只能东蹿西跳找寻些真正能把自己哄欢实了的东西。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 如今看到很高的柜子我都能回想起小时候无数次爬到相当于身高两倍的柜顶上偷书的经历：还只是在身高大约1米的时候，我就瞄上了家中一个高达2.5米的衣柜顶端的一堆砖头般厚实的书。当时怀着极度的好奇心，似乎那堆书被放得那么高是因为里头有敏感内容（譬如性、暴力等不适合孩童的东西）， 越是够不到就越是好奇越发心痒，于是很多时候趁父母外出时我会用书桌、方凳等搭建出一个可以勉强够到衣柜顶的平台，提心吊胆的通过平台抵达衣柜顶端偷几本书下来读。有几次还顺利的在到达柜顶后踩翻了平台，落得只能学猴子下树的可笑姿态口里咬着书沿柜脚借助四肢滑行到地面。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;令人失望的是，那些书是普通大众眼中枯燥无味的《中国古代史》《世界古代史》，又或者是师范函授课本的《文选与写作》等等。我爸把书放到那么高就是因为它们枯燥，然而当初自己还是读得津津有味----毕竟是自己费劲心思得来，倘不好好读真是要对不住自己的舍生忘死啊！
+ &lt;/span&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 有关于“Trouble”的思想斗争在那时的某个无聊下午完美的呈现于头脑中----是翻来覆去继续读手头的儿童读物，或者出去和小伙伴玩无聊的游戏，&amp;nbsp;还是冒险把悬得高高在上的书偷下来读个究竟？为此我充分计算了以当时身高1米的自我如何达到如此悬殊的高度、精心设计好了每一个细节，包括作案时间、道具、如何掩饰偷走书后不至于太明显……估测完所有这些之后，以我当初幼稚无比的想法，猛然发现找寻Trouble和解决Trouble的所有这些加起来，其有趣程度远远超脱了打开一本现成的弱智读物或是出门做一场无聊的游戏。大约从那时候开始，我的世界开始变成一个个未知的冒险。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 随着年岁的增长我发现找寻Trouble的能力持续增强。事实上在中学时期我找寻的很多答案都是在和教科书不搭界的领域，读书我自认为只花了大约4成气力，教科书上的知识只是自然而然进入了头脑，然后就考出来个不错的分数而已。初中时在我的同学们埋头午睡的时候，我在我爹分到的一间半是办公室半是仓库的房间里，把玩了硫酸盐酸硝酸手摇发电机制氧制氢等一系列乱七八糟的实验。有一次引发了爆炸，炸掉的试管玻璃片擦着手心呼啸而过，那种惊心动魄的时刻，现在想起来简直美妙之极。高中时的午睡则更有意思，和几个同样精力旺盛的家伙在池塘边看荷花，无聊的看着水中生物的运动轨迹发呆。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 遇上计算机让这种习惯在Trouble中生存的生活变为常态。机缘凑巧一入大学就碰到了当时一个对电脑颇有造诣的老乡，带我去散心的第一次晚上直接是网吧，第一次见识到电子邮件、在1999年的中国雅虎。那个夜晚美妙无比，那些现今看来笨拙无比的大方盒子，他们如此神奇的运行着彼时身为土包子的自己眼中极其科幻的WIN95。习惯一切循规蹈矩的环境中不停找寻Trouble并解决之的快感，突然一把全爆发出来了，简直是梭哈呀！在这种盒子面前的同类们，大多和当年的自己一般：好奇、好学、无视于规则横行无忌，找到组织了。可想而至，这个本来根红苗正的家伙就这么一头扎了进去，或者说：陷了进去，一路至今。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 从那时开始到现在已是14年时间，14年间我顺利的干爆了三个台式机一个笔记本，在数不清的电脑键盘上敲入过我彼时的状态。我习惯了鼠标，用鼠标在虚拟世界里点出来一堆又一堆廉价的快乐，右手点到鬼速了又换左手，同样点到鬼速后干脆就放弃了鼠标直接用键盘搞定一切。曾深度迷失于网游世界，玩腻了以后突然就金盆洗手懒得去碰。我眼睁睁看着Windows从95升到98而后ME/2000/2003/XP/WIN7/WIN8……帮人重装过无数次系统，最后自己都觉得装得无聊了，看别人每天靠鼠标点击太没效率，一把删掉Windows磕磕绊绊的在Linux下被Trouble们万般虐待。当年那个看着Win95的窗口不知所措的可怜孩子，如今强悍的把家里所有能定制的设备刷上自己一手打造的系统。电脑自是不必说，完全脱离Windows生活已经是第8年了，每天脸不改色心不跳的用着Linux在一堆Windows用户的包围中高速干完自身的活然后就开始折腾。家里很多设备都被定制了，譬如路由器，被刷成一手定制的系统(Linux);&amp;nbsp;NAS（网络存储设备），同样刷成Linux；数码相框，刷成Linux后当成服务器来使；一个名片电脑，随身携带，一加电便是一个定制化的可以用于办公娱乐的系统。我可以截取到空中的信号，譬如飞机起落信息/GPS经度纬度等，也可以借助于诸多传感器感知到环境里微小的变化（湿度温度感光度活体入侵等等），并搭建出适合自身的有趣系统。在技术类的玩意之余，我开始洞察到网络状态所反映的人的意识或是情绪变化，进而揣摩到当事人的心理等等；而借助于网络，生活开始拓宽到乱七八糟的领域，譬如骑行、户外、跑步，这些已经可以属于运动科学的范畴了；又比如钢琴和编曲等，如何在死板的琴键上弹出活泼的音符，如何把内心的乱七八糟的想法通过一种音感来渲饰，这扯到美学和音学的范畴等等。当然还有其他乱七八糟的一堆蠢蠢欲动的想法，例如怎样把饭菜做好吃、要不要去学个剪裁来定制几套自己的衣服出去装逼……但是我太懒了，加上以上提到的这些已经占据掉了生命中醒着时候90%的时间，剩下10%，我得用来发呆、发嗲。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;我现在在电脑前的状态近乎于游戏：头戴耳机坐得东倒西歪，因为这样最舒服，也据说最不容易消耗颈椎脊椎尾椎，用着世界上最激进的操作系统ArchLinux， 每天定时自动更新。很少使用鼠标，敲敲键盘就看网页写程序外加聊天发微博装嗲之类。 习惯刷打折类信息网站，经常逛淘宝看一堆乱七八糟的电子元件或是有意思的创意物件等等。身为水桶级人物，每50分钟左右就喝一大杯水然后遛个弯儿上个厕所兼活动筋骨。 近乎于游戏的状态下，手头把玩的始终是一个又一个的Trouble，而大多数时候，这些Trouble都是自己找出来的----能不能让自己的系统更智能化一点、更快一点、更省电一点、更拉风一点？一旦你有了这种想法，那你完了，因为想法就意味着你要面对Trouble，然后你就需要满世界找一个解决方案出来。我这种笨蛋级人士，脑子大多时候不够用，好在世界上聪明人很多。Google是个好帮手，它提供了一种间接的使用别人脑力的途径。很多的解决方案，其实只是现有的答案加工或是定制一下而已。前提是：你要有想法，才能找到一堆堆的Trouble，最后才能有相对完美的解决方案出炉。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 有时候我问自己，能不能少折腾一下，老老实实的像别人一样工作？因为中国是一个讲究认同度的社会，太多人的毛病就是见不得别人和他不一样，看你不爽了就伙同一干人等开始打口仗。于是有段时间里我煞费苦心的装了几天乖，然后就乖不下去了----我无法忍受那种真正的“无聊”， 譬如说在娱乐类节目前看一堆活宝变着花样哄观众开心的事， 譬如说不经思考直接采用某个现成的答案，再譬如相信某些权威报纸或媒体上的天花乱坠的粉饰太平。那是真正的无聊，因为很多信守可以拈来的理念和你真实的生活其实是脱离开来的， 譬如这几年比较火爆的一些国产情感电影，在我看来就是在无病呻吟的装范儿装品味的外表下赤裸裸的拜金。拿《非诚》系列的电影和相亲类节目来说，我觉得这种价值观全无的玩意能火爆的确很令人诧异，某些剧本的桥段太过于俗套。相亲类节目《非诚》开播至今也只是让我明白了yan凤娇和她的小伙伴们在镜头前的诸多形状而已。原谅我的落伍，因为我很多年不看电视，舍不得把自己的思想交出去完完全全被导播和主持人主宰，或者还有一个原因，大约就是心智强悍的人，宁愿在文字中构建出想象中的绚丽画面，而不是把头脑交给很多习惯在观众头脑里筑墙的二字不识的主持们。有粉丝大约会嘀咕：不就是一娱乐节目嘛，你那么较真干吗？----可是，问题是：我的生活里充满了大大小小的Trouble，每天认真的时间和精力都尚且不够，你跑过让我把脑子弄糊涂一点？
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 这些大大小小的Trouble们，常年累月作用的结果，我想大约是把我变得更温情更勇毅更坚韧了---当然这属于王婆卖瓜自卖自夸的讲法。某种程度上也可以说成是会更变着法儿的绕着弯儿的骂别人“傻逼”了。我有讲过中国是一个很看重集体认同的国度，而过去几十年这个国度又尽在干荒唐事儿，所以当你觉得这个社会很和×谐、你和这个社会也相处得如同新婚夫妇一般你侬我侬时恐怕你心理应该“格登”一下。温情、勇毅、坚韧我是照抄一个作家的原话，他只是说，在所多玛之境里，能正直生活，就非得依靠这三种品质了。
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;回到Trouble作用的话题上，我遇到的很多问题，其实都是自找的。比如如何双手不离开键盘切换窗口切换语言切换工作区域切换网络链接？这个Trouble从2000年开始一直在作用，尽管这些操作我都可以在键盘上挨个点出来，但
+ &lt;/span&gt;
+ 我也不认为我现在的解决方案就是终极方案了，会有更好的键盘出现会有更好的键值组合出现，这个Trouble没有终极的解决方案。但是，寻求它的过程让我在键盘上更得心应手，用个装逼的话来说，更优雅了，一个优雅的装逼犯，大可被小姑娘们归结到“温情”的范畴了。而如此多的Trouble，导致你只能果断下手，因为你不知道后面还有没有更大的或是更有意思的想法， 这是我对“勇毅”的一点点粗浅理解。事实上在初入道的几年里我担心很多事情，譬如某些折腾会不会把硬件弄坏会不会带来灾难性后果，现在我坦然多了，每次我可能搞坏东西的时候，我都劝自己：反正自己是光屁股来到这个世界的，有什么东西放不开的？然后我就顺利的犯傻、顺利的把硬件烧掉、顺利的恢复数据、然后跑出来总结经验教训顺便装嗲。“坚韧”这一说，我觉得既然和“贱人”读音相似，不妨顺便借用一下它的解释： 我从来没有在心底把自己看得很重，所以就不愿意去借用太多外界的力量或是顺利接受现成的东西。很多问题我都贱兮兮的去求一个答案，眼下没答案就贱兮兮的记在脑海里。完全借助键盘切换相似的例子我头脑里有一堆，有的都贱兮兮的记了很多年了。有的可能有答案、有的却无从回头了，摆在那里只是个警醒而已。不管怎样，这些贱兮兮存在于记忆中的Trouble，在一次一次的撕咬中，磨砺着人的耐心和忍性。我曾以为这类贱兮兮的想法多了会把人生活弄颠覆，结果其实没有，因为有时间的力量可以用于来把这些Trouble升华、或是抚平、或是干脆就忘却，贱人贱到后面总会出落得很坚韧。所以这也是为什么我经常和过来问问题的新人们说：没事多琢磨琢磨，别把自己当大爷，别接受太现成的答案，多敲几下键盘不会死。当然我知道这类罗嗦往往都等同于放屁，现在的小孩们，他们太忙了，
+ &lt;span&gt;
+  忙着理财
+ &lt;/span&gt;
+ &lt;span&gt;
+  忙着买房忙着相亲忙着看垃圾剧，内心又不如我们这种老油条一般卑贱，他们可能没有Trouble，或者干脆就在逃避Trouble，于是就活成了一颗颗按部就班的棋子。然后我们这帮贱人就贱兮兮的看着棋子们在某一时间某一地点，刚好落到一个圈子里，犯着早已预知过的错误， 得，微博上的调侃又有料了。
+  &lt;br /&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; Trouble让我时常犯错，事实上我是频繁在犯错。孟子常说他一日三省其身，在计算机、钢琴、运动的世界里，错误岂止是每天三次的频率？频繁犯错的后果是我习惯面对错误和可能的后果了，反正是死猪不怕开水烫。错误频繁发生，经常被人以为是幼稚不成熟再加上马大哈，我又懒得去解释，难免要被扣上“太张狂”这顶帽子。对于这些评价我只能说：
+  &lt;/span&gt;
+ &lt;/span&gt;
+ 那些从来不敢犯错的家伙，从来不会有人说他们幼稚、不成熟、太张狂。你个成熟到骨子里的货，能出来跟我跑两圈吗？如果我像很多人一样，没天在WIN下点来点去，逛逛淘宝打打游戏，我的系统一百年都不会崩溃。也许只是太习惯于追逐Trouble并压迫蹂躏之或是被压迫被蹂躏之的快感了，我经常在做某些个危险操作的时候，把系统搞挂、硬件搞废等等。这没什么，事故发生得多了，你就能充分体会到在郁闷和欢快之间切换的乐趣。更何况这十几年下来很多剧本的结尾都是我在装逼微笑，因而如今如果灾难发生了，我肯定不会第一时间拼死拼活哭天喊地求恢复，泡杯茶，享受沮丧，享受悲剧终于发生后难得的宁静。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 罗里八嗦写这么多，只是因为一个误操作把Linux的根分区完全报废掉了，然后在不算漫长的恢复时间（大概两小时）里，心底想起来这些年和Trouble相处的一些感悟而已。还是重复下Trouble和麻烦的区别，我想说，别让麻烦主宰了你的生活，你应该让Trouble进入你的生活，然后主宰之。写到这里想起""hunter（猎手）“这个词来，大约这些年我干的活儿，基本上可以算得是一个Trouble Hunter，在一次又一次的狩猎中，收获经验、知识、耐心、勇气、最重要的一点：乐趣。所有的这些，都带来心力和能力的提升。
+   &lt;br /&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 我经常调侃小伙伴们说：""节操什么的，好重要啊“”工作拼的，还不是节操嘛。。。“等等的话。节操是怎么炼成的?我想，大概就是在年复一年一次又一次的对Trouble狩获的过程中拾起来的吧。所以说，姑娘小伙们，别害怕Trouble，在问题面前，你应该勇敢的狩获自己的那些个大大小小的Trouble，千万不要让自己的节操掉一地...
+  &lt;/span&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>假如我们不去跑步</title><link href="http://4894816.github.io/jia-ru-wo-men-bu-qu-pao-bu.html" rel="alternate"></link><updated>2013-07-24T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-07-24:jia-ru-wo-men-bu-qu-pao-bu.html</id><summary type="html">假如我们不去跑步
+
+
+
+
+
+  
+  
+  
+  
+  假如我们不去跑步
+ 
+ 
+ 
+  敌人用刺刀
+ 
+ 
+ 
+  &amp;nbsp;杀死了我们
+ 
+ 
+ 
+  还要用刀尖戳着我们圆滚滚的肚子说：“看哪，这有个死胖子! ”
+ 
+ 
+ 
+ 囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧囧
+ 
+ 
+ 
+  原诗
+ 
+ 
+ 
+  
+   假如我们不去打仗
+  
+ 
+ 
+  
+   【作者】田间
+  
+ 
+ 
+  
+   【创作时间】1938年
+  
+ 
+ 
+  
+   
+  
+ 
+ 
+  
+   假如我们不去打仗
+  
+ 
+ 
+  
+   敌人用刺刀
+  
+ 
+ 
+  
+   杀死了我们
+  
+ 
+ 
+  
+   还要用手指着我们骨头说：“看哪，这就是奴隶! ”&amp;nbsp;
+  
+ 
+ 
+  
+ 
+ 
+
+</summary><category term="Qzone"></category></entry><entry><title>反叛到底</title><link href="http://4894816.github.io/fan-pan-dao-di.html" rel="alternate"></link><updated>2013-07-17T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-07-17:fan-pan-dao-di.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &lt;img idx="0" src="/images/Qzone/2013-7-17_fanpandaodi_1.jpg" alt="图片" style="width:800px;height:452px" /&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 《寿司之神》是我最近看过的一部很震撼的记录片，它讲述的是日本东京一位从十几岁开始做寿司一直做到八十多岁仍不肯退休的寿司店老板的故事。片子里没有腥风血雨、没有令人叹为观止的风景、没有美女帅哥香车雕楼……镜头扫过的场景无非是厨房、市场、车站等日常生活中熟悉得让人吐的场景，人物也尽是三教九流之徒，如寿司店老板、学徒、鱼商、虾商、米店老板、美食评论员等等，扔块砖头上去砸下来能砸到两三个的那种路人甲乙。然而“专注”是这些人的通性，虽然地位卑微（其实可能是因为在中国大家普遍都看不起商人吧），但个个脸上都挂着一种很自信很看得起自己的霸气----看完倒吸一口冷气：所谓江湖，不在天涯却在市井之中，而大侠之风，有时竟能在一个摊贩犀利的眼神中被完美诠释！
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 我不介意再罗嗦几句这片的观后感。事实上我如果喜欢一部片，就会翻来覆去的看上好几遍甚至是几十遍，一部好的作品有如醇酒，日久弥香，偶尔拿出来品，满室皆香。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp;&amp;nbsp;《寿司之神》绝对可以被归类到永久珍藏的类别，对比于满大街随处可见的快餐式情爱电影，它完全真实的讲述了一个专注而执着的人，在一个尊崇认真的国度里，如何穷尽一生精力，在一群同样专注伙伴的支撑下，制作出美仑美奂的美味寿司的故事。我不是个吃货，关注健康更甚于味觉的那种，也从不下厨，然而看了这片以后，居然有几分想下厨洗手做羹汤的想法。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; “认真”应该是我们应该关注并追求(追逐？)(Pursue)的一种可贵品质。今天刚好是杨绛先生（钱钟书夫人）102岁寿诞，想起来白天在微博上看到一则博文：“
+  &lt;span style="" color:rgb="color:rgb"&gt;
+   1957年，杨绛接到翻译《唐吉可德》任务，精通英语法语的她找来五种英法译本，仔细对比后，觉得译本代替不了原著。于是，近六旬的杨绛开始学习西班牙文。1961年才着手翻译。这个版本至今印了68次，售出98万套。
+  &lt;/span&gt;
+  ”----如此认真的治学态度让人心生崇敬之心，对比下我们生活中太多的见怪不怪或是自我妥协自我阉割之举，尤其是很多急躁、短视之举都发生在自己身上时，难免就心生惭愧。比如：若是现在接手到一个
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   翻译某段文章的
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   任务
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   ，大多数人第一想法估计是直接找翻译软件吧！？更有甚者，很多人连翻译软件都不找，直接在朋友圈子里找人代劳----这事我太有经验了：太多不成器的家伙，连哄带骗的让我翻译了不少文章、论文。
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 专注并没有使这些不肯苟同于世俗者变成众人想象中不通情理不食人间烟火的怪物，相反这些认真的人往往保有一颗近乎于童真的心----寿司之神里的老板“三郎”，工作时全身贯注，虽然捏的是小小的寿司，一举一动却尽显王者之气；而回乡遇故知时仍宛若顽童，在庙里给故去家人上香时仍不忘幽上一默；杨绛先生在岁月磨砺后尽显出平静、智慧、温暖，有看过《读库》的老四说过，找杨绛做堂吉珂德一书的图册时，先生起初闭门不见，几番求教后终看人诚恳且是真爱书惜字之人，遂倾囊而授，版税一说提都不提，后来据说是捐给某个基金会。做人做到这种份上，才是大通透、真风范。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 内心一直觉得从所谓的“旧社会”过来的本色不改的读书人身上能体会一种从容而知性的范儿。前段时间读到郑念的《上海生与死》，
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   这本书是禁书，被当成根红苗正培养起来的估计很少能听说到并找到，
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   前半本读到心颤不已、而后半本读来渐渐平和。我不介意用多点笔墨来推荐这本书，它是郑念一生的回忆录，书中用平和而真实的文字，完美的诠释出一个自立自强的优雅女性在一个全国江山一片红的癫狂年代里、深陷囚牢生死悬于一线之时，依然不放弃内心对“美”的追求，尽自己所能依旧把生活过得精致、优雅，坚持内心的是非对错不肯低头，出狱后方得知唯一女儿死讯而后独自面对近乎荒谬的现实最终远赴宁土终老一生的故事……找不出太确切的词句来形容这位优雅的女士，读者多冠之以“最后一位名媛”，我觉得远不够形容郑念内心的坚韧和宁和而雅致的美。
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 不知从何时开始，我发现“认真”、“从容”、“优雅”等等这些品质在社会主流里近乎绝迹了。人群变得似乎越来越狂躁、多疑、没有耐心、自我……譬如”优雅“这个词儿，市面上有关优雅可以直接用
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   M-O-N-E-Y来
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   解释
+  &lt;/span&gt;
+  &lt;span style="" font-size:14px="font-size:14px"&gt;
+   ，当前之癫峰（癫狂的峰值）可以归结到这个月上映的《小时代》上。我觉得，在任何价值观正常的社会里《小》这样的片要走红几乎是不可能的，然而它确实走红了，还让郭小四赚得盆满钵满后信心满满的出来拿着那套庸俗功利的价值观随意奚落诸多比他穷比他有操守的良心人士。谈起“认真”来，在一个连食品安全立法都欠缺的国度、连婴儿食品安全都保证不了的国度里，对“认真”的诠释是分阶层的，卫星可以上天后安然返回路上的桥却莫名其妙塌掉了，灵岛一人把整个剧组睡掉手头几百套房的生命可以被认真对待而一个草根富翁草草就能被正法然后直接拿一把灰打发家属。国人的聪明往往是带着奴姓聪明，是聪明到太精明了以至于“反害了卿卿性命”的那种。认真？大多数人的通病和这个涩会一样，唯上不下。&amp;nbsp;而至于“从容”一词，这恐怕是最缺乏的。若你平静的和别人说起“我想对我人生做个规划”，多半会遭人耻笑。因为它们从未想过自己的人生要活成什么模样，它们人生的目的只是“活得赢过其他人”，至于理想不理想、规划不规划，它们才不在乎呢！大多数人从小到大习惯了被安排，长大了也就代代遗传习惯了对别人的生活指手画脚，并把自己未竟的梦想完全安排到下一代身上。在这种人身上，完全不用指望得到任何负责任的建议，因为它们自己连如何生活出自我都不会呀！最无脑最不负责任最简单的回答就是“规划个啥啊，赶紧买房呀”之类----本该可以归结于功利主义的答案，为何在我们的现在就被认为是宇宙真理了！？然而你却无从反驳这种功利，因为畸形的经济走向居然一再的证明把规划丢掉理想丢掉把青春拿去抵押拿去贷款是押对了宝，OMG！原谅我在这里用了“它们”，周星驰有句台词是”没有理想，做人和咸鱼有什么差别？“，用个它字已算是抬举了，好歹可以被归结入生物的类别呢，而不是咸鱼一类的死呢。
+  &lt;/span&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 昨天觉得生活有些憋闷，于是把签名档改成了”反叛到底”。 事实上我是个懒惰和忙碌得很少叛逆的家伙，平时对太多事都是睁一只眼闭一只眼，作“苟全性命、不求闻达”之举。然而总有些贱人奔出来宣扬着自己那一套价值观，拿着庸俗和功利来哭着喊着让你认同。这使我想起一个说法：在一个满是流氓的社会里，要活出味儿来是不是就应该争着去当流氓，大流氓欺负小流氓、小流氓则欺负小混混？我想，这不是唯一的道路，而这种充斥着丛林法则的社会架构，可能会由内而外的溃败。好在生活有很多面，好在个体可以隐藏起来，在一个打了鸡血般疯狂的国度里，依然存在着与世无争百岁高龄仍笔耕不辍的先生，在一个现代文化发达无比的现代化国度里依然有一帮老老实实捏着寿司的“职人”……整个社会的走向也许会近乎癫狂，但这并不影响意志真正坚定的个人的成长。我们可以来做个比方：把整个社会的走向看作是一面倾斜的长满青草的山坡，上坡抑或是下坡，草根们顺着山坡的走势生长，或枯或荣。但山坡上不尽是草，总该有那么几根洗不干净的葱、那么几颗倔强不服的种子，会在山坡上长成树，顺应着重力的方向而不是山势。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 有时候冷眼旁观生活，发现这社会里的很多人拥有“自己干不成事，还能让别人干不成事”这一伟大技能。譬如你跟他讲凡事要认真一点，他反问你做人开心最重要那么要强干嘛？再譬如有的傻逼来问跑步锻炼的经验，你想慢慢从装备体能开始讲，他听了几句就不耐烦反过来质问你的腿啥时候跑成残废；你从容一点，它说你不够上进；你优雅一点，它说你在装逼。有时候我挺纳闷这帮家伙的所作所为的，后来我觉得也许是他们自己活得太空虚，又干不成啥事，没事来秀把智商下限打击一下干正事的以拖人下水吧！至于这种说到东它偏扯西的口头伎俩，我觉得这不是真正的幽默，因为本身我是个能让气氛轻松的家伙，懂得真正的幽默和机智不是王顾左右而言它而是就事论事举一反三方能轻松而智慧的在交流中有所悟。太多时候我所遭遇的这些，近似于“非难”，其实是在傻逼们在装“逼格”罢了。年少时我偶尔会争几句，而今年纪大了，手头事儿确实又有点多到连写文章的时间都得靠挤，如今由人说个痛快后滚蛋就是，沉默是金，不附和是我的底线。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 近半年是很邪乎的半年，事实上从08年开始我就感觉天朝整个社会在迅速溃败中。真相是敏感词不能说的，说出来D妈妈估计不开心。我只是觉得这半年的丛生乱象的程度，大可在老去之时当成笑话或是传奇用来哄孙子玩了。说这话可能会让人觉得个人就是一大逆不道目无尊长一把年纪一事无成的资深级屌丝，有事没事跟主流价值观对着干那种。我想说的是：有很多人是从没闲功夫和2B价值观做斗争的，他们的生活真实而忙碌，因为心智强悍的家伙能接触的生活深度和广度、能把玩到的技能之多可能会超乎常人之想象。如果觉得这种个体太过于反叛的，也许首先你应该把自己的视野放宽了跳出自我生活的小圈子看看再说，简单说来就是把价值观掰正了再瞅瞅，因为并不是每个人都在刷着人云亦云的微博看着无聊的电视发呆品着小时代然后感慨手头钱太少演员包太好呀。老实说我并不觉得一个“/喜看书/善思考/爱跑步/喜欢写程序/写文章/K歌/弹琴/逗姑娘小伙开心/生活洒脱写意/“的家伙，不愿意把生活过得庸俗化功利化的所作所为是在反叛乃至是祸害涩会。我觉得不信邪的姑娘小伙们越多越好，因为不信邪的人才会真实的生活着，而不是把短短几十年演成一部守卫红色江山永不变色的战争屎或是节衣缩食买完一套买二套之后再买学区再买投资房的血汗外加投机奋斗屎。生活就是生活，不该承载太多这个那个屎。
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 有时候，反叛不是在真的反叛，诸人眼中另类的姿态，也许只是在糜烂的现实中，依旧坚持着自以为正确的价值观而已。拿我发小的话来说：”正确的价值观只是被人压在了水面下，迟早会浮出来“。我所谓的”反叛到底“，只是在坚持到浮出水面的一天而做的不肯妥协的姿态而已。回到上文的那个比喻中，顺势生长的草也许会讥笑树苗”你长歪了“，然而树有自己的姿态和长势，因为它是树。真反叛我是没时间的，哥有程序要写有琴要弹有电路要制作有步要跑有妞要泡，忙着写文字忙着发嗲忙着成长，哪有心思和时间和这个2B社会对着干？
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>早起一小时能干个啥</title><link href="http://4894816.github.io/zao-qi-xiao-shi-neng-gan-ge-sha.html" rel="alternate"></link><updated>2013-06-20T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-06-20:zao-qi-xiao-shi-neng-gan-ge-sha.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 本来我早上的生活节奏是这样的：早6：00起床，上厕所刷牙吃点东西后换装大约在6：40左右出门去玄武湖边跑一圈，8：10左右回家修整、洗澡、洗衣服，赶在9：00之前出门上班。每周1、3、5、7皆是如此，若是周2、4、6，只把跑步换成弹琴即可。这样的生活已经持续了近一年，每天早上出门几乎都能在固定地点遇到些固定人物，安静而自然，我也没觉得有什么不对。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; 日子毕竟一天天在过去，太阳的直射点随着北半球夏天的到来逐渐北移，天亮得也越来越早。冬天的时候，7点到湖边也无非看到太阳挂在紫金山麓而已，而最近出门，若是晴天，7点的太阳已经和地面成60度以上角了。对于跑者而言，阳光就意味着温度，温度一高身体的排汗机能就会大打折扣。原本轻松能完成的距离在温度上升10度后就变得挑战极大。这时候倘碰上湿度较高的天气，身体就很容易因出汗过多而出现脱水等症状。比如前天的早间长跑就因为天气实在太闷，后半程无法发力，加上太阳晒得太凶，只得一步步走回了家。
+  &lt;br /&gt;
+  &lt;span&gt;
+   &lt;br /&gt;
+   &amp;nbsp; &amp;nbsp; 于是我在想：有没有方法避开酷热依旧享受跑步？答案无非是两个：晨跑改夜跑，夜跑这事我以前干过，没啥意思。&amp;nbsp;另一个就是：把时间往前调一个到一个半钟。
+   &lt;br /&gt;
+   &lt;span&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 所以我今天早上的节奏是这样的：早5：00起床，5：40出门跑完7：10。
+    &lt;br /&gt;
+    &lt;br /&gt;
+    &amp;nbsp; &amp;nbsp; 把时钟往前调了一个钟点后，出门的见闻就成了另一个世界。以前路过时开始营业的早点摊这会还在生炉子。晨练的老年人这会还没集合，广场安安静静。以往碰到的跑得大汗淋漓的家伙们这会正在做准备运动。以往空空如也的湖面上突然出现很多划艇，原来水上运动学校的早课训练是在7：00前就结束，难怪以往从来没有看到过。跑完回家的路上也不再车满为患，中央路两边的步行道上依然可以慢跑回程。
+    &lt;br /&gt;
+    &lt;span&gt;
+     &lt;br /&gt;
+     &amp;nbsp; &amp;nbsp; 我以前看过金凯瑞演的电影《楚门的世界》，金在其中的角色是扮演一个从出生起就被各种摄像头包围的巨大片场里的明星，片场里所有的演员都围着他转。&amp;nbsp;终于有一天他发现了不对，于是他玩了一个关于时间的游戏，发现了其中的假象，最终走出了那个封闭的世界朝着心目中的女神奔去。
+     &lt;br /&gt;
+     &lt;span&gt;
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 有时候我看着自己的生活，很多时候它也像是一部设计好的影片。比如每天我背包出门要进的办公室要见的人，就那么些。如果我不折腾，每天的事情也大同小异。再比如跑步这一活动，跑的时间长了，会发现在固定点遇到固定的人很正常。若是夜跑，视野内没有景物，更是春夏秋冬分不出区别的漫长跋涉，剧本静止成一页文字。
+      &lt;br /&gt;
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 这也是为什么我热衷于换时间换空间的原因。在一个地方呆久了，固定下来是件很可怕的事情。圈子固定了，见识也就固定了。圈子里的人谈论的话题，不知不觉会把你拉进去，从这个出发点来说，到了南京后我懒得步入到同事的圈子里，他们的话题始终是孩子和房子，一个人倘若把自己存在的意义全盘寄托到下一代身上、寄托在一堆不会动的钢筋水泥身上，我觉得对我而言不是一件可以让人乐观的事。当然在他们看来会觉得我比较傻，愣等着不买房挥霍着大好青春，活该做屌丝每天撸巴撸巴睡。既然彼此都瞧不上，那就索性懒得有交集，哥向来都是玩得风生水起的主儿，每天忙着燃烧绳命，哪有功夫关注你们那个小鸡巴圈子里的闲言碎语。一起抱团取暖其实是没有生命力和独自生活勇气的表现而已，有家伙问我每天一个人吃饭会不会觉得不自然，其实哪有不自然，更多的是感觉牛逼，一个人吃顿饭的30分钟内能读半本小说，跟你们一大堆人就只能斗上半小时嘴皮子，你说如果你是我你会选择哪个？当然大多数人会从众，这我理解，大多数人从小到大就没有过独处的空间，离开了人群，你让他怎么活。
+      &lt;br /&gt;
+      &lt;br /&gt;
+      &amp;nbsp; &amp;nbsp; 我常听人抱怨说生活没意思、下班无聊、不知道生活如何协调技术如何发展等等的牢骚，然后我就会给出一堆建议，你可以这样你可以那样你可以换个系统你可以玩某个乐器玩某项运动之类----其实内心知道说这些话的时候我基本上是在浪费我的口水和苦口婆心以及时间。大多数笨蛋多半会点头，然后说我又不是你我做不到；少数几个会去尝试下，买来装备买来书换个系统啥的，然后过几天你就可以看着他的装备开始落灰书开始发霉系统因为占据磁盘空间太多不得不删掉等等。其实所有牢骚的根源，在于自身的懒惰使然。而解决方案，也不是随便买来些装备就能消除的。太多数人只是太习惯活在了人堆里，缺乏和内心的自我对话的时间和空间，从众容易让人心生懒惰，而一懒惰，什么事就打水漂了。所以，从去年就嚷嚷着要减肥的家伙现在肚子上依然是一块腹肌外加一个游泳圈，从入职伊始就立志玩好Linux的师妹依然在IE下逛淘宝刷人人网，有看到我码表数字心头发热买回来A740的家伙的车钢圈已经开始发锈……冷眼旁观他人的生活其实是一件很有意思的事儿，你会发现好多人用生命在执着的谱写着一幕幕喜剧和狗血剧。
+      &lt;br /&gt;
+      &lt;span&gt;
+       &lt;br /&gt;
+       &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp;好吧，回到正题来。
+       &lt;br /&gt;
+       &lt;span&gt;
+        &lt;br /&gt;
+        &amp;nbsp; &amp;nbsp; &amp;nbsp;如果说习惯的生活是一幕快要定格的剧本的话，那么早起一小时、出门，也许能让你发现原本看上去一成不变的生活里原来可以换个剧本去体会。魔戒还分三部曲外加前传呢，看惯了第三部的家伙们何不轻移莲步跺到看看故事的前因后果呢？生活中有很多美，不因我们不知道而不存在。你要做的就是早起一小时，或是狂奔几千里，在不同的时间和空间里，去邂逅她。&amp;nbsp;
+        &lt;br /&gt;
+        &lt;span&gt;
+         &lt;br /&gt;
+         &amp;nbsp; &amp;nbsp; 若问早起一小时给我带来什么？全新的视角+适宜跑步的温度+充裕的时间……如果一切都是多余，那至少能憋出这篇屁文污染大众视线吧。&amp;nbsp;
+        &lt;/span&gt;
+       &lt;/span&gt;
+      &lt;/span&gt;
+     &lt;/span&gt;
+    &lt;/span&gt;
+   &lt;/span&gt;
+  &lt;/span&gt;
+ &lt;/span&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>知难行易</title><link href="http://4894816.github.io/zhi-nan-xing-yi.html" rel="alternate"></link><updated>2013-04-02T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-04-02:zhi-nan-xing-yi.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 近来我在练汤普森的钢琴教程，这本教程好比当年的人教版初中英语课本，韩美美李磊的那版，很基础、简单、循序渐进。
+ &lt;br /&gt;
+ &lt;span&gt;
+  &amp;nbsp; &amp;nbsp; 玩琴到现在，一直没有接受过太过于系统化的训练。这颇类似于昔日上海洋场上的""
+ &lt;/span&gt;
+ 洋泾滨"", 你说他不通文法，然而他却和洋鬼子们谈笑风声沟通无碍。而手头玩琴这几年，谱都不怎么认得全的时候，依然可以看着别人的伴奏练习手型，而后完整演绎出来。&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 练到汤普森时我有些恍然大悟的感觉----原来识得了谱以后有如虎添翼的感觉。再度回头来看曾经弹过的曲目，内心了然。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 于是我在思考一个命题：太多时候，我们所谓的”学会了”，到底是不是真的“学会了”？ &amp;nbsp; &amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;比如说，大家都说我搞嵌入式、搞LINUX都还有几把刷子。然而扪心自问，我惭愧得很。在我近6年的研发生涯中，碰到的大多数问题，至少90%以上的情形网上都有类似的情况。我要做的就是Google一把，而后和当前的形势结合起来，分析分析，而后得到一个解决方案。又快又好，不是吗？ &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 问题就出在这：太容易解决了问题，得到的结果是自己的知识结构颇为杂乱。你看，这个我也搞过、那个我也会，然而一旦遇到面试的场合，尤其是遇到所谓科班出身的面试场合，我多半会被秒杀----因为我记不住那些个条条框框，多被纠结几句，自己就索性徼械投降了事。你不能对面试官说：这个用某个关键字GOOGLE一把。不排除面试官很多都是猪脑子，他不问你会什么，你不会什么他会追着问以获得心理上的极大满足感。所以，正式的面试场合，哥多半是悲剧。 &amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 当然，有现成的宝典可以用，比如《程序员面试宝典》。我知，却不屑。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这和钢琴其实是一个道理，遇到科班出身的家伙，他若问起来钢琴的理论，马上我就会哑口无言。然而如果让我下手，稀里哗啦，至少不间断搞上个把小时不是难事。给我一台电脑，大多数的场合我都能胜任职能，然而笔试面试里的一堆纯理论性题目我可能压根做不出来，比如那些个磨死个人的算法题，想来想去都想不明白怎么就能搞出来N多种解决方案，然后也无从比较出孰好孰坏，然而，如果问题具体一点，再让我用个GOOGLE，解决方案我能给出一堆。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这就牵扯出来一个命题：到底是先入为主，一头扑上去玩这玩意，等手头活儿熟了再补补理论呢、还是先啃上一大堆砖头，然后再轻轻的弹上几曲？在国内，大多数人属于后者，因为我们本来就是个善于装逼的民族嘛！前者可能无意中触碰到很多艰难的东西，不知不觉做完并做好了还恍然不觉；而后者却可能畏首畏尾半天不敢出手，青春可是过得很快的，于是他们很快的老去了，老了以后发现自己还是诸多心事只能唱给自己听，手头却无从抓住些什么。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 所以，尽管被人鄙视成没文化、没修养的屌丝，我还是秉承不管三七二十一，先做起来再说的原则。凡事拿到手，先做起来再说，至于理论不理论，为什么这么做，不必想得太明白。比如嵌入式吧，哥玩了那么多板子，还是很多不知道如何着手，没关系，至少自己知道如何触发出当时的场景。而到了那一步，适当再翻翻大部头，也就天把两天的事儿。知难行易，这是句大实话。很多东西其实没必要搞得太懂的，比如英语文法语法一类的东东，又不是语言学家，搞那么刻板又是何苦？Anyway，玩得转、玩得开心是王道。无论是语言、音乐、抑或是编程写文发微博，一样的道理。
+ &lt;span&gt;
+ &lt;/span&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>三月</title><link href="http://4894816.github.io/san-yue.html" rel="alternate"></link><updated>2013-03-27T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-03-27:san-yue.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 得益于微博的缘故，现在要回首一段时间里干了些什么事儿只消翻翻微博即可----这样做的前提是：你得保证微博的原创性，若是一天到晚转着各类花边新闻的人，回首往事，多半会发现自己转载的不过是别人的生活罢了。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 翻起来，三月充斥着各种忙乱，然而与忙乱对抗的，是逐渐强大而淡定的内心。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 写了大半年的程序进入到测试阶段，问题一堆一堆冒出来，对此我早已有心理准备--得益于我司落后而低效的沟通机制，一个正宗的开发者要把所有问题在写代码阶段结束无异于是痴人说梦。于是就修修补补，顺便在修修补补中打发着无聊。以往不知道什么叫垃圾代码，也无从了解码农的概念，这一个月下来竟是恍然大悟。代码尽管是垃圾代码，然写代码和解决问题之机却是修炼耐心的大好机会。于工作而言，我从未想着依赖于某个机构而飞黄腾达抑是衣食无忧。有些物种是成群行动的，譬如羊群，然而还是有些物种可贵的保持着独行的特征，譬如鹰。既然不愿委身于群体苟且而活，自然只能在暂时的群体性生存里苟且偷生，挤得一点点时间作自我提升之计而已。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 从这个意义上而言，我有些看不起太专注于工作的人。专注于工作本身没有错，然而如果一个人把全副身家性命都放在了工作上，这就有点类似于落水的人把希望都寄托在一颗浮木或是一根稻草上的情形了。要在广袤的大海上活得自在潇洒，最好的方式莫过于学会游泳，而不是从一根浮木跳到另一根浮木抑或是稻草。因而在工作中被这些个浮木生存者挑衅的时候哥从来是爱理不理----你爱快自己快去，不要用自己的标准要求别人；淡定的解决问题是哥最近几年来养成的工作风格，天下本无事，庸人自扰之，讲得就是爱来事的一帮人。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 很多时候，我觉得身边的人过得太忙了。他们忙得连好好反思一下的时间都没有。其实看上去忙忙碌碌不是件好事，欲速则不达就是用来形容瞎忙的那批人的。当然“忙”是现代天朝的主旋律，忙着买房、忙着结婚、忙着生娃、忙着离婚、忙着买更多的房……但是，然后呢？
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 身边的人3月份谈论最多的话题无异于是“买房”“卖房”。国5条还没正式出台，屁民就惶恐不可终日。这一幕令我回想起日本大地震时抢盐的情景。此时此刻，正如彼时彼刻。而此时的交易行为，就出发点这一点来说，恐慌性消费为主，真正的理性下手的估计是微乎其微。哪里是太平盛世，一片末日之景而已。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 末日之景里，看到的无非是人的贪欲。其实就买房这事来说，在中国，往往是没房的盼着有房、有小房的盼着换大房、有一套的盼着二套、手头有钱的恨不得把整个小区都吞了、而真的吞了整个小区的人则担心新加的20%会不会让资产缩水……熙熙攘攘者皆为利也。的确在一个没有安全感的国度里，所谓的不动产能最大程度上带来人心的安定感。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 于房市而言我向来不关心。从来都是个懒得和别人去争什么的人，你有钱你先买就是，没钱那就先享受着市中心的便利再等等。09年时本是市场回归理性之机，彼时泡沫尚且如此更何况如今。如今你就算是借了熊心豹子胆给我我都懒得出手，一出手押上30年，太不值。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 在熙熙攘攘的充斥着各类讨论的办公室里，终于体会到拥有一个主动降噪而已的必要，于是小败了一个主动降噪型的耳机，噪音一下减少了很多，再配合上Pandora音乐里劲爆的R&amp;amp;B，在办公室再也没有人可以吵到我。然而一个坏处就是我的话也愈发少起来了，无所谓，和一帮身价百万的房主讨论什么奋斗的事哦。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 二会的如期主办让人很无语，生活的便利度一下降低了不少，北京开个屁会，南京这头的小贩都不让摆摊了。于是3月份最大的困境是找不到可口的早点和水果摊。而二会之后，我朝前任一下子销声匿迹，而现任浮上水面后颇为高调，直让人担忧。凭心而论，前任给现任留下的是一个烂摊子而已，临走前还要把20%税率给引爆。所以说，祸起萧墙一说并非空穴来风，不理解祸起萧墙涵义的，请自行GOOGLE之。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 乱世之机惟有读书抑是精神上的享受才是正道。三月看了《悲惨世界》，出自雨果之手的伟大作品。近几年来在影院里看到飙泪的，就这一部。然而真正有思想的作品在中国往往会被陷入到小众的地步，悲惨世界的票房并不好，对比于其他的搞笑或是傻乐作品来说。然而这又如何？真理的的道路上永远都不会人满为患。看完《悲惨世界》后我开始找寻雨果的作品，翻完了一部《笑面人》，里头的爱情只能用震撼来形容。大师就是大师，永远出其不意的让剧情反转，而在剧情反转之机，情感倾泻而出。这足以让那些写了几页就开始湿润开始骚动的身体小说自惭形秽。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 李承鹏来南京签书的时候，果断的跑去要了个签名。队伍蝉联大约有1千米长，排队几近4小时。然而心里却是很开心的，更何况大眼一一和读者握手。置身于队伍里的感觉，有如一只时常乱窜的丑小鸭，陡然知道自己的群体原属于白天鹅一般。我想说，明事理的人不在少数，有些东西，看不见，只因为他们被压在了水面下，他们只是被暂时打压；而迟早，他们是会浮出水面的，Definitely（绝对的）.
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 最近在翻的另外的一些书，大体是玄幻系列，《地海××》系列，兴趣的可以去翻一下。美国一位老太太作家的作品，共6部。充满着想象力，文字美，故事惊心动魄。老太太的一句话的意思，大体就是说，成人里拥有想象力的家伙才可贵。她老人家非常给力的描绘除了一个神奇的魔性世界，在绚丽的场景里透露出生命意义的点滴。有兴趣的可以抓来看看，反正3月份的后半段，我梦里头出现的龙都是带着翅膀的。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 这个月入了不少东西，降噪耳机以外还入了个青花瓷造型的鼠标，原因只在听周董《青花瓷》的时候刚好看到了罗技的促销广告；另外入了把Ukelele，传说里的四弦吉他，夏威夷吉他， 如此，在钢琴以外，也得花点时间出来练练扫弦了。这世间有很多值得把玩的东西，光是乐器就有许多种。我不知道以后会玩到什么，然而多接触点不同演奏方式的乐器总是件乐事，至少总好过无所事事吧。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 3月份过去了，我一点也不怀念它。时间过着，只要自己没有虚度，就不会有遗憾抑或是怀念之类的蠢情感。天气时冷时热，像极了晦涩难懂的现状。然而，佛经里的说法是：眼前种种，皆是虚幻而已。30当头的自己，看眼前诸多种种繁杂，也只得物过如水，了然于心而已。在忽冷忽热的季节里、在纷扰如麻的世事中，能坚守的只有不够完美却始终真实的自我而已。至少，用一周4次跑步顽强的PK掉了乱七八糟的天气；至少，在百无聊赖中依然看着书编着代码爬着山吹着牛。如此，3月无憾矣。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp;
+ &lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>如极客般思考，如斗士般行动</title><link href="http://4894816.github.io/ru-ji-ke-ban-si-kao-ru-dou-shi-ban-xing-dong.html" rel="alternate"></link><updated>2013-03-08T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-03-08:ru-ji-ke-ban-si-kao-ru-dou-shi-ban-xing-dong.html</id><summary type="html">
+&amp;nbsp; &amp;nbsp;&amp;nbsp;作为一个喜欢关注、并比较能折腾电子设备的家伙，我常常饶有兴趣的观看身边的人群使用电子设备的品味、场合、习惯。这么些年下来也接触了不少装备，玩得兴起之余少不得乱写几笔，于是看过文章的也会跟风买来同款。而平时看乱七八糟的评测、促销消息多了，就能知道哪些设备可玩性高、“值得买”、耐玩，于是诸多平时根本不关注设备的小白们在下单前总会跑来要给主意。
+&lt;br /&gt;
+&lt;span&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 交代完了背景，接着我就要开始发几个飙了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 1. 90%以上的拥有强大功能电子设备的人，只用到了该设备20%以下的功能。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;“创新Zen V Plus”，这是07年左右的一款很经典的MP3，当年要卖到1K左右价位，我一个同事去年送给我的。具体原因就是说玩得没意思了，空着也是空着了。然而就是这款MP3有着很多设备上不多见的直录功能，所谓直录，就是直接接收音频输出采集到音频文件里。刚好彼时我为着电子琴的录音伤透脑筋，有了这玩意录音的问题自然是迎刃而解。其他诸多功能，比如台历、备忘录、时间显示、视频播放等，都是很简单实用的功能。我很好奇的问起同事，他有用到过多少，“就听MP3呗“，果然不出所料。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;这只是举我遇见的一个比较典型的例子而已。事实上我帮Samsung&amp;nbsp;i9300的机主安装过淘宝客户端、帮水果机的机主开过多任务手势……以及诸多的在我看来多动几下手就能接触到的功能。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 所以在地铁里看着满车厢的大屏机器，水果或是棒子或是火腿肠之类，刚开始我会有点发怵，似乎不买个这样的机器来我会落后于科技、被时代淘汰之类。现在我并不这么想，大多数人这类机器的机主，与其说是在玩机，不如说是在被机玩。他们整天在背书，背着那一堆看似很牛逼的参数，几核内存多大屏幕分辨率多细腻之类的，然而极少有人能把厂商所标榜的那些功能用到极致。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 大多数拥有智能机的人，恐怕除了在购机时被奸商刷上一堆应用程序外，自己就很少下了。这种现象有点好笑，但如果你能理解大多数人是在拿着手机装逼就一点也不难理解了，他们要的只是面子，至于面子下面是一砣屎还是一锭黄金，他才不关心呢。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 2. 90%的购买需求在于头脑发热。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 毋庸置疑我是个很能鼓动人的人，所以在我写了那几篇关于Kindle的文章后，有不少朋友入手了Kindle。但目前看来，大多数的人表示“买来后还没看几本书”，至于几到底是几，我猜都能猜到----几就是一，大多数人买来Kindle后连一本书都没看完。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 不错，Kindle是个好东西，看书也是件好事。但是，我在文章里头，吹捧的那些好处，只是对我而言。大多数人可能没想清楚这一点，就急匆匆入手了Kindle。事实上，看书是很单调的活动，心不静的人很少能体会到文字的妙处。当初要买Kindle的人，只消自己清醒一点，认识到自己平时一年能读几本纸质书，就不难做出正确的判断。像我这种一周跑一次图书馆换5本书的人，用Kindle那显然是多快好省，想看什么书直接一拖就是。倘一个三年五载不摸纸张的人，买个Kindle来，那是委屈和辜负了亚马逊。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这也只是一个很典型的例子罢了。我还见过头脑一热买来NAS说为了扩展家庭网络可用性的，高档CPU+高档显卡说要做图像处理的，败来苹果电脑说要做APP开发的……这些人咨询我意见时我总是劝说考虑清楚再败，于是伊摆出一大堆理由来，对我竟是一副同仇敌忾的表情，似乎我挡着他升官发财自我提升的道路了一般。而后时间过了个大半年，那些个精心淘来的装备，大多落了灰发了霉了。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 3. 在朝党和在野党的区别。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 有条段子这么说----有女生微博写到：「如果我有男朋友，我就天天看他打篮球。帮他拿衣服给他送饮料，陪他跑步，给他唱歌，给他买早饭买中饭买晚饭买夜宵，天冷的时候给他暖手，给他送热水。」某网友回复：「在野党的诉求，不能当真的。等她成了执政党，早先说过的话就是**了。」
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 爱情尚且如此，更何况是败装备？
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 败来装备之前，我们总是想好一大堆乱七八糟的理由，似乎有了这件装备人生就完美了一般，万事俱备，所欠的东风就是那件装备。然而，当装备在手了，把玩几天发现其实也不过如此，外面有着更好、更多的值得败的装备。于是我们忘掉以前败这件装备的初衷，而对着另一件根本不属于自己的装备大流口水。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 这是病，得电。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 老实说，我不知道怎么电好这种病，因为喜新厌旧是人的本性，我们本来就是这样的，无法根治，只能预防。现在每次见到有好东西我蠢蠢欲动的时候，总是问自己几个问题：玩得过来吗？手里头那些个东西怎么办？搬家会不会太麻烦？如此，便能消灭大多数勾人心魂的装备带来的购买欲。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 4. 沉迷于太过于智能的东西会让我们变成傻逼。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 1999年时，我初去兰州，彼时是第一次走入所谓的“大城市”，第一件事就是花两块钱买来一张兰州地图，找寻各种位置信息、公交信息。那个年代的信息远没有现在发达，在陌生的城市里，我们熟悉这个城市的运作，大多是源自于和当地人的交流以及各种基于地图进行的判断。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 而在2013年，甚至是很早以前起，一切就变了，随身的智能设备的出现，掌控信息只在指点之间。我们再没有打开一张地图后，根据路标、太阳照射方向等等用于自我定位的必要了，我们也不需要问路，我们所要做的就是点开那一个个APP，获得当前的地理位置、美食信息、出行线路等等。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 也许你会问：这有什么不好呢？消息，那么现成，信手拈来就是？科技，让生活更美好，有句广告词不就是这么说的吗？
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 是的，我赞同并完全理解这种说法。然而我只是在想一个命题：在轻易得到这些信息的同时，我们失去了什么？比如，与陌生人交流的能力、辨认方向的能力、设计旅行线路的能力、品味各种不知名美食的能力、安排时间的能力……以往，在没有智能设备的年代里，这些消息的获得，大多依靠认真阅读地图、和当地人的交流等等来获得，然而，智能设备的出现让这种冒险变得索然无味：我们很容易就知道如何设计最经济的线路、我们很容易就知道自己到了哪里去往何处、甚至我们去下的馆子，都是被人众人推荐该地域最多的，去点的菜，居然和大多数人吃的一模一样！！！那你告诉我，这样的旅行、这样的历险，有何乐趣呢？因为，看起来，我们只是从一个城市的地图里，游荡到另一个城市的地图里啊？我们到底是在地域上旅行，还是在地图上旅行？
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 同样，这里只是举一个例子，用于说明设备太智能的结果是我们变成傻逼。大多数人在这些年里逐渐丧失了自己的想法，所以我们经常可以看到，身边一帮好友玩微博，自己发言的没几个。一堆写QZONE的，99%的人都是在转载。他们本该有的想法去了哪里？对此我理解的合理解释只有一个：点一个“转”字比辛辛苦苦敲个几万次键盘来得轻松容易多了、翻手机比翻地图更方便更快捷多了； 而故事的最后，是我们变成了信息的被动接受者而不是理解者、创造者，设备智能了，我们却傻逼了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 5. Geek不死。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 所谓Geek的解释，可以来个类比----大家都洗过葱吧？一捆葱里总有那么几棵洗不干净的葱，顽固不化，又或者说得好听点，叫做本色不移。善思考、爱折腾、思想开放、行动快速、凡事追求极致（尽我所能）……其他诸多品质大家可以自由发挥。 那么些个洗不干净的葱儿，就叫Geek.
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 我这30年里，确实见识过不少Geek。很聪明而勤劳的家伙，没事总跟世俗的脑子们过不去，非得弄出点干戈来的那种。这些Geek们有趣的所做所为，在我有限的记忆里，加上了很多笔绚丽多姿的涂鸦。比如有亲手打造音频设备的家伙、有肯花两个晚上的时间连续熬夜来对付一个病毒的家伙， 有半夜1点爬起来更新系统的家伙、有玩直升机来研究重力感应的家伙、有不务正业玩编曲玩创作的家伙……
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;和这些家伙交流是件很有意思的事儿，有时候他们的思维是跳跃的，你也得跟着跳。他们平时也许沉默寡言，然而碰到了志趣相同者，就开始喋喋不休了。然而这类家伙有一共同点，就是：他们大多远离人世清净度日，也许在人群里他能融入进来嘻嘻哈哈，然而到了自我的境地里，那份专注和忘我的心境，是常人难比的。你生命里也许也碰到过一两个这样的怪人，也许你很难理解他的所做所为，然而从旁人角度看，他的生活是很诡异而有意思的。这类家伙才是人生的赢家，因为没有什么比自我陶醉和自我的成就感更令人开心了。很多人为着别人眼中的自己而活，很多人为着财富地位而活，太多人干脆什么都不想浑浑噩噩的混到钻进墓穴的那一天； 而Geek的生活却不是这样的，他偶或沮丧，但更多时候却是天不怕地不怕的闯着，用自己的智慧和努力在自我的时间里成就着自己预期里的自己。常常说人活着要有境界，Geek就是这类活得有境界的人。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 那么，Geek和电子设备有啥必然关系？
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 答案很简单，电子设备在令普通人越变越傻逼的同时，却在让Geek们的生活越变越有意思。普通人只用到20%的功能，为什么？因为，全面的功能是为Geek而设计的，甚至，如果他够强悍，他能玩到120%。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 我见过的很多Geek ，在这些年里指点过我很多次，和他们的交流，成为了我记忆里很美好的瞬间。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 总结： 物欲 VS 人心
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 我常觉得我们这代人是很有幸的，能生活在一个日新月异般变化的年代里。还是拿我1999年来比较，彼时的400MHZ的CPU/64M的内存就已然是顶配了。然而你知道吗？大约过了不到10年，当我在NOKIA上班的时候，公司发给我一个能端在手头的N97 MINI，他的CPU就是400MHZ，内存已经是128M了。而不过是3年后不到的时间，现在的手持设备，已然是奔到4核的阶段了。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 10年前我们需要用1万元买来的东西，到现在恐怕500元不到就能在性能上完败之。当然，房子是个例外，这符合我朝自成立之初始一贯而来的坑蒙拐骗偷，泡沫，迟早要破，而且快破了。 然而纵观这十多年，是物质（除了钢筋混凝土以外的所有）极大丰富的年代，在被物欲不时冲击的年代里，如何保持一颗淡定的心？
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; &amp;nbsp;远离世俗那一套已经行不通了，这不是三国时代，诸葛亮隐居上十年还能洞察天下做出隆中对的年代。然而，入世吧，又极其容易被物欲冲个头昏脑胀，看看那帮在台上喧嚣得无法自拔的家伙们就知道了。如何从容而淡定的面对眼前瞬息万变的生活、而不落伍于年代，确实是个很难的命题。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 也许，用心凌驾于物欲之上是中很好的生活态度。如Geek而言，他们其实是藐视很多东西，更愿意用智慧在自己擅长的一块活得风生水起的一部分人。万千物欲，只关注于自己能着手并主导的一部分，至于其他诸种，皆是浮云。而与此对比的庸人式生存方式则是：什么都想要，什么都去做，结果，浅尝辄止，越来越多的傻逼涌现出来了，一如我在文中提到的诸多种人所现。其实大多数人没有一种让自己的心思凌驾过物欲的”霸气“，在物欲来势汹汹的冲击前，我们自行躺倒了----既然是自行躺倒的，那就别怪物欲们把你轮奸了数次提起裤子来还问你要服务费。唯独在物欲乱世里坚持自我，让内心凌驾于物欲之上的人，方能活得自在，正应了苏东坡当年和佛印斗气的一句小词儿：”八风吹不动“。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 然而，想明白了也只是初步，更有必要的，是如同古罗马的斗士般，谨慎而快捷的行动----生活就是这样，如同斗士对面的野兽，你出刀不狠不准，倒下的是你自己。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp; 如Geek般思考，如斗士般行动，也许这是在物欲横流、乱相横生的世道中，比较靠谱而不失精彩的生存之道之一吧。
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;
+&lt;/span&gt;
+</summary><category term="Qzone"></category></entry><entry><title>至乐莫若读书(7)</title><link href="http://4894816.github.io/zhi-le-mo-ruo-du-shu-7.html" rel="alternate"></link><updated>2013-03-02T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-03-02:zhi-le-mo-ruo-du-shu-7.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 今年的冬天又潮又冷，外加前所未有的雾霾天，日子黯淡得让人看不到半点希望。从一月份到现在，由于天气和空气的关系，跑步次数用两只手就可以数出来。思量着跳个槽换换思路，一路过五关斩六将所有人都认同后却被告知公司人头已满，直接憋死；而由于过度自信年后能顺利辞职，于是一咬牙把所有年假都耗在了家里烤火，被放完鸽子后最令人不爽的是今年手头已经没了机动时间。是不怎么爽吧，然而2013年却这样一头雾水嗖的一下就过去了1/6了。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 阴霾的日子里，能提起来说说的，也就翻过的一大摞子书吧。寒冷的冬夜里，捧着电纸书在被窝里，一盏黄灯从床头罩下来，绝对能让人心生温暖。又或者在某个路边的小饭馆里无聊的等着老板上饭的时间里，打开来读上几十页，也好过莫名发呆。文字就是这样在寒冷和阴霾的时光里，如一丝暖流，浸润过人早已焦躁不安的心田。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 电纸书对比于实体书的一个缺点在于，你无从永久保存下读过的书。实体书读过，少不得有本书样子在那里，可以提起来回想一下或是装逼一通；电纸书没有，读完按个DEL键就是，因此，有必要频频回顾，以免有荒废光阴之感。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《茶花女》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 法国作家小仲马最著名小说之一，1848年出版。一位徜徉于巴黎交际花的故事。去年10.1回家的火车上碰到一对很文艺的情侣，看我埋头看Kindle于是主动搭话，我也不是个闷人，果然就相谈甚欢。文艺情侣里的男生说“我很喜欢国外作品里塑造的光辉的人性，譬如《基督山伯爵》里的伯爵和《茶花女》里的女主玛格丽特”。由此而动了翻《茶花女》的念头。《茶花女》读来让我倍感震撼，尤其是阿尔芒替玛格丽特收尸时，掀开棺木时的那一刹那，那种文字带来的冲击感实在是太强悍了。当然这与我当时所处的环境有关：口里咬着一个大虾肉馄鈍，两点钟方向的一张桌子上坐了一个香喷喷的黑丝女侠，然后文字描述出来的那幅场景，一下让被暖气熏得人想困的餐厅变成了阴森潮湿的墓地，阿尔芒的心如刀割，透过书页，迎面而来。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 不懂爱情是个啥玩意的家伙们，又或者自以为很懂爱情的家伙们；不了解女人的汉子们，又或者认为自己很了解女人的汉子们，没事你们可以翻一翻这本书。一个妓女，却拥有如同茶花一样洁白的灵魂里的爱情。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《彼得 潘》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 这书我小时候就看过，只不过当时是看家里给订阅的《少年儿童报》上的连载。彼时的一份报纸，订下来要花掉我爸1/3个月的工资。而那份报纸到手，却也没怎么被浪费，在上头我囫囵吞枣的鲸吞了不少好故事，以至于长大了以后还可以拿着那些个小故事小幽默来逗人开心。再度读到《彼得 潘》是在今年过年回家时的某个下午，屋外淫雨霏霏，爹娘相约去镇上买东西，留下个大小伙子在家窝着火炉哆嗦。然后就翻到《彼得 潘》，再度阅读时发现小时候的那些想象里的场景，再度浮现。譬如海盗的形象，虎莲公主的形象，还有那只肚子里吞了只怀表始终嘀嘀嗒嗒的笨鳄鱼……孩童的想象力真的是很难用常理来揣测的，当年一个窝在偏远山村里连火车都没见过的小孩，他凭空想象出来的那些画面和人物，在头脑里演绎出一个完美的故事。所以我经常跟别人讲，不要小看小孩，你所嘲笑的他们的幼稚、任性，正是你所主动或被动失去的可贵的品质。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《重回梦幻岛》是一部关于《彼得 潘》创作的电影，有兴趣可以看看，不过我觉得拍的一般。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《哈维尔文集》
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 哈维尔是个很传奇的人，限于篇幅所致只能少许介绍：捷克著名剧作家、捷克前总理、捷克“天鹅绒革//命”的发起人（其实也不能说是发起人，因为一个人干不成这么大的事）、烟鬼。和我一起跑步一年的哥们很欣赏他，并对捷克社会体制的平滑过渡表现出了由衷的赞叹。哈维尔于去年去世，去世时的国葬上，诸多名人现身，足见其影响力之大。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 有一个传奇式的画面是：捷克平滑过渡中，捷克人为了表示对他的支持，在他演讲时，不约而同的拿出钥匙串晃动，钥匙们相互撞击的声音充满了整个现场。因为钥匙当时用来表示民众要求ZF交出权@力。因而在哈维尔的葬礼上，很多人依然摇着钥匙祭奠他。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 当然，在伟大的天朝，您是没法知道这些个故事的。哈维尔过世的时候，天朝人民的老朋友、朝鲜人民的金太阳刚刚咽下最后一口气。于是九个长老相继去吊孝了，表达了一番土司狐悲之心。关于哈维尔过世的新闻，CCAV只字未提，却以很大篇幅表达了对金家的那位“正在干”同学的哀悼之心，愚蠢。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 回到正题来。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 哈维尔，人帅，文字更帅。读哈维尔的文字时，能让人心生希望。如果你认为哈维尔是个愤青，那你错了，他是个极其温和、智慧的家伙，文字也是一样，在他平静的追问和自省里，我们很容易看到自己到底丢掉了什么，也很容易明白自己该怎么办，act ,just do it!(行动起来，去做就是了）
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《论中国》《越战回忆录》
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 两本都是基辛格的回忆录。《论中国》里有不少敏感词，所以估计在国内出版是不可能的，这也是电纸书的价值所在，拷进去就是书了，你懂的。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 我把这两本当成八卦来看，然而基辛格的文笔很有意思： 他不从自己的角度去看问题，他非常客观的站在各方的角度上描述了当时很多事情的前因后果。 一个外国人，看待中国问题比绝大多数中国人都清楚，我们是不是该扪心自问一下：自己是不是被那帮孙子们蒙蔽得太久、以致于失去了自我思考的能力？
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《雾锁中国》《中国的陷阱》
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 何清涟的作品，这书早些年还能出版，无奈影帝一上台，书被禁了也就罢了，更把何赶出了国门。何的书绝非危言耸听之词，书里的问题至今仍在作恶。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《全世界人民都知道》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 这书太有名了，作者大眼，这本书就是大眼的博客合集。由于几年来一直关注大眼博客的缘故，他书里的文章我都看过，就没再看了，只是把纸质书买回去了。想不到我爹看了以后拍案叫絕，连说这家伙骂的痛快。他老人家甚至将很多大眼式的小幽默背出来逗我妈开心。文字的作用就是这样，发人深省，启人智慧。家里有比较“左”的家长的同学们，你们可以有意无意的买一本回去搁着，很多代沟和误会会消失的，相信我。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《民主的细节》《送你一颗子弹》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 刘瑜的作品。才女、剩女。这些个书读起来，文笔清新，有理有据有意思。大家不要拿着“女子无才便是德”当成自己犯懒或是贬低女生的理由了----事实上，和一个才女谈恋爱应该是一件很令人开心的事儿，譬如当年的李清照夫妇，乱世之中各种小清新小浪漫玩得风生水起，直让人羡慕嫉妒恨；但大约是他们太令人羡慕嫉妒恨，以至于老天爷也看不下去，于是收走一个，只留下那个才女独自做“凄凄惨惨切切”之词。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《最后一名女知青》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 阎连科作品，很好的小说，情节跌宕起伏。读书人，就算当了兵，也还是那么帅。阎一个当兵的家伙，能超脱地位和阶层去写诸多阶层的辛酸苦辣，可谓难得----要知道军队的笔杆子大多是作舔屁沟之作。阎还有很多作品，以后可以一一阅览之。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《我们最幸福》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 这书里写了这么几个故事：认识10年才交往、交往3年才拉手、6年才接吻且是唯一一个，女主全家消失后男主千辛万苦九死一生终达韩国（不剧透了）; 一位饥饿的朝鲜家庭主妇想方设法找食物最终却只能亲手埋葬丈夫和帅气的儿子;一位医务人员无从忍受良心谴责脱国而去……《我们最幸福》，你值得拥有。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 这本书里的故事，若是拍成电影，定是惊心动魄催人泪下之作。事实上反映朝鲜脱北者的电影为数不少，我在09年就看过一部，当时直接用掉了大半包面巾纸，现在心硬了点，但少说也还能用个两三张吧。客观的说，朝鲜当前政权的存在绝对是人道主义的一大灾难，那啥，我们也好不到哪去，30多年前，我们就是朝鲜。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《百年孤独》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 鼎鼎有名的诺贝尔获奖作品，玄幻之极。读书所产生的想象力能让你超脱时空，读《百年孤独》的时候，有种“人在书中游”的感觉，几个世纪的轮回、南美大地上的传奇，历历如在眼前。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《霍乱时期的爱情》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 兔子同学说起过，这是很老的作品了。老，却不失经典。和《茶花女》一样，我觉得这书适合每一个懂爱或不懂爱的人，懂男人或不懂男人的女人。《茶花女》是描述欢笑场上的女人，而《霍》则是描述风流场上自甘堕落的男人。 《茶》是悲剧，玛格丽特最终辞世；而《霍》到最后竟然是喜剧，盖上书页时有一种极大而平静的幸福感袭来。它的词句也是很好的，很多句子，拿出来就可以写成情书送出去赚眼泪。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 《白鲸》：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 很爷们、很充满生命力的作品。在困境里挣扎的人，不妨翻翻《白鲸》，看看一堆孤独无助的家伙，在苍茫的大海上，是如何追寻并征服鬼魅一般的庞然大物的。人，贵在有勇气和智慧，没有了勇气和智慧，我们什么也不是。这也是《白鲸》的字里行间透露出来的赤裸裸的男性荷尔蒙和生命力。爷们，你们值得去读一下；娘们，如果你们想了解爷们，欢迎拜读。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 其实我这两个月读的书远不止这些，写到这大概就写了一半吧。但我现在累了，明天还要陪同学去爬山，改天再写啦，睡觉去。
+ &lt;/div&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>跑步的意义（七）</title><link href="http://4894816.github.io/pao-bu-de-yi-yi-qi.html" rel="alternate"></link><updated>2013-01-12T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-01-12:pao-bu-de-yi-yi-qi.html</id><summary type="html">
+&lt;div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp;
+  &lt;img idx="0" alt="图片" src="/images/Qzone/2013-1-12_paobudeyiyi_qi__1.jpg" style="width:500px;height:285px" /&gt;
+  &amp;nbsp;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; 跑者之冬
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &lt;br /&gt;
+  &amp;nbsp; &amp;nbsp; --&amp;nbsp;写在28年来最冷的冬天。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 南京最冷的时候恰逢元旦，彼时我正在深圳上山下海，只穿一件T-shirt便能横行无忌。1月1号的晚上，爬南山，沿小路一路下到海关，万簌俱静，静静悄悄走在空无一人的幽静街道，花香扑鼻而来，大约岁月静好便是这样的一副画面。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 6天5个山，耗到精疲力尽后坐晚班航班回得南京，已是零下六度的酷寒。在三万英尺的高空就着R&amp;amp;B读完海明威的《老人与海》，再想想从06年后7年的过往，过往点滴依旧萦绕于心间，似乎当年从兰州出走之时只是闲暇度假一般；然而当飞机落地，指针确切的指到临晨1：30，25KG的大包上肩时，才明白过往终究不可追----“昨日种种，譬如昨日死；今日种种，譬如今日生”，如此而已。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 年过30,依然保持着18岁时的身材；更值得庆幸的是，拥有着18岁时不曾幻想的耐力----18岁在足球场上，我最多踢60分钟，盖因我速度太快，每次拼抢都会消耗大量体力。所以，在18岁的时候，我曾未想过我可以在四十多分钟内持续跑1万米，或是持续几天做千米以上垂直高度的攀升。然而，30岁时候，我发现似乎每天四十多分钟跑个1万米是很开心的事儿；人说三十而立，照我看来，时处乱世，各路妖孽傻叉横行无忌黑白颠倒之时，立它做甚！？拥有于我同样想法的人想必不少，其实我们内心知道，不立并非刻意而为，而是世道太纷杂了，我们需要多点儿时间，来寻找生命里真正值得携手、相守、守护的美好。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 跑步，是极其孤独的运动----很少有人能找到和自己步履一致的同伴，我曾和某哥们一起跑步近一年时间，即便如此，我们两人的表现，依然取决于耐力、体能、饮食、心情等等诸多因素。大多数时候，我不得不停下来等他休息完毕才继续行进。那哥们离开南京后我便开始一个人的环湖，而来半年有余矣。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 在长长的奔袭里，我开始体会到孤独的本质----孤独并不是一种不幸，相反，它是一种难得的幸运： 只有在孤独的时间里，你才可以真正的和自己的内心呆在一起。而在跑步的路途中无比孤独的时间里，我常常在追问自己的内心一些在旁人看来很幼稚很天真的问题，譬如：亲，你到底要什么，你做了些什么，你打算做什么……之类。而彼时彼刻，耳边响着的，是某段隽永抑是动感的音符----和自己对话着，而后满眼风景袭来，脚底的触觉却告诉自己始终在前行，而后过了某段距离，恍然大悟于某个用心琢磨出来的答案，记住：这个答案不是别人告诉你，而是你和自己谈判后得来的，然后内心空明，能有比这更舒畅、开心的事儿吗？
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 前几天南周出了点事，如果你是个关心国家前途的人，想必你会捕风捉影知道些小道消息。在南周的风波里，让我记住的，是伊能静。女性的沉静和坚韧、达观、勇敢，在她身上一览无余，曾经我以为她只是个花瓶，然而从这一事件里她的言语，让我窥见一个智慧女孩所拥有的种种。关注其博客之时我读到她摘抄的一段关于跑步的文字，不敢独享，摘录于下：
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; “不要浪费任何一分钟在该放下的人事物上，那只会让凝固的过去拉着你无法前进。就像赛跑选手若要奋力前行，就不能回头张望，否则只会失去平衡跌倒。活在过去的人就不可能有未来，生命有限，我要做个前行的跑者。---”
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 如果你是跑者，那么这段话的意义，在你孤独多时的跑步历程里，你应该是不止一次会体会到这种感觉----一如我在《跑步的意义（三）》里提到的一般：“跑步的意义，就是在于永远向前”。确实，在眼帘不断被迎面而来的美景所袭击、侵蚀之时，又有怎样悲伤、不堪的过往不可以放下呢？人生苦短，若不想白度的话，不如做个勇敢的跑者，在零下六度的气温里依然早上6点一过便得挣扎着起床，整装待发后一袭战衣，和自我一起在自由里奔袭，人生至乐，何及如此？
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;br /&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 很多家伙说我的文字很能煽动人，以至于我写了关于《至乐莫若读书》的几篇后，大家纷纷买来了Kindle助兴----OK，那么这次，希望你们去败上几双顶级跑鞋+压缩衣裤，最重要的是，败上你们的满腔热情，在空气优良的天气里，小跑几把，享受一下和身体、和自我对话的过程。
+ &lt;/div&gt;
+ &lt;div&gt;
+  &amp;nbsp; &amp;nbsp; 你有多久没有过脚跟接触地面的感觉了，又有多少年不曾大口呼吸到新鲜、带着清香的空气了？不如去跑一跑，在脚跟微微麻酥、呼吸极致畅快的同时，拥有一段和自我真诚对话的时间，并赢得一个永远向前的人生。 Forest Gamp(阿甘）曾说起过他喜欢跑步的原因：I just like running。&amp;nbsp;&amp;nbsp;喜欢上她，爱上她，享受她，找回迷失已久抑或是从未曾发现的自我---比这更爽的事儿不多了，元芳们，你们怎么看？
+ &lt;/div&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>至乐莫若读书（6）</title><link href="http://4894816.github.io/zhi-le-mo-ruo-du-shu-6.html" rel="alternate"></link><updated>2013-01-06T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2013-01-06:zhi-le-mo-ruo-du-shu-6.html</id><summary type="html">
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 从11月开始一直疏于动笔，一半源自工作生活非常忙碌；另一半是源于这些天来陆续碰到比较狗血的人和事，身在其中，心绪难免会随波逐流搞得有点小不淡定。于是，日志就长久没有更新了。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 11月初我两手空空的奔到东莞见到我姐，所谓吃在广东绝非说说而已，确实南粤的饮食是非常讲究的。大块朵颐之余，少不得要把Kindle捐出来聊表心意。正巧我对Nook非常感兴趣，于是把手头的阅读器从Kindle换成Nook了。Nook相比于Kindle功能更强大，可定制性更强，但是一个负面的影响是----它的功能太过于强大了，以至于我不得不花了半个月时间不停的刷机刷机再刷机，并熟悉其上头的软件和更新方式。牛人一般脾气很大，功能牛的东西其实也一样，这好比于劣马对比于良马，良马被驯服前总得耍耍脾气。Nook就是这样的一匹良马，在完全熟悉其性能前，让我吃了不少苦头，就不一一说起了。总之结论就是：如果你愿意折腾，入NOOK；如果你一懒二馋三耍赖，Kindle+多看是你最好的选择。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 阅读器是换了一个，阅读可是半点都没放下。从11月到现在，连续两次奔到南粤之地，而电纸书，很好的打发了旅途里无聊的时光。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《纳尼亚传奇》系列：&amp;nbsp;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 各位可能都看过电影，然而原著对比于电影，更富想象力。与国外作家天马行空的想象力一对比，国内的少儿读物难免显得太过于现实。我常和同事开玩笑，将来我有了娃儿才不会让他（她）看《喜YY与灰太狼》一类的垃圾电影呢。他（她）爹可是从小天马行空的长大的。OK，不说太远，单就《纳》一书而言，原著文字里所描绘出的美轮美奂的画面和剧情，绝对值得童心未泯的成人和准成人花上段时间来消遣。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《丁丁历险记》系列：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 最初是为了测试Nook的诸多阅读器而下载的，没想到读来读去读出了瘾，索性就全盘读完了。多年前的连环画，读起来依然饶有情趣。看完后又读到《丁丁历险记》之父埃尔热的一个访谈录，书名叫《丁丁与我》，感兴趣的可以看一下，讲述着作者创作时的心路历程，很真诚的访谈录。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《一半明媚一半忧伤：民国那些女子》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 带点八卦类的传记文学。张爱玲、陆小曼、林徽因……，其当年的风流抑或是狗血事件，皆可从此书窥见一斑。八卦的人其实是最热爱生命的人，有木有？
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《老人与海》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 读这书的时候我在深圳飞回南京的飞机上，6天爬完5座山后，身心俱疲，恰似《老人与海》里主人公完败于鲨鱼后的状态。然而，海明威所渲染的硬汉形象依然让人心动不已“命运可以把我毁灭，但是绝不会把我打败”----硬汉们，共勉之。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《假如给我三天光明》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 海伦 凯勒的自传，用很平静的语言讲述一个盲人如何被天使唤醒的经历。能看到花花世界的我们，是不是应该对生活更多点感恩？然而个人对于海伦凯勒成年后的思想境界不敢沟通。Communism是洪水猛兽，这事咱就不用证明了吧，很遗憾海伦凯勒逐渐成长为一个communist，不得不说让人遗憾。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《伊利亚特》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 无需多言，经典里的经典。小时候我就看过《奥德赛》，这部是《奥》的姊妹篇。上学时我曾看过《特洛伊》的电影，就是以其为背景创作的。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《邮差》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 诺贝尔文学奖得主聂努达的故事。聂努达的诗自是不用说了，温情款款。这部半自传体的小说，我看到的时候是在某天晚上的10：30,一气读完，不觉倦怠。爱情、友情、信任，在此书中被完美诠释。四个字：我很喜欢。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《围城》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 温习而已，原作多年前我就读过。然而经典的作品，值得再次阅读，一次阅读能得到更多的心得。钱老的智慧和幽默让人忍俊不禁，年过30,读起此书来，更是有拍案叫絕之感。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《一生最爱纳兰词》
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 典型的文艺+小清新的作品，给我感觉是过度骚情地解释了纳兰的作品，通常只有女作家才会这么骚情。但是它不失为一本好书，纳兰的词本来就美，解读虽有矫情之疑，然不失公允，所以还是推荐之。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《一生的远行》
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 季羡林的回忆录，回忆老人家当年在德国留学时的生活，记忆力之好让人佩服。其实人生本来就是一次有去无回的旅程，我们，一个个的个体，都在做着没有回头路的远行。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp;&amp;nbsp;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《马可波罗行记》
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 历史书上看过的，但是没想到原著也很有意思，几百年前的攻略了，无条件推荐。好人生，始终在路上。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《星云大师谈处世》《星云大师与你谈心》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 无条件推荐。星云大师可是救助高尔泰的贵人，至于不知道高尔泰是谁的人，不怪你们，只提一句他是个很有智慧很有修养的了不起的人就是了。星云上师这两本书里头，谈禅学，谈得失，谈出世入世之道，正所谓字字珠矶，不可多得之作。心里有诸多戾气的家伙，欢迎拜读。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《万历十五年》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 经典之作，讲明史，很到位。看完它之后基本上可以觉得某某某写的《张召政》一书可以用来当手纸了，当然我司估计不爽，张召政，可不就是我D愿意推崇的忠君爱国的形象吗？
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《少年PI的奇幻漂流之旅》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 书太好了，以至于我不敢去看电影了。看完了电影的各位，颤抖吧！因为从原著里能收获天马行空的想象力。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 《这是我最好的爱》：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 这是我近两年来买过的唯一本纸质书，在深圳时无意中买到的，王尔德的童话专辑。印刷质量很好，而后图案配得绝佳，且是中英双版。连夜读完后，第二天我把它送给一个PPMM啦。那话怎么说来着，宝剑赠英雄，好书赠佳人。书的新主人，何其之幸：）&amp;nbsp;有时候，人算不如天算，更何况有造化两字，万般无奈的被留在了深圳，没想到却不经意的邂逅了一段最美的时光。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 这俩个月值得推荐的大体就摆在这里了。其他的诸多书，大多觉得不够有深度，也懒得费笔墨。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 11月份我独自徜徉于白云山里时，路过广州碑林，里头有副对联如此写到“至乐莫若读书,至善莫如教子”----原来以为至乐一句就是全部了，没想到下句居然如此犀利，直叫人无地自容。像俺这种没子可教的家伙，估计心事也无从与“善”字结缘：）， 然而，又有什么事能敌得过在午后慵懒的拿起Kindle或是Nook在温暖的房间里安静阅读的时光来得安逸而自然呢？我有一个朋友在微博上转过这样一条帖子：
+&lt;/div&gt;
+&lt;div&gt;
+ &amp;nbsp; &amp;nbsp; 一日不读书，无人看得出；一周不读书，开始会爆粗；一月不读书，智商输给猪。书可以让软弱的人变得坚强，让贫穷的人拥有财富，让忧伤的人开始喜悦，让失败的人取得成功，让生病的人恢复健康，让年老的人回归年轻，让迷路的人找到方向，让失望的人看到希望，让困境中的人汲取力量----读书好，好读书，读好书，爱书的各位，人生残酷而漫长，大约前世相识的文字，才会让我等在如此浑浊之世不至于沉沦俗世，enjoy the reading time, 愿与各位共勉之。
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>跑者的8月</title><link href="http://4894816.github.io/pao-zhe-de-8yue.html" rel="alternate"></link><updated>2012-08-26T00:00:00+02:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2012-08-26:pao-zhe-de-8yue.html</id><summary type="html">
+&lt;br class="" apple-interchange-newline="Apple-interchange-newline" /&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp;在我还少不更事的时候(其实这段时期就是
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 在去年
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ )，我还大言不惭的说着：“夏天是最好的季节
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ ”----说这话的缘由在于本人的天生懒惰，夏天短衣
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 短裤出场接客即可，作为屌丝级程序员，脚底上少不得
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 配上一双拖鞋，简直拉风而随意得要死。再加上本人拥有诸多奇形怪状的T-Shirt
+&lt;/span&gt;
+&lt;span style="" color:rgb="color:rgb"&gt;
+ 的缘故，更是恨不得一年四季全是夏天才好。
+&lt;/span&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 然而，这个夏天，我并不这么想。原因是因为我已经沦落成了一个跑者。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 去年夏天的运动以骑行为主，于是也顺利地把一辆山地骑爆了两个胎，里程达到4000+公里。之所以寻找那种飘荡在路上的感觉，出发点是源于被冷落，惟有在车座上的时光才可以专心于骑行其本身。莫名奇妙的故事被一度延续到今年七月，诸多的困惑终于逼到我直接梭哈。而梭哈的结果自然如我所料：对方依然装聋卖哑并一再推脱责任---既是如此，少一个不真诚的朋友绝对不是坏事。走江湖的人，从不畏惧敌者，害怕的却是被所谓的朋友捅刀子或是下黑手。这般惨痛的经历已经有过两次，事不过三的道理用在傻子身上都能生效，更何况是一个把着智慧凭手艺换饭吃的家伙。只是，我是讲江湖道义的家伙，答应人家的事情，自然当做到妥当。分离时决断，只为以后不再被往事羁绊，心中有江湖的人，一觉醒来，眼下便是新的江湖。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 从去年10月跑步开始，整个生活轨迹就改变了。环湖长跑近乎是一种巡游，让人真实的感觉到生命的存在。这种真实的存在感使得每次在常人眼里近似于不可能的磨练变成一种趣事----每次跑步时心路也会走一个复杂的历程： 从开始时的担心而忐忑，到跑至中途的少许劳累和纠结，到快到结束时的期盼，最终的一部分最难却最拉风，到最后完成时腿部肌肉随着节奏突然慢下来而渐渐松弛下来的感觉，以及与此同时带来的心理上的欣慰和征服感……很少有事情能像长途跑步一般让人酣畅淋漓。而每次跑完后，身体是略带劳累的，精神上确实是极为愉悦的。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 精神上的愉悦，用我一个一起跑步的朋友，中国药科大学某博士的说法，有氧运动能产生一种化学产物，成份和人吸毒到某个程度后的神经系统里生成的化合物成份一般，达到愉悦精神的目的----从这个意义上来说，跑步其实等同于吸上一次没有任何副作用的毒品。常常运动的人，我说这个你们懂得：），运动会上瘾，部分原因可能就是在于该化合物的产生。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 发散得有点远，回正题。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 8月我成功的跑到两次中暑，36度的气温下，连玄武湖上吹来的风都是热浪。长途奔袭的跑者，又不曾带水，一气跑完全程，少不得口干舌燥。而真正的中暑是在跑完后回到家里，坐下来时，汗水依然大滴大滴往下流，如宣泄时的眼泪一般情不自禁。在我近30岁的运动生涯里从未见过如此诡异的场景，后来我开始明白，36度只是气温，地表温度早就能烤熟鸡蛋。虽说是晚上，地表依然能轻松过45度，能保持速度冲完全程已经是足够牛逼。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 于是乎，在挥汗如雨的8月里，我无比怀念寒冷的冬夜里背上揣着一团火儿狂奔的感觉。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 快30的当头，8月里的跑步让我体会到：其实季节无所谓好坏，每个季节都有其独到之处。正如我从秋天一路跑到夏天，同样的跑道上，蕴藏了何等的风景！----秋天叶落时阔叶林晚上的风声、冬夜里大片结冰的湖面、春夜时湖边大片花地传来的阵阵清香……夏天是最有意思的季节，荷叶、蛙鸣、垂柳、挥汗如雨的征途、还有路边遛弯的姑娘们白花花的大腿。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 于是在8月的尾巴上，突然参悟到：很多事情本无所谓好坏，所谓好坏，皆在人心。譬如夏天晚上的跑步，虽是煎熬，却能极大锻炼心肺能力和耐力以及身体的耐渴程度。而那段被小姑娘当猴儿耍的日子呢？不甘心当傻叉的自己当然是选择了牛逼处世的方式，由此有了爵士钢琴、5K公里的骑行和途中的风景、万米跑步的体格和耐力……最重要的，它把我性格给磨砺得温柔无比了，爱情从来就是这样，一人努力挣脱的，另一人捡回去当宝供着。同样是买颗珠子，有人还把盒子当宝，由此才有了买牍还珠的典故。挑男（女）人又何尝不是如此，要副臭皮囊还是一副美灵魂，个人心里自有分寸。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 很多事情无所谓好坏，却有善恶之分。于是在奇幻般的8月里，看到诸多奇葩般的故事：
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 最大的亮点：奥运。刀锋战士终于走上战场，跑者无敌。然后我又看到被淘汰出局后被美丽老婆细心抚慰的射击王子，看到“败者为王”的马来西亚国手李天王，看到傲然航行于海上的失聪+一只眼镜失明的女孩……这些平凡的小事儿、甚至是败者，让人心生敬佩；而最坏的污点也同时出现：看到天朝羽毛球阵营的无耻，看到刘跨栏恶心的表演，再看到天朝诸多运动员如同机器人一般的没有灵魂和思想眼里只有“金”……在一场本该是开开心心较量、切磋的盛会里，天朝赢的只是几十块牌，输的却是精神和灵魂。奖牌虽不关乎善与恶，而在奖牌的后面，确实隐藏着诸多的善恶：举@国体@制要得只是面子，“一将功成万骨枯”，每块奖牌的后面，至少都包含了金字塔底下诸多被淘汰的运动员的伤痛和眼泪，而每一块奖牌的巨额投资里，蕴含的是本该属于每个人的一块自由活动的场地、一件本该免费享用的器械、一项本可以尽情参与的运动……在集@@权横行的体@制里，越多的奖牌，也许就意味着更多的耻辱和罪恶。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 8月还有很多乱七八糟的奇葩的事儿。看到了官@员们的集体YD照片，看到了桥塌，看到十几岁的小女孩被卖@淫而后母亲被劳@教，看到诸多傻叉义愤填膺的上街砸同胞的车，再看到一帮傻叉急忙追捕一个已经逃了十几年的犯人，再看到某总督夫人被免死。这一切让人感觉到巨大的希望：乱世已然如此，变天只是迟早的事情。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 然而8月生命里还是有不少开心的事儿的：见到野夫并聆听其两个小时的讲座，感慨之余心怀希望。见到多年未见的朋友，认识到新的优秀可人的姑娘：温柔外加才艺双全，写出更为拉风的程序……世事虽然纷扰，个人的生活，却是岁月静好之态。
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+&lt;div style="" color:rgb="color:rgb"&gt;
+ &amp;nbsp; &amp;nbsp; 以此献给即将逝去的8月。八月的高温有如热情的沙漠，而我们，皆在热情的沙漠中取瑟而歌。
+&lt;/div&gt;
+&lt;div&gt;
+ &lt;br /&gt;
+&lt;/div&gt;
+</summary><category term="Qzone"></category></entry><entry><title>So Long, Marianne</title><link href="http://4894816.github.io/so-long-marianne.html" rel="alternate"></link><updated>2012-02-21T00:00:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2012-02-21:so-long-marianne.html</id><summary type="html">
+&lt;embed allowfullscreen="" true="true"&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 最初听到Leonard Cohen是在某个雨雪交加又冷又潮的午后，在热得把人熏到昏昏欲睡的图书馆里，边听着豆瓣FM边翻翻建筑类的画册，忽然就被一个沧桑的男声电到浑身一激灵，原来是《Boogie Street》。回来后就开始去找他的专辑听了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 看网上的资料，Cohen，1934年生，浪迹天涯，年轻时处处留情。早年写诗和小说把自己写到了“加拿大最重要的几位作家”的地位，并得到加拿大最高荣誉的总督奖，这哥们居然拒绝去领奖。早年写作时他曾跑到希腊的一个岛上去，同一位挪威女人Marianne Jensen和她的儿子同居了7年还生了娃，后来以Marianne回到前夫身边而结束。后来Cohen 写的《So Long, Marianne》就是这段感情的尾声。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 到34岁才开始发第一张唱片，自此一发不可收拾把自己唱到举世皆知。从1968年唱到1994年后，这哥们又跑去修道院里修道，5年后带着近百首诗和歌词下山，继续唱歌。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 视频大约是4年前的LIVE版，当时这哥们已经74岁了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 好的歌曲，歌词可以当成诗来读。《So Long, Marianne》的词句感情之真挚，即便如我这种麦霸级人物都很少见。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 自写自唱自己故事的，我也见过听过唱过不少，比如陶喆的《Melody》，王力宏的诸多歌曲，就是很好的作品。然而陶和王毕竟是小男生，东方人毕竟也含蓄，歌词里唱到前女友也不过是隐隐约约。Cohen的这首则是直抒心意、慨叹得极其畅快、酣畅淋漓。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 听到这歌时，是一种很奇怪的感觉----不是悲伤、也不是解脱、亦不是祝福。而是诸多混合的情感涌上来，弥漫着一种深沉的告别之时的惋惜气息，Cohen坦坦荡荡的抒发着心头如同挽歌式的感叹，和对世事无常的嗟叹。一把嗓音，低沉而性感，一曲下来，简直可以入酒了。
+ &lt;br /&gt;
+ &amp;nbsp;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 听过两个版本的，年轻时候的和70多岁版本的。各有特色。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 年轻时候Cohen的声线比较尖，更像是男孩离开爱人时无助的哭诉。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 可是我太喜欢70多岁的LIVE版了。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 70多岁时的版本，就是上面贴的视频（这可是辛辛苦苦从youtube下载来传在国内的）。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 老头子戴着礼帽在音乐响起时一路踏着鼓点、嬉皮似的跳着入场，而后调皮的摘下麦克风。只一句下来， 姿态就在磁性到能电倒人的声音里变得特性感----神马叫帅啊，这才叫帅到掉渣的典范啊。
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; 有句俏皮话这么说：帅人从来不说自己帅，帅人总是抓紧时间做最帅的样子。70多岁的老头一点都不显得颓，演绎的时候神情而投入。在这段youtube的视频下某粉丝很诙谐的评论道“姐想睡了他”（I wanna sleep him, and I am not a gay），然后居然一堆人点了“顶”。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 我常在想：不知道Cohen在演绎这个版本时，想起50年的情人时是何种感觉？
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 70多的老头，站到舞台上，本身就是个奇迹，而老头居然还演绎得如此完美，嗓音似被岁月浸透一般，不再灵活的身体随鼓点轻轻摆动，尽显沧桑后的超脱。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &amp;nbsp;&amp;nbsp;&amp;nbsp; 满分是10分的话，这首可能我要给到12分。Marianne是何等幸运啊，年轻帅气的爱人，在时间之流里变身成白发苍苍的老头后，依然在深情款款的吟唱着她的名字。
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Would you come over to the window, my little darling
+ &lt;br /&gt;
+ I'd like to try to read your palm.
+ &lt;br /&gt;
+ I used to think I was some kind of Gypsy boy
+ &lt;br /&gt;
+ Before I let you take me home
+ &lt;br /&gt;
+ 亲爱的，能否来到我窗前
+ &lt;br /&gt;
+ 我想看看你的手相
+ &lt;br /&gt;
+ 我过去常认为自己是个吉普赛男孩
+ &lt;br /&gt;
+ 在我让你带我回家之前
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Now so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Well you know that I love to live with you
+ &lt;br /&gt;
+ But you make me forget so very much
+ &lt;br /&gt;
+ I forget to pray for the angels
+ &lt;br /&gt;
+ And then the angels forget to pray for us
+ &lt;br /&gt;
+ 你知道，我爱极了和你一起生活
+ &lt;br /&gt;
+ 而你令我忘记了太多
+ &lt;br /&gt;
+ 我忘记了为天使们祈祷
+ &lt;br /&gt;
+ 于是天使们忘记了护佑我们
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Now so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ We met when we were almost young
+ &lt;br /&gt;
+ Deep in the green lilac park
+ &lt;br /&gt;
+ You held on to me like I was a crucifix
+ &lt;br /&gt;
+ As we went kneeling through the dark
+ &lt;br /&gt;
+ 相逢的时候我们都很年轻
+ &lt;br /&gt;
+ 在那片绿色丁香园的深处
+ &lt;br /&gt;
+ 你抱着我就像抱着受难的耶酥
+ &lt;br /&gt;
+ 我们以膝前行穿越黑暗
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Oh so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Your letters they all say that you're beside me now
+ &lt;br /&gt;
+ Then why do I feel alone
+ &lt;br /&gt;
+ I'm standing on a ledge and your fine spider web
+ &lt;br /&gt;
+ Is fastening my ankle to a stone
+ &lt;br /&gt;
+ 你信中所有的字都说你现在就在我身边
+ &lt;br /&gt;
+ 而为何我感觉如此孤单
+ &lt;br /&gt;
+ 我站在一块礁石上，而你编织的精美蛛网
+ &lt;br /&gt;
+ 将我的脚踝牢牢系于石前
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Now so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ For now I need your hidden love
+ &lt;br /&gt;
+ I'm cold as a new razor blade
+ &lt;br /&gt;
+ You left when I told you I was curious
+ &lt;br /&gt;
+ I never said that I was brave
+ &lt;br /&gt;
+ 现在我需要你隐秘的爱
+ &lt;br /&gt;
+ 我像一张新刀片那样冰冷
+ &lt;br /&gt;
+ 当我告诉你我很古怪时你离我而去
+ &lt;br /&gt;
+ 我从未说过我勇敢
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Oh so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Oh, you are really such a pretty one
+ &lt;br /&gt;
+ I see you've gone and changed your name again
+ &lt;br /&gt;
+ And just when I climbed this whole mountain side
+ &lt;br /&gt;
+ To wash my eyelids in the rain!
+ &lt;br /&gt;
+ 你是如此美丽动人
+ &lt;br /&gt;
+ 我看见你已离开，并再次换了名字
+ &lt;br /&gt;
+ 就在我爬上这整座山的山腰时
+ &lt;br /&gt;
+ 在雨中冲刷我的眼帘
+ &lt;br /&gt;
+ &lt;br /&gt;
+ Oh so long, Marianne, it's time that we began
+ &lt;br /&gt;
+ To laugh and cry and cry and laugh about it all again
+ &lt;br /&gt;
+ 那么再会，玛丽安，是时候我们开始再次
+ &lt;br /&gt;
+ 大笑、痛哭、痛哭、大笑，对这所有的一切
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;br /&gt;
+ &lt;div&gt;
+ &lt;/div&gt;
+&lt;/embed&gt;
+</summary><category term="Qzone"></category></entry></feed>
