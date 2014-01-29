@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Dash's Qzone</title><link href="http://4894816.github.io/" rel="alternate"></link><link href="http://4894816.github.io/feeds/qzone.atom.xml" rel="self"></link><id>http://4894816.github.io/</id><updated>2014-01-24T16:18:00+01:00</updated><entry><title>迁移博客成功</title><link href="http://4894816.github.io/qianyibokechenggong.html" rel="alternate"></link><updated>2014-01-24T16:18:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-24:qianyibokechenggong.html</id><summary type="html">&lt;p&gt;谈一下设计思路， 兼谈博客的写作。   &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Dash's Qzone</title><link href="http://4894816.github.io/" rel="alternate"></link><link href="http://4894816.github.io/feeds/qzone.atom.xml" rel="self"></link><id>http://4894816.github.io/</id><updated>2014-01-29T11:21:00+01:00</updated><entry><title>Moves Like Jagger</title><link href="http://4894816.github.io/Moves-Like-Jagger.html" rel="alternate"></link><updated>2014-01-29T11:21:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-29:Moves-Like-Jagger.html</id><summary type="html">&lt;p&gt;每年春节回家的一趟我都习惯把一年淘汰下来的电子装备往家里搬,以便为来年继续折腾腾出空间。 自己玩儿过的东西，有点“一日XX百日恩”的意思，更何况在上头浪费过绳命，扔了怪可惜，于是通通塞回登山包驼回家。 &lt;br /&gt;&lt;br /&gt;
+于是我这些年把家里塞满了各种乱七八糟的配件，主机、路由器、收音机、平板之类，甚至小到网线、夹线钳之类。随手捡起来一两件，看看标签，大体就能知道这玩意是怎么到手的。一个零件，一段故事。譬如，某个鼠标是某PK赛的奖品，之类。&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;最近考虑淘汰上网本, 于是下了块500G的硬盘后做完系统打算带回家，结果发现做了个挫事: GMA3150支持的最大分辨率达不到我上次带回去的显示器的最佳分辨率。为此我还傻逼兮兮的编译了整套驱动，心里一直疑惑为何只能最大到1680x1050, 原来是硬件所限 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;于是我上网找到了这货：&lt;br /&gt;
+&lt;img alt="/images/nuc.jpg" src="/images/nuc.jpg" /&gt;    &lt;br /&gt;
+印象中觉得这货好像还没上市，因为有段时间没关注这个了。结果发现在万能的淘宝上居然可以用不到1K的价格买到了。无奈今年天色已晚，就只能来年一开春再入了。&lt;br /&gt;
+这货的好处是，可以装成Windows/Linux等多种类型的操作系统，装成Win的话，完全是家人用机器的典范。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;你可能觉得这货已经够碉堡了，但是等等，还有这个：&lt;br /&gt;
+&lt;img alt="/images/edison.jpg" src="/images/edison.jpg" /&gt;  &lt;br /&gt;
+SD卡大小的板子，主频400MHZ，双核，集成WIFI/蓝牙，解码能力硬解1080P。价格应该不会超过1K人民币，我个人估计是在600左右。这意味着未来我们可能只需要带着一块edison的板子，回家的娱乐就有着落了。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;10年前从兰州回湖南的火车上，百无聊赖，于是幻想如果能联一盘《帝国时代》该有多棒。凭那时的硬件设备，近乎于不可能----大大的机箱，笨重的CRT显示器，有线的鼠标/键盘，再加上网线/路由器等等。一套可供对战的设备带上火车，我觉得保守也得塞满两个行李箱。需得一个壮年大汉，背着才能上火车。&lt;br /&gt;
+现在就简单多了，两个上网本，加一个无线路由器一联网，完美解决。场景我可以贡献一下手头的设备做个DEMO，对，就是下图所示, 一个姑娘家轻松背得动 !&lt;br /&gt;
+&lt;img alt="/images/connect.jpg" src="/images/connect.jpg" /&gt;  &lt;br /&gt;
+甚至你可以更简单，两个微软的Surface平板，自联网一下。当然我手头没有微软的平板。这个配置，上一个熊孩子就能背得动!&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;那么未来会怎样呢？我能想象到的是，有可能在火车车厢里，会出现各种奇奇怪怪的装备----比如，我摘下手表，投影在对面卧铺的墙壁上，然后我就能看投影电影。&lt;br /&gt;
+再比如，我很无聊了，就在车厢里玩体感游戏，这并非不可能，现在的体感游戏可能很快就会渗入到可穿戴设备上。&lt;br /&gt;
+........&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;99年时我们用着4.3G的昆腾大脚硬盘，还觉得很碉堡，居然能装那么多小电影。现在随手挑个手机，内建存储随便能上8G/16G等等。然后十几年间我们淘汰了胶卷/软驱/MODEM…………接下来会被淘汰的是什么，不得而知。但是有一点是确定的，未来的装备和服务，必然将更加优雅、别致、人性化。&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;技术的革新永远比我们想象中要来的快得多。于是文章的结尾想到Maroon 5的《Moves like Jagger》。你看，今天下午要回家的我已经能够在车厢里随便看电影，带上数百G电纸书翻阅，数万首MP3用来做背景音乐之类了，手头三只摄像头想拍就拍，第一时间同步诸多社交类网站。。数年后在车厢里玩儿真人体感游戏想必也不会太远，Moves like jagger，在车厢里玩儿真人对战的一天，大家师母已呆吧！！！&lt;/p&gt;</summary><category term=""></category></entry><entry><title>迁移博客成功</title><link href="http://4894816.github.io/qianyibokechenggong.html" rel="alternate"></link><updated>2014-01-24T16:18:00+01:00</updated><author><name>Dash</name></author><id>tag:4894816.github.io,2014-01-24:qianyibokechenggong.html</id><summary type="html">&lt;p&gt;谈一下设计思路， 兼谈博客的写作。   &lt;/p&gt;
 &lt;h3&gt;设计思路&lt;/h3&gt;
 &lt;p&gt;大概花了有10天的时间，把所有博客都同步到了自己平台，其中包括Ycool 800篇，两个QQ里共计300多篇，以及开心网等其他平台上的几百篇文章。  &lt;br /&gt;
 所有的迁移过程全靠代码搞定，为此写了几个脚本去抓叶子，有用来抓Ycool的，QQ私密日志版的，公开版的，开心网抓取版，加起来大概不到1000行的代码搞定，其中还有大量废话式的注释。依次跑一次的话，大概半个小时就能把所有日志同步到自己的服务器上。     &lt;/p&gt;
