@@ -11,3 +11,6 @@ then visit http://localhost:8000
 4. How to push your pages into github?
 make github
 make pushgit
+
+5. How to push your code into remote code?
+git push origin master:code
