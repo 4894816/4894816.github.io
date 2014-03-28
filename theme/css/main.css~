@@ -84,6 +84,7 @@ p {
 
 	padding: 0 3em;
 	text-align: justify;
+        text-indent: 2em;
 }
 p img {
 	width:auto;
@@ -121,6 +122,7 @@ ol {
 .post-info p{
     margin-bottom: 1px;
     text-align: left; 
+    text-indent: 2em;
     padding: 0;
 }
 
