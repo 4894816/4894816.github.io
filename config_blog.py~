@@ -58,7 +58,7 @@ def create_blog(article_name):
         temp_file.write("Slug: " + blog_post_Slug + "\n")
         temp_file.write("Author: " + "Dash" + "\n")
         temp_file.write("Summary: " + "To fill something here(Default)" + "\n")
-        temp_file.write("\n Better reading effect please goto: :\n")
+        temp_file.write("\n 更好的阅读效果请移步:\n")
     # The following will be left to the author to write something. 
     # Now close the temp_file
     temp_file.close()
