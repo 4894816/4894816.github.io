@@ -9,11 +9,18 @@ make serve
 then visit http://localhost:8000
 
 4. How to push your pages into github?
+Make modifications also available on github:   
+```
 make github
+```
+
+Make your website publish:   
+```
 make pushgit
+```
 
 5. How to push your code into remote code?
-git push origin master:code
+git push origin code
 
 6. Prerequisites?    
 You should manually install the dependencies for python libs:    
@@ -33,3 +40,8 @@ Yes there are 3 branches for development:
 
 Only the code branch holds the modifications of the code, so make sure you are
 under the code branch for writing articles.   
+
+```
+$ git pull origin code
+$ git push origin code
+```
