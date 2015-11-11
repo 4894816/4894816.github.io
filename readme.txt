@@ -24,3 +24,12 @@ $ sudo pip install pinyin
 ```
 
 In ArchLinux, install pelican via `yaourt -S pelican`.   
+
+7. Branches
+Yes there are 3 branches for development:   
+* code
+* master
+* gh-pages
+
+Only the code branch holds the modifications of the code, so make sure you are
+under the code branch for writing articles.   
