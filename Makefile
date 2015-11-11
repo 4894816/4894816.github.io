@@ -104,11 +104,10 @@ cf_upload: publish
 
 github: publish
 	ghp-import $(OUTPUTDIR)
-	#git push origin https://github.com/4894816/4894816.github.io.git gh-pages:m
 	git push origin gh-pages
+	git push origin code
 
 pushgit: publish
-	#git push -f git@github.com:4894816/4894816.github.io.git gh-pages:master
 	git push -f https://github.com/4894816/4894816.github.io.git gh-pages:master
 
 .PHONY: html help clean regenerate serve devserver publish ssh_upload rsync_upload dropbox_upload ftp_upload s3_upload cf_upload github pushgit
