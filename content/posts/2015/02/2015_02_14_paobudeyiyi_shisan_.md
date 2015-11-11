@@ -1,0 +1,56 @@
+Title: 跑步的意义(十三)
+Date: 2015-02-14 17:57
+Tags: 
+Category: Qzone
+Slug: paobudeyiyi-shisan-
+Author: Dash
+Summary: To fill something here(Default)
+
+### 2015年一月初，彼时还在南京：   
+
+1\. 坐标点位于新模范马路城门，这里曾是我南京四年晨跑的起点：   
+![/images/run1.jpg](/images/run1.jpg)    
+
+2\. 冬天里的树木最好看的是它掉光叶子后奇型怪状的线条：   
+![/images/run2.jpg](/images/run2.jpg)    
+
+3\.  青山隐隐水遥遥，秋尽江南草木凋。    
+![/images/run3.jpg](/images/run3.jpg)    
+
+
+4\. 在城墙下跑步，有如攻城一般的冲击感。   
+![/images/run4.jpg](/images/run4.jpg)    
+
+
+### 2015年1月中旬起，这里是广州！！！
+
+5\. 从家里窗台往外望：    
+![/images/run5.jpg](/images/run5.jpg)    
+
+6. 清早起来，珠江边的灯还未曾熄灭：   
+![/images/run6.jpg](/images/run6.jpg)    
+
+
+7.  珠江   
+![/images/run7.jpg](/images/run7.jpg)    
+
+8.  遮天蔽日的榕树下的跑道：   
+![/images/run8.jpg](/images/run8.jpg)    
+
+9. 俯瞰跑道：   
+![/images/run9.jpg](/images/run9.jpg)    
+
+10. 每天都要横穿盛产小姑娘的中山大学，这是她们的标志性建筑：   
+![/images/run10.jpg](/images/run10.jpg)    
+
+11. 不跑山是不可能的，这里是白云山：   
+![/images/run11.jpg](/images/run11.jpg)    
+
+12. 跑到了山里头，满眼就只有绿色:   
+![/images/run12.jpg](/images/run12.jpg)    
+
+13. 上周天，玉兰花都已经开了，人勤春早嘛。
+![/images/run13.jpg](/images/run13.jpg)    
+
+14. 想怎么吃就怎么吃，想吃什么都有！就得这么任性。。。。。。。    
+![/images/run14.jpg](/images/run14.jpg)    

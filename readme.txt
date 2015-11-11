@@ -14,3 +14,11 @@ make pushgit
 
 5. How to push your code into remote code?
 git push origin master:code
+
+6. Prerequisites?    
+You should manually install the dependencies for python libs:    
+
+```
+$ sudo pip install ghp-import
+$ sudo pip install pinyin
+```
