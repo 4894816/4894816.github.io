@@ -28,6 +28,7 @@ You should manually install the dependencies for python libs:
 ```
 $ sudo pip install ghp-import
 $ sudo pip install pinyin
+$ sudo pip install Markdown
 ```
 
 In ArchLinux, install pelican via `yaourt -S pelican`.   
