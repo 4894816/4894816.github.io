@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Dash'
-SITENAME = u"Dash's Qzone"
+SITENAME = u"Dare To Try"
 SITEURL = ''
 
-TIMEZONE = 'Europe/Paris'
+TIMEZONE = 'Asia/Shanghai'
 
 DEFAULT_LANG = u'en'
 
@@ -18,7 +18,7 @@ TRANSLATION_FEED_ATOM = None
 # Blogroll
 LINKS =  (('4894816', 'http://4894816.qzone.qq.com/'), 
           ('Pelican', 'http://getpelican.com/'),
-          ('Python.org', 'http://python.org/'),
+          ('我的技术类博客', 'http://purplepalmdash.github.io'),
           ('Jinja2', 'http://jinja.pocoo.org/'),)
           #('You can modify those links in your config file', '#'),)
 
