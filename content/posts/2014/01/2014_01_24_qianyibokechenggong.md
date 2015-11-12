@@ -4,7 +4,7 @@ Tags:
 Category: Qzone
 Slug: qianyibokechenggong
 Author: Dash
-Summary: To fill something here(Default)
+Summary: 点击标题阅读更多^_^
 
 谈一下设计思路， 兼谈博客的写作。   
 

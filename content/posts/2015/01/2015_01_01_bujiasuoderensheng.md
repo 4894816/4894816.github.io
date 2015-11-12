@@ -4,7 +4,7 @@ Tags:
 Category: Qzone    
 Slug: bujiasuoderensheng    
 Author: Dash    
-Summary: To fill something here(Default)    
+Summary: 点击标题阅读更多^_^
     
 近期要换城市，却舍不得扔下骑过七八千公里的自行车，于是去捷安特专卖大修一次以便通过快递带走。一番伤筋动骨后车子终于枯木逢春，能再度以30码的速度飞驰在祖国的大好河山上。    
 

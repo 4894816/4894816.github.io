@@ -4,7 +4,7 @@ Tags:
 Category: Qzone
 Slug: huangbangziderensheng
 Author: Dash
-Summary: To fill something here(Default)
+Summary: 点击标题阅读更多^_^
 
 每年春夏之交都是我固定回乡休假的日子。小村幽静、远离现代文明，亦无旁人烦扰，俨然一个读书的绝佳处所，七八天的假期下来，大小部头能啃完一大落。往年多是大把实体书拖回去，看完即扔在家，不胜行李之累。自从有了Kindle，尽是连这点累都省掉了。    
 月初我在家里翻毛姆的《刀锋》，这部小说一年多了一直没翻完，可能是因为南京太嘈杂、而该部小说情节又稍显平淡之故。然而回家心静之余信手翻来，大有相见恨晚之感。    

@@ -4,7 +4,7 @@ Tags:
 Category: Qzone
 Slug: laiyipianxinde
 Author: Dash
-Summary: To fill something here(Default)
+Summary: 点击标题阅读更多^_^
 
 这里来一篇新的博客，放两张图片进来吧。    
 ![/images/lucifier1.jpg](/images/lucifier1.jpg)

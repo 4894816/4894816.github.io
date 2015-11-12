@@ -4,7 +4,7 @@ Tags:
 Category: Qzone    
 Slug: youguanxiwang    
 Author: Dash    
-Summary: To fill something here(Default)    
+Summary: 点击标题阅读更多^_^
     
 2012年夏天最热的日子里，我有幸去了一次先锋书店，南京最有名最文艺的书店，听了一次我长久以来很为仰慕的一位作家(野夫)的签售会。     
 那天盛况空前。先锋书店建在一个防空洞里，长长的洞体里排满了前来签售的读者，几长溜下来，一圈、又一圈。    

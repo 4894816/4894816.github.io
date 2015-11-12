@@ -4,7 +4,7 @@ Tags:
 Category: Qzone
 Slug: renshengrudaguai
 Author: Dash
-Summary: To fill something here(Default)
+Summary: 点击标题阅读更多^_^
 
 ### 游戏
 在我还有时间可以浪费在游戏上的“很久以前”，我玩过一个冒险类游戏，故事的背景是这样的：作为大秦帝国的王子扶苏，始皇帝莫名架崩，而后有刺客追杀你，你连夜逃出，手头只有木剑一把、布衣一袭外加草鞋。    

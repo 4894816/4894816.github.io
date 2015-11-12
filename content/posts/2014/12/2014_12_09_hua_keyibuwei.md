@@ -4,7 +4,7 @@ Tags:
 Category: Qzone    
 Slug: hua-keyibuwei    
 Author: Dash    
-Summary: To fill something here(Default)    
+Summary: 点击标题阅读更多^_^
     
 做IT的人都知道，业界有家很有名的公司叫华为。后来它开始做手机了，卖得还挺好，所以不是通信科班出身的普通消费者想必也听说过这家企业的大名。这家企业以加班狠著称，在加班狠而后尽力压缩成本的前提下，它的网络铺设到了诸多国家，后来它开始做手机，于是市面上有了华为手机。它做网盘，于是有了华为网盘之类。    
 

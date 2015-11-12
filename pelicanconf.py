@@ -32,7 +32,8 @@ DEFAULT_PAGINATION = 10
 # Use theme for our own
 # THEME = "./pelican-themes/waterspill-en"
 # THEME = "/home/qzone/pelican-themes/bootstrap"
-THEME = "./bluegrasshopper"  # Very Good
+# THEME = "./bluegrasshopper"  # Very Good
+THEME = "./clean-blog"  # Very Good
 # THEME = "/home/qzone/pelican-themes/sundown"   # Very Clear
 # THEME = "/home/qzone/pelican-themes/pelipress"
 # THEME = "/home/qzone/pelican-themes/plumage" # Not so good

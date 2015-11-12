@@ -4,7 +4,7 @@ Tags:
 Category: Qzone
 Slug: zhilemoruodushu10_guanyushebeideyixiejiqiao
 Author: Dash
-Summary: To fill something here(Default)
+Summary: 点击标题阅读更多^_^
 
 我手头有过的阅读设备有过很多，各种尺寸/材质的都曾体会过。一直觉得“工欲善其事，必先利其器”这句话大有道理。诚然，一款好的阅读设备，若拿到手里放眼望去赏心悦目，会大大提升对知识的吸收速度。<br />
 
